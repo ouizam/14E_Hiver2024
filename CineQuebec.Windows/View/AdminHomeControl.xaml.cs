@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CineQuebec.Windows.DAL.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,19 @@ namespace CineQuebec.Windows.View
     /// </summary>
     public partial class AdminHomeControl : UserControl
     {
+        private List<Abonne> _listeAbonnes;
+
         public AdminHomeControl()
         {
             InitializeComponent();
+            _listeAbonnes = new List<Abonne>();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UtilisateursControl utilisateursControl = new UtilisateursControl();
+            utilisateursControl.Show();
+        }
+        
     }
 }

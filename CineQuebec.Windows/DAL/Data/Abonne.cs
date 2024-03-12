@@ -12,5 +12,11 @@ namespace CineQuebec.Windows.DAL.Data
         public ObjectId Id { get; set; }
         public string Username { get; set; }
         public DateTime DateAdhesion { get; set; }
+        public override string ToString()
+        {
+            return $"{Username}: adhéré(e) le {DateAdhesion}";
+        }
     }
+
+  
 }
