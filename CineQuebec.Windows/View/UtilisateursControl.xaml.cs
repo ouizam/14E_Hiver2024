@@ -29,6 +29,7 @@ namespace CineQuebec.Windows.View
             InitializeComponent();
            
             _listeDesUsers= _databasePeleMele.ReadAbonnes();
+            //_databasePeleMele.AddAbonne();
             AfficherListeUtilisateurs();
         }
 

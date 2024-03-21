@@ -60,5 +60,29 @@ namespace CineQuebec.Windows.DAL
             }
             return abonnes;
         }
+
+        //public void AddAbonne()
+        //{
+        //    var abonnes = new Abonne
+        //    {
+        //        DateAdhesion = DateTime.Now,
+        //        Username = "Ouiza1",
+        //        Email = "ouiz@gmail.com",
+        //        Recompenses = new List<Recompense> { new Recompense { Type = new TypeRecompense { nomRecompense = "Ticket gratuit" } } },
+        //        Reservations = new List<Reservation> { new Reservation { DateReservation = DateTime.Now, Projection = new Projection { DateProjection = DateTime.Now, NoSalle = 2, Film = null } } },
+        //    };
+           
+        //    try
+        //    {
+        //        var collection = database.GetCollection <Abonne>("Abonnes");
+        //        collection.InsertOne(abonnes);
+               
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+        //    }
+          
+        //}
     }
 }
