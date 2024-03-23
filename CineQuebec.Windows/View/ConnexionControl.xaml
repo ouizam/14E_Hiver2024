@@ -11,13 +11,13 @@
             <Label Content="{x:Static rs:Resource.connexion_username}" 
                    Style="{StaticResource defautLabel}" />
             <TextBox Width="200"  Style="{StaticResource defautInput}"
-                     Margin="0 0 0 10"/>
+                     Margin="0 0 0 10" x:Name="usernameTXT"/>
 
             <Label Content="{x:Static rs:Resource.connexion_password}" 
                    Style="{StaticResource defautLabel}" />
             <TextBox Width="200" 
                      Style="{StaticResource defautInput}"
-                     Margin="0 0 0 20" />
+                     Margin="0 0 0 20"  x:Name="passwordTXT"/>
 
             <Button Content="{x:Static rs:Resource.connexion_connect}" 
                     Style="{StaticResource defautButton}" Width="100" Click="Button_Click" />
