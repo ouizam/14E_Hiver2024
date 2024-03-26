@@ -22,11 +22,16 @@ namespace CineQuebec.Windows.View
     public partial class AdminHomeControl : UserControl
     {
         private List<Abonne> _listeAbonnes;
+        private List<Film> _listeFilms;
 
         public AdminHomeControl()
         {
             InitializeComponent();
-            _listeAbonnes = new List<Abonne>();
+			// TODO: ALLER CHERCHER LES ABONNEES DANS LA BD
+			// TODO: ALLER CHERCHER LES FILMS DANS LA BASE
+            // NOTE: JE NE SAIS PAS SI C'EST PERTINENT D'INSTENCIER ICI LES ABONNEES ET LES FILMS
+			_listeAbonnes = new List<Abonne>();
+            _listeFilms = new List<Film>();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,6 +39,11 @@ namespace CineQuebec.Windows.View
             UtilisateursControl utilisateursControl = new UtilisateursControl();
             utilisateursControl.Show();
         }
-        
-    }
+
+		private void Button_Films_Click(object sender, RoutedEventArgs e)
+		{
+            // TODO: GERER LE CLICK DU BOUTON VOIR FILMS
+            // TODO: FAIRE LE FENETRE POUR AFFICHER LES FILMS
+		}
+	}
 }

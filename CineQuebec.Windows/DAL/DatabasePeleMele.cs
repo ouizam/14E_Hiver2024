@@ -1,10 +1,12 @@
 ﻿using CineQuebec.Windows.DAL.Data;
+using Microsoft.VisualBasic;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CineQuebec.Windows.DAL
 {
@@ -51,7 +53,7 @@ namespace CineQuebec.Windows.DAL
 
             try
             {
-                var collection = database.GetCollection<Abonne>("Abonnes");
+				IMongoCollection<Abonne> collection = database.GetCollection<Abonne>("Abonnes");
                 abonnes = collection.Aggregate().ToList();
             }
             catch (Exception ex)
@@ -60,6 +62,52 @@ namespace CineQuebec.Windows.DAL
             }
             return abonnes;
         }
+
+        public List<Film> ChargerListeFilms()
+        {
+
+			List<Film> films = new List<Film>();
+
+			try
+			{
+
+				IMongoCollection<Film> collection = database.GetCollection<Film>(name:"Films");
+                films = collection.Aggregate().ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Impossible d'obtenir la collection {ex.Message}", "Récupération Films");
+            }
+            return films;
+        }
+
+        public Administrateur ConnexionUtilisateur(string pUsername, string pPassword)
+        {
+            Administrateur utilisateur = new Administrateur();
+            try
+            {
+                IMongoCollection<Administrateur> collection = database.GetCollection<Administrateur>("Administrateurs");
+
+                var filter = Builders<Administrateur>.Filter.Eq("Name", pUsername);
+
+                utilisateur = collection.Find(filter).FirstOrDefault();
+
+                if (utilisateur is null)
+                    throw new UtilisateurNotFoundException("Le username est incorrect!");
+
+                if (!utilisateur.Password.Equals(pPassword))
+                    throw new UtilisateurNotFoundException("Mot de passe incorrect!");
+                    
+            }catch (UtilisateurNotFoundException ex)
+            {
+                MessageBox.Show($"Erreur lors de la connexion: {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }catch (Exception ex)
+            {
+                Console.WriteLine($"Impossible d'obtenir la collection {ex.Message}", "Connexion Administrateur");
+            }
+            return utilisateur;
+        }
+
 
         //public void AddAbonne()
         //{
@@ -85,4 +133,10 @@ namespace CineQuebec.Windows.DAL
           
         //}
     }
+
+    public class UtilisateurNotFoundException: Exception
+    {
+		public UtilisateurNotFoundException(string message = "Utilisateur non trouvé.") : base(message) { }
+		public UtilisateurNotFoundException(string message, Exception innerException) : base(message, innerException) { }
+	}
 }
