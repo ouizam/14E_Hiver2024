@@ -24,6 +24,7 @@ namespace CineQuebec.Windows.View
         DatabasePeleMele _databasePeleMele = new DatabasePeleMele();
 
         List<Abonne> _listeDesUsers=new List<Abonne>();
+        
         public UtilisateursControl()
         {
             InitializeComponent();
@@ -37,7 +38,10 @@ namespace CineQuebec.Windows.View
         {
             if (lstUsers.SelectedItems !=null)
             {
-                Abonne abonne = lstUsers.SelectedItems as Abonne;
+                Abonne abonne = lstUsers.SelectedItem as Abonne;             
+                InformationsAbonne informationAbonne = new InformationsAbonne(abonne);
+                informationAbonne.Show();
+
             }
         }
 
@@ -50,6 +54,8 @@ namespace CineQuebec.Windows.View
             }   
         }
        
+       
 
+      
     }
 }

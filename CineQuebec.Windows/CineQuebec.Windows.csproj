@@ -9,10 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Ressources\images\img_defaut.png" />
     <None Remove="Ressources\Images\logoCinema.png" />
     <None Remove="Ressources\Images\logoCinemaWithoutText.png" />
     <None Remove="Ressources\images\projections.png" />
     <None Remove="Ressources\images\users.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Ressources\images\img_defaut.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
