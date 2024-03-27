@@ -11,7 +11,8 @@ namespace CineQuebec.Windows.DAL.Data
     {
         public ObjectId Id {  get; set; }
         public DateTime DateReservation { get; set; }
-        //public Abonne Abonne { get; set; }
+        public ObjectId IdAbonne { get; set; }
+        public ObjectId IdProjection { get; set; }
         public Projection Projection { get; set; }
     }
 }

@@ -1,5 +1,7 @@
-﻿using CineQuebec.Windows.DAL;
+﻿using CineQuebec.Windows.BLL.Services;
+using CineQuebec.Windows.DAL;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,7 @@ namespace CineQuebec.Windows.View
     /// </summary>
     public partial class UtilisateursControl : Window
     {
-        DatabasePeleMele _databasePeleMele = new DatabasePeleMele();
+        AbonneService _abonneService=new AbonneService();
 
         List<Abonne> _listeDesUsers=new List<Abonne>();
         
@@ -29,7 +31,7 @@ namespace CineQuebec.Windows.View
         {
             InitializeComponent();
            
-            _listeDesUsers= _databasePeleMele.ReadAbonnes();
+            _listeDesUsers= _abonneService.ReadAbonnes();
             //_databasePeleMele.AddAbonne();
             AfficherListeUtilisateurs();
         }
@@ -51,11 +53,11 @@ namespace CineQuebec.Windows.View
             foreach (Abonne abonne in _listeDesUsers)
             {
                 lstUsers.Items.Add(abonne);
-            }   
+            }
         }
        
        
+       
 
-      
     }
 }

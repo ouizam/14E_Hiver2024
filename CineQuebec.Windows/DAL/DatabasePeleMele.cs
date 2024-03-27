@@ -47,21 +47,21 @@ namespace CineQuebec.Windows.DAL
             }
             return db;
         }
-        public List<Abonne> ReadAbonnes()
-        {
-            var abonnes = new List<Abonne>();
+    //    public List<Abonne> ReadAbonnes()
+    //    {
+    //        var abonnes = new List<Abonne>();
 
-            try
-            {
-				IMongoCollection<Abonne> collection = database.GetCollection<Abonne>("Abonnes");
-                abonnes = collection.Aggregate().ToList();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
-            }
-            return abonnes;
-        }
+    //        try
+    //        {
+				//IMongoCollection<Abonne> collection = database.GetCollection<Abonne>("Abonnes");
+    //            abonnes = collection.Aggregate().ToList();
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+    //        }
+    //        return abonnes;
+    //    }
 
         public List<Film> ChargerListeFilms()
         {
