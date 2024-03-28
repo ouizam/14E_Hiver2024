@@ -20,12 +20,11 @@ namespace CineQuebec.Windows.BLL.Services
             _adminRepository = new AdminRepository();
         }
 
-        public async Task<Administrateur> ConnexionUtilisateur(string pUsername, string pPassword)
+        public async Task<Administrateur?> ConnexionUtilisateur(string pUsername, string pPassword)
         {
-            Administrateur utilisateur = new Administrateur();
             try
             {
-                utilisateur = await _adminRepository.ConnexionUtilisateur(pUsername, pPassword);
+                return await _adminRepository.ConnexionUtilisateur(pUsername, pPassword);
 
             }catch (UtilisateurNotFoundException ex)
             {
@@ -35,7 +34,7 @@ namespace CineQuebec.Windows.BLL.Services
             {
 				MessageBox.Show($"Erreur lors de la connexion: {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-            return utilisateur;
+            return null;
         }
     }
 }
