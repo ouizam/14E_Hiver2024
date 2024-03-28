@@ -10,18 +10,20 @@ namespace CineQuebec.Windows.DAL.Repositories
 {
 	public class FilmRepository:BaseRepository
 	{
-		public FilmRepository() { }
+		IMongoCollection<Film> _collection;
+		public FilmRepository()
+		{
+			_collection = database.GetCollection<Film>(name: "Films");
+		}
 
-		public List<Film> ChargerListeFilms()
+		public async Task<List<Film>> ChargerListeFilms()
 		{
 
 			List<Film> films = new List<Film>();
 
 			try
 			{
-
-				IMongoCollection<Film> collection = database.GetCollection<Film>(name: "Films");
-				films = collection.Aggregate().ToList();
+				films = await _collection.Aggregate().ToListAsync<Film>();
 			}
 			catch (Exception ex)
 			{
