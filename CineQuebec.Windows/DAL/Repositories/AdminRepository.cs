@@ -11,10 +11,11 @@ namespace CineQuebec.Windows.DAL.Repositories
 {
     public class AdminRepository:BaseRepository
     {
+        private IMongoCollection<Administrateur> _collection;
        
        public AdminRepository()
         {
-
+            _collection = database.GetCollection<Administrateur>("Administrateurs");
         }
 
         public async Task<Administrateur> ConnexionUtilisateur(string pUsername, string pPassword)
@@ -22,11 +23,10 @@ namespace CineQuebec.Windows.DAL.Repositories
             Administrateur? utilisateur = new Administrateur();
             try
             {
-                IMongoCollection<Administrateur> collection = database.GetCollection<Administrateur>("Administrateurs");
 
                 var filter = Builders<Administrateur>.Filter.Eq("Name", pUsername);
 
-                utilisateur = await collection.Find(filter).FirstOrDefaultAsync();
+                utilisateur = await _collection.Find(filter).FirstOrDefaultAsync();
 
                 if (utilisateur is null)
                     throw new UtilisateurNotFoundException("Le username est incorrect!");
