@@ -13,14 +13,14 @@ namespace CineQuebec.Windows.DAL.Repositories
     {
         private IMongoCollection<Administrateur> _collection;
        
-       public AdminRepository()
+        public AdminRepository()
         {
             _collection = database.GetCollection<Administrateur>("Administrateurs");
         }
 
         public async Task<Administrateur> ConnexionUtilisateur(string pUsername, string pPassword)
         {
-            Administrateur? utilisateur = new Administrateur();
+            Administrateur utilisateur = new Administrateur();
             try
             {
 
@@ -31,16 +31,16 @@ namespace CineQuebec.Windows.DAL.Repositories
                 if (utilisateur is null)
                     throw new UtilisateurNotFoundException("Le username est incorrect!");
 
-                if (!utilisateur.Password.Equals(pPassword))
+                if (!utilisateur.Password.Equals(pPassword)){
+                    utilisateur = null;
                     throw new UtilisateurNotFoundException("Mot de passe incorrect!");
+                }
 
             }catch (UtilisateurNotFoundException  ex){
-                utilisateur = null;
 				MessageBox.Show($"Erreur lors de la connexion: {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
             catch (Exception ex)
             {
-                utilisateur = null;
                 Console.WriteLine($"Impossible d'obtenir la collection {ex.Message}", "Connexion Administrateur");
             }
 
