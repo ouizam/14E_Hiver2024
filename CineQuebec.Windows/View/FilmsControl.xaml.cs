@@ -63,9 +63,12 @@ namespace CineQuebec.Windows.View
 		{
 			lstFilms.Items.Clear();
 
-			foreach(Film film in _films!)
+			if (_films is not null)
 			{
-				lstFilms.Items.Add(film);
+				foreach (Film film in _films)
+				{
+					lstFilms.Items.Add(film);
+				}
 			}
 		}
     }
