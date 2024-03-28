@@ -14,6 +14,7 @@ namespace CineQuebec.Windows.DAL
     {
         private IMongoClient mongoDBClient;
         private IMongoDatabase database;
+        private string connexionString = "mongodb+srv://dev:QWERTY123@cluster0.nfeagoi.mongodb.net/";
 
         public DatabasePeleMele(IMongoClient client = null)
         {
@@ -25,7 +26,7 @@ namespace CineQuebec.Windows.DAL
             MongoClient dbClient = null;
             try
             {
-                dbClient = new MongoClient("mongodb://localhost:27017/");
+                dbClient = new MongoClient(connexionString);
             }
             catch (Exception ex)
             {
@@ -39,7 +40,7 @@ namespace CineQuebec.Windows.DAL
             IMongoDatabase db = null;
             try
             {
-                db = mongoDBClient.GetDatabase("TP2DB");
+                db = mongoDBClient.GetDatabase("CineQuebec");
             }
             catch (Exception ex)
             {
