@@ -9,8 +9,14 @@ namespace CineQuebec.Windows.DAL.Data
 {
     public class Acteur
     {
-      public ObjectId Id { get; set; }
-       public string NameActeur { get; set; }
+		public ObjectId Id { get; set; }
+		public string NameActeur { get; set; }
+
+		public Acteur(string pNom)
+		{
+			NameActeur = pNom;
+			Id= ObjectId.GenerateNewId();
+		}
 
 		public override string ToString()
 		{
