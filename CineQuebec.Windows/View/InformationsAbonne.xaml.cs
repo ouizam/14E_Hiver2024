@@ -1,4 +1,5 @@
 ﻿using CineQuebec.Windows.DAL.Data;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace CineQuebec.Windows.View
     /// </summary>
     public partial class InformationsAbonne : Window
     {
+        List<Acteur> _acteurs = new List<Acteur>();
         public InformationsAbonne(Abonne abonne)
         {
             InitializeComponent();
@@ -34,6 +36,26 @@ namespace CineQuebec.Windows.View
                 datePickerDateAdhesion.Text = abonne.DateAdhesion.ToString();
                 txtEmail.Text = abonne.Email;
                 txtNbProjection.Text=abonne.Reservations.Count.ToString();
+                lstActeurs.Items.Add(abonne);
+                AfficherPreferenceActeurs(abonne);
+
+
+            }
+        }
+
+        public void AfficherPreferenceActeurs(Abonne abonne)
+        {
+            lstActeurs.Items.Clear();
+            foreach (var preference in abonne.Preferences)
+            {
+                if (preference.Acteur != null && preference.Acteur.Id != ObjectId.Empty)
+                {
+                    lstActeurs.Items.Add(preference.Acteur);
+                }
+                if (preference.Realisateur != null && preference.Realisateur.Id != ObjectId.Empty)
+                {
+                    lstRealisateurs.Items.Add(preference.Realisateur);
+                }
                
             }
         }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CineQuebec.Windows.View"
         mc:Ignorable="d"
-        Title="InformationsAbonne" Height="550" Width="420">
+        Title="InformationsAbonne" Height="550" Width="440">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

@@ -55,5 +55,6 @@ namespace CineQuebec.Windows.View
                 lstUsers.Items.Add(abonne);
             }
         }
+
 	}
 }

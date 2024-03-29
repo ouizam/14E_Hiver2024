@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL.Data
 {
-   public class Preferences
+   public class Preference
     {
         public ObjectId Id { get; set; }
         public ObjectId IdAbonne { get; set; }
         public ObjectId IdActeur { get; set; }
         public ObjectId IdRealisateur { get; set; }
         public ObjectId IdCategorie { get; set; }
+        public Acteur Acteur { get; set; }
+        public Realisateur Realisateur { get; set; }
+        public Categorie Categorie { get; set; }
     }
 }

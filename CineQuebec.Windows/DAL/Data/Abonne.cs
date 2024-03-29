@@ -16,7 +16,7 @@ namespace CineQuebec.Windows.DAL.Data
         public string Password { get; set; }
         public List<Reservation> Reservations { get; set; } = new List<Reservation>();
         public  List <Recompense> Recompenses { get; set; } = new List<Recompense>();
-        public  List <Preferences> Preferences { get; set; } = new List<Preferences>();
+        public  List <Preference> Preferences { get; set; } = new List<Preference>();
 
 
         public override string ToString()
