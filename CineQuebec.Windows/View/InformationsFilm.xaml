@@ -9,8 +9,53 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+
         </Grid.ColumnDefinitions>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Column="0" Grid.Row="1"  Header="Informations Films" Height="400">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="37*"/>
+                    <ColumnDefinition Width="113*"/>
+                    <ColumnDefinition Width="22*"/>
+                    <ColumnDefinition Width="42*"/>
+                    <ColumnDefinition Width="217*"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition Height="32"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="20,5,20,7" Text="Nom" Grid.ColumnSpan="3"/>
+                <TextBox x:Name="txtNomFilm" Grid.Column="3" Grid.Row="1" Height="26" Width="200" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0" Grid.ColumnSpan="2"  />
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="20,5,15,13" Text="Date de sortie" Grid.ColumnSpan="3"/>
+                <DatePicker x:Name="dateSortieFilm" Width="197" Height="26"  IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="21,0,0,0" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" />
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="20,5,20,12" Text="Categorie" Grid.ColumnSpan="3"/>
+                <TextBox x:Name="txtCategorie" Grid.Column="3" Grid.Row="3" Height="26"  Width="200"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0" Grid.ColumnSpan="2"  />
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="20,5,36,11" Text="Realisateur(s)" Grid.ColumnSpan="4"/>
+                <TextBox x:Name="txtRealisateurs" Grid.Row="4" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="20,5,36,11" Text="Acteur(s)" Grid.ColumnSpan="4"/>
+                <TextBox x:Name="txtActeurs" Grid.Row="5" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />
+                
+                <TextBlock Grid.Row="6" Grid.Column="0" Margin="20,5,36,11" Text="A l'affiche" Grid.ColumnSpan="4"/>
+                <CheckBox x:Name="checkAffiche"  Grid.Row="6" Grid.Column="3"  Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
