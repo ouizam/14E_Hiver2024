@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.BLL.Services;
 
 namespace CineQuebec.Windows.View
 {
@@ -24,15 +25,15 @@ namespace CineQuebec.Windows.View
 	public partial class ConnexionControl : UserControl
     {
 
-		private DatabasePeleMele _db;
+		private AdminService _adminService;
 
 		public ConnexionControl()
         {
             InitializeComponent();
-            _db = new DatabasePeleMele();
+            _adminService = new AdminService();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             string username = usernameTXT.Text.ToString();
             string password = passwordTXT.Text.ToString();
@@ -41,9 +42,9 @@ namespace CineQuebec.Windows.View
 				MessageBox.Show("Veuillez entrer un nom d'utilisateur et un mot de passe.", "Erreur lors de la connexion", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
 			{
-				Administrateur admin = _db.ConnexionUtilisateur(username, password);
+				Administrateur admin = await _adminService.ConnexionUtilisateur(username, password);
 
-                if (admin is not null)
+                if (admin != null)
                 {
 					((MainWindow)Application.Current.MainWindow).AdminHomeControl();
 				}

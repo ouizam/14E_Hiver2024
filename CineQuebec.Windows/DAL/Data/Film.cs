@@ -15,5 +15,6 @@ namespace CineQuebec.Windows.DAL.Data
         public Categorie Categorie { get; set; }
         public List <Realisateur> Realisateurs { get; set; }
         public List <Acteur> Acteurs { get; set; }
-    }
+        public string Nom {  get; set; }
+	}
 }

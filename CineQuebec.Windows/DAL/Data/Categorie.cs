@@ -12,5 +12,10 @@ namespace CineQuebec.Windows.DAL.Data
         public ObjectId Id { get; set; }
         public string NameCategorie { get; set; }
 
-    }
+		public override string ToString()
+		{
+			return NameCategorie;
+		}
+
+	}
 }

@@ -11,5 +11,10 @@ namespace CineQuebec.Windows.DAL.Data
     {
         public ObjectId Id { get; set; }
         public string NameRealisateur { get; set; }
-    }
+
+		public override string ToString()
+		{
+			return NameRealisateur;
+		}
+	}
 }
