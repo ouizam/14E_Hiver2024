@@ -13,8 +13,13 @@ namespace CineQuebec.Windows.DAL.Data
         public DateTime DateSortieFilm { get; set; }     
         public bool EstAffiche { get; set; }
         public Categorie Categorie { get; set; }
-        public List <Realisateur> Realisateurs { get; set; }
-        public List <Acteur> Acteurs { get; set; }
+        public List<Realisateur> Realisateurs { get; set; }
+        public List<Acteur> Acteurs { get; set; }
         public string Nom {  get; set; }
+
+        public Film()
+        {
+            Id = ObjectId.GenerateNewId();
+        }
 	}
 }

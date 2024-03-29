@@ -41,7 +41,7 @@ namespace CineQuebec.Windows.View
                 
                 if (reponse)
                 {
-                    Close();
+                    this.DialogResult = true;
                 }
             }
             else
@@ -65,22 +65,26 @@ namespace CineQuebec.Windows.View
         {
 			Film nouveau_film = new Film();
 
+            nouveau_film.Acteurs = new List<Acteur>();
+            nouveau_film.Realisateurs = new List<Realisateur>();
+
+
 			nouveau_film.Nom = txtNomFilm.Text.ToString().Trim();
 
 			nouveau_film.DateSortieFilm = dateSortieFilm.SelectedDate!.Value;
 
 			nouveau_film.EstAffiche = checkAffiche.IsChecked.GetValueOrDefault(defaultValue: false);
 
-			nouveau_film.Categorie = new Categorie { NameCategorie = txtCategorie.Text.ToString().Trim() };
+			nouveau_film.Categorie = new Categorie(txtCategorie.Text.ToString().Trim());
 
 			foreach (string nom in txtActeurs.Text.ToString().Split(','))
 			{
-				nouveau_film.Acteurs.Add(new Acteur { NameActeur = nom.Trim() });
+				nouveau_film.Acteurs.Add(new Acteur(nom.Trim()));
 			}
 
 			foreach (string nom in txtRealisateurs.Text.ToString().Split(","))
 			{
-				nouveau_film.Realisateurs.Add(new Realisateur { NameRealisateur = nom.Trim() });
+				nouveau_film.Realisateurs.Add(new Realisateur(nom.Trim()));
 			}
 
             return nouveau_film;
@@ -93,13 +97,13 @@ namespace CineQuebec.Windows.View
 
             try
             {
-                await _filmService.CreerFilm(film);
+                return await _filmService.CreerFilm(film);
             }catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erreur lors de la création", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+				return false;
+			}
 
-            return false;
-        }
+		}
     }
 }

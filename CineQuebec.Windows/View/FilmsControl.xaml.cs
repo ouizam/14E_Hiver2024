@@ -73,5 +73,19 @@ namespace CineQuebec.Windows.View
 				}
 			}
 		}
+
+		private void Button_Ajouter_Film(object sender, RoutedEventArgs e)
+		{
+			AjouterFilm ajouterFilm = new AjouterFilm();
+
+			bool? resultat = ajouterFilm.ShowDialog();
+
+			if (resultat == true)
+			{
+				MessageBox.Show("Le film a bien été ajouté", "Ajout Film", MessageBoxButton.OK, MessageBoxImage.Information);
+				ChargerFilms();
+			}
+
+		}
     }
 }
