@@ -20,7 +20,14 @@
 
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Liste des films">
-            <ListBox x:Name="lstFilms" Margin="0,0,0,-357" SelectionChanged="lstFilms_SelectionChanged" />
+            <ListBox x:Name="lstFilms" Margin="0,0,0,-357" SelectionChanged="lstFilms_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Nom}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
         </GroupBox>
     </Grid>
 </Window>

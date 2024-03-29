@@ -31,7 +31,7 @@ namespace CineQuebec.Windows.View
 			_filmService = new FilmService();
 
 			ChargerFilms();
-			AfficherListeFilms();
+
 		}
 
 		private void lstFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,8 +52,10 @@ namespace CineQuebec.Windows.View
 			try
 			{
 				_films = await _filmService.GetFilms();
+				AfficherListeFilms();
 
-			}catch (Exception ex)
+			}
+			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message,"Une erreur est survenue", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
