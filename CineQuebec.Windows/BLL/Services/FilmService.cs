@@ -17,7 +17,7 @@ namespace CineQuebec.Windows.BLL.Services
 			_filmRepo = new FilmRepository();
 		}
 
-		public async Task<List<Film>?> GetFilms()
+		public async Task<List<Film>?> ChargerListeFilms()
 		{
 			try
 			{
@@ -31,5 +31,16 @@ namespace CineQuebec.Windows.BLL.Services
 			return null;
 		}
 
+		public async Task<bool> CreerFilm(Film film)
+		{
+			try
+			{
+				return await _filmRepo.CreerFilm(film);
+			}catch (Exception ex)
+			{
+				Console.Error.WriteLine(ex.Message);
+			}
+			return false;
+		}
 	}
 }

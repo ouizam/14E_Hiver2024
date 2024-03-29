@@ -1,4 +1,5 @@
 ﻿using CineQuebec.Windows.DAL.Data;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -16,20 +17,32 @@ namespace CineQuebec.Windows.DAL.Repositories
 			_collection = database.GetCollection<Film>(name: "Films");
 		}
 
-		public async Task<List<Film>> ChargerListeFilms()
+		public async Task<List<Film>?> ChargerListeFilms()
 		{
-
-			List<Film> films = new List<Film>();
-
 			try
 			{
-				films = await _collection.Aggregate().ToListAsync<Film>();
+				return await _collection.Aggregate().ToListAsync<Film>();
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine($"Impossible d'obtenir la collection {ex.Message}", "Récupération Films");
 			}
-			return films;
+			return null;
 		}
+
+		public async Task<bool> CreerFilm(Film film)
+		{
+			try
+			{
+				await _collection.InsertOneAsync(film);
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Erreur lors de la création du film : {ex.Message}");
+				return false;
+			}
+		}
+
 	}
 }

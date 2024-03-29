@@ -51,7 +51,7 @@ namespace CineQuebec.Windows.View
 		{
 			try
 			{
-				_films = await _filmService.GetFilms();
+				_films = await _filmService.ChargerListeFilms();
 				AfficherListeFilms();
 
 			}
