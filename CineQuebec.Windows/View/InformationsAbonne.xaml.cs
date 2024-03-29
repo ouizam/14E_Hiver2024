@@ -37,13 +37,13 @@ namespace CineQuebec.Windows.View
                 txtEmail.Text = abonne.Email;
                 txtNbProjection.Text=abonne.Reservations.Count.ToString();
                 lstActeurs.Items.Add(abonne);
-                AfficherPreferenceActeurs(abonne);
+                AfficherPreferences(abonne);
 
 
             }
         }
 
-        public void AfficherPreferenceActeurs(Abonne abonne)
+        public void AfficherPreferences(Abonne abonne)
         {
             lstActeurs.Items.Clear();
             foreach (var preference in abonne.Preferences)
@@ -55,6 +55,10 @@ namespace CineQuebec.Windows.View
                 if (preference.Realisateur != null && preference.Realisateur.Id != ObjectId.Empty)
                 {
                     lstRealisateurs.Items.Add(preference.Realisateur);
+                }
+                if (preference.Categorie != null && preference.Categorie.Id != ObjectId.Empty)
+                {
+                    lstCategories.Items.Add(preference.Categorie);
                 }
                
             }

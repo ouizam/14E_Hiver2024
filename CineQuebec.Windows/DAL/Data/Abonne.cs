@@ -21,7 +21,7 @@ namespace CineQuebec.Windows.DAL.Data
 
         public override string ToString()
         {
-            return $"{Username}: adhéré(e) le {DateAdhesion}";
+            return $"{Username} ( Nombre réservation : {Reservations.Count})";
         }
 
         public void VoirDetailFilm(Film film)

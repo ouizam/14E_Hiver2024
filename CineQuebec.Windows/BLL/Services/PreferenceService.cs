@@ -14,12 +14,14 @@ namespace CineQuebec.Windows.BLL.Services
         private PreferenceRepository _preferenceRepository;
         private ActeurService _acteurService;
         private RealisateurService _realisateurService;
+        private CategorieService _categorieService;
 
         public PreferenceService() 
         {
             _preferenceRepository = new PreferenceRepository();
             _acteurService = new ActeurService();
             _realisateurService = new RealisateurService();
+            _categorieService = new CategorieService();
         }
 
         public Preference ObtenirPreference(ObjectId idPrefernce)
@@ -49,6 +51,7 @@ namespace CineQuebec.Windows.BLL.Services
                 {
                     preference.Realisateur = _realisateurService.ObtenirRealisateur(preference.IdRealisateur);
                     preference.Acteur = _acteurService.ObtenirActeur(preference.IdActeur);
+                    preference.Categorie = _categorieService.ObteniCategorie(preference.IdCategorie);
                                   
                 }
             }
