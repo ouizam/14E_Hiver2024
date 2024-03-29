@@ -27,20 +27,25 @@ namespace CineQuebec.Windows.View
 			InitializeComponent();
 			_film = film;
 
-			//DataContext = new
-			//{
-			//	PathProperties = new List<KeyValuePair<string, string>>
-			//	{
-			//		new KeyValuePair<string, string>("Id", film.Id.ToString()),
-			//		new KeyValuePair<string, string>("Date de sortie", film.DateSortieFilm.ToString()),
-			//		new KeyValuePair<string, string>("Est affiché", film.EstAffiche.ToString()),
-			//		new KeyValuePair<string, string>("Nom", film.Nom.ToString()),
-			//		new KeyValuePair<string, string>("Categorie", film.Categorie.NameCategorie.ToString()),
-			//		new KeyValuePair<string, string>("Réalisateur(s)", string.Join(", ", film.Realisateurs)),
-			//		new KeyValuePair<string, string>("Acteur(s)", string.Join(", ", film.Acteurs)),
-			//	}
-			//};
+			AfficherInformations();
 		}
 
+		private void AfficherInformations()
+		{
+			txtNomFilm.Text = _film.Nom;
+			txtRealisateurs.Text = string.Join(", ", _film.Realisateurs);
+			txtActeurs.Text = string.Join(", ", _film.Acteurs);
+			txtCategorie.Text = _film.Categorie.ToString();
+
+			if (_film.EstAffiche)
+				checkAffiche.IsChecked = true;
+
+			dateSortieFilm.Text = _film.DateSortieFilm.ToShortDateString();
+		}
+
+		private void checkAffiche_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+
+		}
 	}
 }

@@ -8,16 +8,17 @@
         Title="InformationsFilm" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Column="0" Grid.Row="1"  Header="Informations Films" Height="400">
+        <GroupBox Grid.Column="1" Grid.Row="1"  Header="Informations Films" Height="400">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="37*"/>
@@ -48,13 +49,13 @@
                 <TextBox x:Name="txtCategorie" Grid.Column="3" Grid.Row="3" Height="26"  Width="200"  IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0" Grid.ColumnSpan="2"  />
 
                 <TextBlock Grid.Row="4" Grid.Column="0" Margin="20,5,36,11" Text="Realisateur(s)" Grid.ColumnSpan="4"/>
-                <TextBox x:Name="txtRealisateurs" Grid.Row="4" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />
+                <TextBox x:Name="txtRealisateurs" Grid.Row="4" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />
 
                 <TextBlock Grid.Row="5" Grid.Column="0" Margin="20,5,36,11" Text="Acteur(s)" Grid.ColumnSpan="4"/>
-                <TextBox x:Name="txtActeurs" Grid.Row="5" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />
+                <TextBox x:Name="txtActeurs" Grid.Row="5" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />
                 
                 <TextBlock Grid.Row="6" Grid.Column="0" Margin="20,5,36,11" Text="A l'affiche" Grid.ColumnSpan="4"/>
-                <CheckBox x:Name="checkAffiche"  Grid.Row="6" Grid.Column="3"  Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0"/>
+                <CheckBox x:Name="checkAffiche"  Grid.Row="6" Grid.Column="3"  Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0" IsEnabled="False"/>
             </Grid>
         </GroupBox>
     </Grid>
