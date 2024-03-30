@@ -1,5 +1,7 @@
 ﻿using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,19 +35,6 @@ namespace CineQuebec.Windows.View
 			ChargerFilms();
 
 		}
-
-		private void lstFilms_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-
-			if(lstFilms.SelectedItems != null)
-			{
-				Film? filmSelectionnee = lstFilms.SelectedItem as Film;
-
-				InformationsFilm informationsFilm = new InformationsFilm(filmSelectionnee!);
-				informationsFilm.Show();
-			}
-
-        }
 
 		private async void ChargerFilms()
 		{
@@ -82,10 +71,45 @@ namespace CineQuebec.Windows.View
 
 			if (resultat == true)
 			{
-				MessageBox.Show("Le film a bien été ajouté", "Ajout Film", MessageBoxButton.OK, MessageBoxImage.Information);
 				ChargerFilms();
 			}
 
 		}
-    }
+
+		private async void Button_Click(object sender, RoutedEventArgs e)
+		{
+			// Obtenez le film associé au bouton cliqué
+			Film? film = ((Button)sender).DataContext as Film;
+
+			MessageBoxResult result = MessageBox.Show("Voulez-vous vraiment supprimer ce film ?", "Attention", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+			if (result == MessageBoxResult.Yes)
+			{
+				try
+				{
+					DeleteResult? reponse = await _filmService.SupprimerFilm(pFilm: film!);
+
+					if (reponse!.IsAcknowledged)
+						ChargerFilms();
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Une erreur c'est produite", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
+			}
+
+		}
+
+		private void Button_Click_1(object sender, RoutedEventArgs e)
+		{
+
+			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
+
+			InformationsFilm informationsFilm = new InformationsFilm(filmSelectionnee!);
+			bool? resultat = informationsFilm.ShowDialog();
+
+			if (resultat == true)
+				ChargerFilms();
+		}
+	}
 }

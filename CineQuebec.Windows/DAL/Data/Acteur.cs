@@ -12,6 +12,7 @@ namespace CineQuebec.Windows.DAL.Data
 		public ObjectId Id { get; set; }
 		public string NameActeur { get; set; }
 
+		public Acteur() { }
 		public Acteur(string pNom)
 		{
 			NameActeur = pNom;

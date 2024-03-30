@@ -12,6 +12,9 @@ namespace CineQuebec.Windows.DAL.Data
         public ObjectId Id { get; set; }
         public string NameCategorie { get; set; }
 
+
+		public Categorie() { }
+
 		public Categorie(string pNom)
 		{
 			Id = ObjectId.GenerateNewId();

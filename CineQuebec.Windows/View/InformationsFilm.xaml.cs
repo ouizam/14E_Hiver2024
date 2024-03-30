@@ -1,4 +1,6 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Services;
+using CineQuebec.Windows.DAL.Data;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,18 +23,21 @@ namespace CineQuebec.Windows.View
 	/// </summary>
 	public partial class InformationsFilm : Window
 	{
-		private Film _film;
+		private Film? _film;
+		private FilmService _filmService;
 		public InformationsFilm(Film film)
 		{
 			InitializeComponent();
 			_film = film;
+			_filmService = new FilmService();
 
-			AfficherInformations();
+			if(_film is not null)
+				AfficherInformations();
 		}
 
 		private void AfficherInformations()
 		{
-			txtNomFilm.Text = _film.Nom;
+			txtNomFilm.Text = _film!.Nom;
 			txtRealisateurs.Text = string.Join(", ", _film.Realisateurs);
 			txtActeurs.Text = string.Join(", ", _film.Acteurs);
 			txtCategorie.Text = _film.Categorie.ToString();
@@ -43,9 +48,5 @@ namespace CineQuebec.Windows.View
 			dateSortieFilm.Text = _film.DateSortieFilm.ToShortDateString();
 		}
 
-		private void checkAffiche_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-		{
-
-		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Repositories;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,18 @@ namespace CineQuebec.Windows.BLL.Services
 				Console.Error.WriteLine(ex.Message);
 			}
 			return false;
+		}
+
+		public async Task<DeleteResult?> SupprimerFilm(Film pFilm)
+		{
+			try
+			{
+				return await _filmRepo.SupprimerFilm(pFilm);
+			}catch (Exception ex)
+			{
+				Console.Error.WriteLine(ex.Message);
+			}
+			return null;
 		}
 	}
 }

@@ -44,5 +44,22 @@ namespace CineQuebec.Windows.DAL.Repositories
 			}
 		}
 
+		public async Task<DeleteResult?> SupprimerFilm(Film pFilm)
+		{
+			try
+			{
+				var filter = Builders<Film>.Filter.Eq("_id", pFilm.Id);
+
+				return await _collection.DeleteOneAsync(filter);
+
+				
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Erreur lors de la suppression du film: {ex.Message}");
+			}
+			return null;
+		}
+
 	}
 }
