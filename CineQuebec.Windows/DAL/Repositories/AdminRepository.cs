@@ -1,9 +1,11 @@
 ﻿using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Exceptions;
+using Konscious.Security.Cryptography;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,7 +21,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             _collection = database.GetCollection<Administrateur>("Administrateurs");
         }
 
-        public async Task<Administrateur> ConnexionUtilisateur(string pUsername, string pPassword)
+        public async Task<Administrateur> ConnexionUtilisateur(string pUsername, byte[] pPassword)
         {
             Administrateur utilisateur = new Administrateur();
             try
