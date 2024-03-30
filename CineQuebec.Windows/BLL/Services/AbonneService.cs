@@ -13,11 +13,13 @@ namespace CineQuebec.Windows.BLL.Services
     {
         private AbonneRepository _abonneRepository;
         private ReservationService _reservationService;
+        private PreferenceService _preferenceSrvice;
 
         public AbonneService()
         {
             _abonneRepository = new AbonneRepository();
             _reservationService = new ReservationService();
+            _preferenceSrvice = new PreferenceService();
         }
         public List<Abonne> ReadAbonnes()
         {
@@ -29,6 +31,7 @@ namespace CineQuebec.Windows.BLL.Services
                 foreach (var abonne in abonnes)
                 {
                     abonne.Reservations = _reservationService.ObtenirReservationsAbonne(abonne.Id);
+                    abonne.Preferences =  _preferenceSrvice.ObtenirPreferencesAbonne(abonne.Id);
                 }
                
             }

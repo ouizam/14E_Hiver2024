@@ -31,7 +31,7 @@ namespace CineQuebec.Windows.View
         {
             InitializeComponent();
            
-            _listeDesUsers= _abonneService.ReadAbonnes();
+            _listeDesUsers= _abonneService.ReadAbonnes().OrderByDescending(x=>x.Reservations.Count).ToList();
             //_databasePeleMele.AddAbonne();
             AfficherListeUtilisateurs();
         }
@@ -55,5 +55,6 @@ namespace CineQuebec.Windows.View
                 lstUsers.Items.Add(abonne);
             }
         }
+
 	}
 }

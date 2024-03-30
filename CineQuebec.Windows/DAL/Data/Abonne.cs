@@ -16,11 +16,12 @@ namespace CineQuebec.Windows.DAL.Data
         public string Password { get; set; }
         public List<Reservation> Reservations { get; set; } = new List<Reservation>();
         public  List <Recompense> Recompenses { get; set; } = new List<Recompense>();
+        public  List <Preference> Preferences { get; set; } = new List<Preference>();
 
 
         public override string ToString()
         {
-            return $"{Username}: adhéré(e) le {DateAdhesion}";
+            return $"{Username} ( Nombre réservation : {Reservations.Count})";
         }
 
         public void VoirDetailFilm(Film film)

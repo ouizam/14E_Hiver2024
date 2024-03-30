@@ -12,6 +12,7 @@ namespace CineQuebec.Windows.DAL.Data
         public ObjectId Id { get; set; }
         public  DateTime DateProjection { get; set; }
         public int NoSalle { get; set; }
+        public ObjectId IdFilm { get; set; }
         public Film Film { get; set; }
     }
 }

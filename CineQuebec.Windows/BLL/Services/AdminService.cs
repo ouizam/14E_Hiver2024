@@ -24,7 +24,7 @@ namespace CineQuebec.Windows.BLL.Services
         {
             try
             {
-                return await _adminRepository.ConnexionUtilisateur(pUsername, pPassword);
+                return await  _adminRepository.ConnexionUtilisateur(pUsername, pPassword);
 
             }catch (UtilisateurNotFoundException ex)
             {
