@@ -11,10 +11,10 @@ namespace CineQuebec.Windows.BLL.Services
 {
     public class CategorieService
     {
-        private CategorieRepository _categoreiRepository;
+        private CategorieRepository _categorieRepository;
         public CategorieService() 
         {
-            _categoreiRepository = new CategorieRepository();
+            _categorieRepository = new CategorieRepository();
         }
 
         public Categorie ObteniCategorie(ObjectId idCategorie)
@@ -23,7 +23,7 @@ namespace CineQuebec.Windows.BLL.Services
 
             try
             {
-                categorie = _categoreiRepository.ObtenireCategorie(idCategorie);
+                categorie = _categorieRepository.ObtenirCategorie(idCategorie);
 
             }
             catch (Exception ex)

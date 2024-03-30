@@ -13,7 +13,7 @@ namespace CineQuebec.Windows.DAL.Repositories
     {
         public CategorieRepository() { }
 
-        public Categorie ObtenireCategorie(ObjectId idCategorie)
+        public Categorie ObtenirCategorie(ObjectId idCategorie)
         {
             var categorie = new Categorie();
 

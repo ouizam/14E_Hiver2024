@@ -26,15 +26,15 @@ namespace CineQuebec.Windows.BLL.Services
             {
                 return await  _adminRepository.ConnexionUtilisateur(pUsername, pPassword);
 
-            }catch (UtilisateurNotFoundException ex)
+            }catch (UtilisateurNotFoundException)
             {
                 return null;
             }
             catch (Exception ex)
             {
 				MessageBox.Show($"Erreur lors de la connexion: {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+				return null;
 			}
-            return null;
-        }
+		}
     }
 }
