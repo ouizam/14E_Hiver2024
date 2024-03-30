@@ -55,5 +55,29 @@ namespace CineQuebec.Windows.BLL.Services
 			}
 			return null;
 		}
+
+		public async Task<List<Film>?> ChargerListeFilmsAffiche()
+		{
+			try
+			{
+				return await _filmRepo.ChargerListeFilmsAffiche();
+			}catch(Exception ex)
+			{
+				Console.Error.WriteLine(ex.Message);
+			}
+			return null;
+		}
+
+		public async Task<UpdateResult?> ModifierFilm(Film film)
+		{
+			try
+			{
+				return await _filmRepo.ModifierFilm(film);
+			}catch (Exception ex)
+			{
+				Console.Error.WriteLine(ex.Message);
+			}
+			return null;
+		}
 	}
 }

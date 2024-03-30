@@ -61,5 +61,41 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
+		public async Task<List<Film>?> ChargerListeFilmsAffiche()
+		{
+			try
+			{
+				return await _collection.Find(Builders<Film>.Filter.Eq(f => f.EstAffiche, true)).ToListAsync<Film>(); ;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Impossible d'obtenir la collection : {ex.Message}");
+			}
+			return null;
+		}
+
+		public async Task<UpdateResult?> ModifierFilm(Film film)
+		{
+			try
+			{
+				var filter = Builders<Film>.Filter.Eq(f => f.Id, film.Id);
+				var update = Builders<Film>.Update
+					.Set(f => f.Nom, film.Nom)
+					.Set(f => f.DateSortieFilm, film.DateSortieFilm)
+					.Set(f => f.EstAffiche, film.EstAffiche)
+					.Set(f => f.Categorie, film.Categorie)
+					.Set(f => f.Realisateurs, film.Realisateurs)
+					.Set(f => f.Acteurs, film.Acteurs);
+
+				return await _collection.UpdateOneAsync(filter, update);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Erreur lors de la modification du film : {ex.Message}");
+			}
+			return null;
+		}
+
+
 	}
 }

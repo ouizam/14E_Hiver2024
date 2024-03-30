@@ -48,5 +48,46 @@ namespace CineQuebec.Windows.View
 			dateSortieFilm.Text = _film.DateSortieFilm.ToShortDateString();
 		}
 
-	}
+		private async void ModifierFilmButton_Click(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				InitialiserFilm();
+				UpdateResult? reponse = await _filmService.ModifierFilm(_film!);
+
+				if (reponse!.IsAcknowledged)
+					this.DialogResult = true;
+
+			}catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Une erreur c'est produite", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+
+		private void InitialiserFilm()
+		{
+			_film!.Nom = txtNomFilm.Text.ToString().Trim();
+			_film.Categorie.NameCategorie = txtCategorie.Text.ToString().Trim();
+			_film.DateSortieFilm = dateSortieFilm.SelectedDate!.Value;
+
+			if (checkAffiche.IsChecked == true)
+				_film.EstAffiche = true;
+			else
+				_film.EstAffiche = false;
+
+
+			_film.Realisateurs.Clear();
+			_film.Acteurs.Clear();
+
+			foreach (string nom in txtRealisateurs.Text.Split(","))
+			{
+				_film.Realisateurs.Add(new Realisateur(nom.Trim()));
+			}
+
+			foreach (string nom in txtActeurs.Text.Split(","))
+			{
+				_film.Acteurs.Add(new Acteur(nom.Trim()));
+			}
+		}
+    }
 }

@@ -26,6 +26,9 @@ namespace CineQuebec.Windows.View
 		private FilmService _filmService;
 
 		private List<Film>? _films;
+
+		private List<Film>? _filmAffiche;
+
 		public FilmsControl()
 		{
 			InitializeComponent();
@@ -41,7 +44,10 @@ namespace CineQuebec.Windows.View
 			try
 			{
 				_films = await _filmService.ChargerListeFilms();
+				_filmAffiche = await _filmService.ChargerListeFilmsAffiche();
+
 				AfficherListeFilms();
+				AfficherListeFilmsAffiche();
 
 			}
 			catch (Exception ex)
@@ -59,6 +65,19 @@ namespace CineQuebec.Windows.View
 				foreach (Film film in _films)
 				{
 					lstFilms.Items.Add(film);
+				}
+			}
+		}
+
+		private void AfficherListeFilmsAffiche()
+		{
+			lstFilmsAffiche.Items.Clear();
+
+			if(_filmAffiche is not null)
+			{
+				foreach(Film film in _filmAffiche)
+				{
+					lstFilmsAffiche.Items.Add(film);
 				}
 			}
 		}
