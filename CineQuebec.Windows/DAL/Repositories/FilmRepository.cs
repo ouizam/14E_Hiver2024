@@ -17,7 +17,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			_collection = database.GetCollection<Film>(name: "Films");
 		}
 
-		public async Task<List<Film>?> ChargerListeFilms()
+		public virtual async Task<List<Film>?> ChargerListeFilms()
 		{
 			try
 			{
@@ -30,7 +30,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public async Task<bool> CreerFilm(Film film)
+		public virtual async Task<bool> CreerFilm(Film film)
 		{
 			try
 			{

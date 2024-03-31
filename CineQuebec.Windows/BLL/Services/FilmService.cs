@@ -18,6 +18,11 @@ namespace CineQuebec.Windows.BLL.Services
 			_filmRepo = new FilmRepository();
 		}
 
+		public FilmService(FilmRepository pFilmRepo)
+		{
+			_filmRepo = pFilmRepo;
+		}
+
 		public async Task<List<Film>?> ChargerListeFilms()
 		{
 			try
