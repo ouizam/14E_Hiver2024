@@ -50,18 +50,29 @@ namespace CineQuebec.Windows.View
 
 		private async void ModifierFilmButton_Click(object sender, RoutedEventArgs e)
 		{
-			try
-			{
-				InitialiserFilm();
-				UpdateResult? reponse = await _filmService.ModifierFilm(_film!);
+			MessageBoxResult resultat = MessageBox.Show("Voulez-vous apporter les modifications sur le films ?", "Modification d'un film", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-				if (reponse!.IsAcknowledged)
-					this.DialogResult = true;
-
-			}catch (Exception ex)
+			if (resultat == MessageBoxResult.Yes)
 			{
-				MessageBox.Show(ex.Message, "Une erreur c'est produite", MessageBoxButton.OK, MessageBoxImage.Error);
+				try
+				{
+					InitialiserFilm();
+					UpdateResult? reponse = await _filmService.ModifierFilm(_film!);
+
+					if (reponse!.IsAcknowledged)
+						this.DialogResult = true;
+
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Une erreur c'est produite", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
 			}
+			else
+			{
+				AfficherInformations();
+			}
+			
 		}
 
 		private void InitialiserFilm()
