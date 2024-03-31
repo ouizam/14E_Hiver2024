@@ -44,7 +44,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			}
 		}
 
-		public async Task<DeleteResult?> SupprimerFilm(Film pFilm)
+		public virtual async Task<DeleteResult?> SupprimerFilm(Film pFilm)
 		{
 			try
 			{
@@ -61,7 +61,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public async Task<List<Film>?> ChargerListeFilmsAffiche()
+		public virtual async Task<List<Film>?> ChargerListeFilmsAffiche()
 		{
 			try
 			{
