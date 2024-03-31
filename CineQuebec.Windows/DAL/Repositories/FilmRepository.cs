@@ -48,7 +48,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 		{
 			try
 			{
-				var filter = Builders<Film>.Filter.Eq("_id", pFilm.Id);
+				var filter = Builders<Film>.Filter.Eq(f => f.Id, pFilm.Id);
 
 				return await _collection.DeleteOneAsync(filter);
 
