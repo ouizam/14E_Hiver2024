@@ -3,6 +3,7 @@ using CineQuebec.Windows.DAL.Repositories;
 using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.BLL.Services;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace CineQuebec.Tests
 {
@@ -29,7 +30,7 @@ namespace CineQuebec.Tests
 		}
 
 		[Fact]
-		public async Task CreerFilm_Retourne_True_Succes()
+		public async Task CreerFilm_Retourne_True_Si_Succes()
 		{
 			// Arrange
 			Mock<FilmRepository> mockRepository = new Mock<FilmRepository>();
@@ -63,7 +64,7 @@ namespace CineQuebec.Tests
 		}
 
 		[Fact]
-		public async Task ChargerListeFilmsAffiche_RetourneListeFilmAffiche()
+		public async Task ChargerListeFilmsAffiche_Retourne_Liste_Film_Affiche()
 		{
 			// Arrange
 			Mock<FilmRepository> mockRepo = new Mock<FilmRepository>();
@@ -83,6 +84,36 @@ namespace CineQuebec.Tests
 			// Assert
 			Assert.NotNull(result);
 			Assert.Equal(1, result?.Count);
+		}
+
+		[Fact]
+		public async Task ModifierFilm_Retourne_UpdateResult()
+		{
+			Mock<FilmRepository> mockRepo = new Mock<FilmRepository>();
+			Film film = new Film
+			{
+				Id = ObjectId.GenerateNewId(),
+				Nom = "Nouveau film",
+				DateSortieFilm = DateTime.Now,
+				EstAffiche = true,
+				Categorie = new Categorie { NameCategorie = "Action" },
+				Realisateurs = new List<Realisateur> { new Realisateur { NameRealisateur = "Nom Réalisateur" } },
+				Acteurs = new List<Acteur> { new Acteur { NameActeur = "Nom Acteur" } }
+			};
+			UpdateResult updateResult = new UpdateResult.Acknowledged(1, 1, film.Id);
+			mockRepo.Setup(repo => repo.ModifierFilm(It.IsAny<Film>())).ReturnsAsync(updateResult);
+			FilmService filmService = new FilmService(mockRepo.Object);
+
+			// Act
+			UpdateResult? result = await filmService.ModifierFilm(film);
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.IsType<UpdateResult.Acknowledged>(result);
+			Assert.True(result.IsAcknowledged);
+			Assert.Equal(1, result.ModifiedCount);
+			Assert.Equal(1, result.MatchedCount);
+			Assert.Equal(film.Id, result.UpsertedId);
 		}
 
 	}

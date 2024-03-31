@@ -74,7 +74,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public async Task<UpdateResult?> ModifierFilm(Film film)
+		public virtual async Task<UpdateResult?> ModifierFilm(Film film)
 		{
 			try
 			{
