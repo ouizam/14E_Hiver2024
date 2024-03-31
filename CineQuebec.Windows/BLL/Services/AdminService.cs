@@ -26,6 +26,12 @@ namespace CineQuebec.Windows.BLL.Services
             _dicoSalts = new Dictionary<string, byte[]>();
         }
 
+        public AdminService(AdminRepository pAdminRepo)
+        {
+            _adminRepository = pAdminRepo;
+            _dicoSalts = new Dictionary<string, byte[]>();
+        }
+
         public async Task<Administrateur?> ConnexionUtilisateur(string pUsername, string pPassword)
         {
             try
@@ -40,7 +46,6 @@ namespace CineQuebec.Windows.BLL.Services
             }
             catch (Exception ex)
             {
-				MessageBox.Show($"Erreur lors de la connexion: {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
 				return null;
 			}
 		}

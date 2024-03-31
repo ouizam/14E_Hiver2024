@@ -42,12 +42,20 @@ namespace CineQuebec.Windows.View
 		
             if(ValiderConnexion(username, password))
 			{
-				Administrateur? admin = await _adminService.ConnexionUtilisateur(username, password);
-
-                if (admin != null)
+                try
                 {
-					((MainWindow)Application.Current.MainWindow).AdminHomeControl();
+					Administrateur? admin = await _adminService.ConnexionUtilisateur(username, password);
+
+					if (admin != null)
+					{
+						((MainWindow)Application.Current.MainWindow).AdminHomeControl();
+					}
 				}
+				catch (Exception ex)
+                {
+					MessageBox.Show($"Erreur lors de la connexion: {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
+				
 			} 
         }
 

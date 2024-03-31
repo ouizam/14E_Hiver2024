@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL.Exceptions
 {
-	public class UtilisateurNotFoundException : Exception
+	public  class UtilisateurNotFoundException : Exception
 	{
-		public UtilisateurNotFoundException(string message = "Utilisateur non trouvé.") : base(message) { }
+		public UtilisateurNotFoundException() { }
+		public UtilisateurNotFoundException(string message) : base(message) { }
 		public UtilisateurNotFoundException(string message, Exception innerException) : base(message, innerException) { }
 	}
 }

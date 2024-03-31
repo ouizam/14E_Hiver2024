@@ -21,7 +21,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             _collection = database.GetCollection<Administrateur>("Administrateurs");
         }
 
-        public async Task<Administrateur> ConnexionUtilisateur(string pUsername, byte[] pPassword)
+        public virtual async Task<Administrateur> ConnexionUtilisateur(string pUsername, byte[] pPassword)
         {
             Administrateur utilisateur = new Administrateur();
             try
