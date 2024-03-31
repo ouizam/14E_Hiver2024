@@ -42,7 +42,7 @@ namespace CineQuebec.Windows.View
 		
             if(ValiderConnexion(username, password))
 			{
-				Administrateur admin = await _adminService.ConnexionUtilisateur(username, password);
+				Administrateur? admin = await _adminService.ConnexionUtilisateur(username, password);
 
                 if (admin != null)
                 {
