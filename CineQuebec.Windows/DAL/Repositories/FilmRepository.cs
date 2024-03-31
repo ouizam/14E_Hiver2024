@@ -48,7 +48,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 		{
 			try
 			{
-				var filter = Builders<Film>.Filter.Eq(f => f.Id, pFilm.Id);
+				FilterDefinition<Film> filter = Builders<Film>.Filter.Eq(f => f.Id, pFilm.Id);
 
 				return await _collection.DeleteOneAsync(filter);
 
@@ -78,8 +78,8 @@ namespace CineQuebec.Windows.DAL.Repositories
 		{
 			try
 			{
-				var filter = Builders<Film>.Filter.Eq(f => f.Id, film.Id);
-				var update = Builders<Film>.Update
+				FilterDefinition<Film> filter = Builders<Film>.Filter.Eq(f => f.Id, film.Id);
+				UpdateDefinition<Film> update = Builders<Film>.Update
 					.Set(f => f.Nom, film.Nom)
 					.Set(f => f.DateSortieFilm, film.DateSortieFilm)
 					.Set(f => f.EstAffiche, film.EstAffiche)
