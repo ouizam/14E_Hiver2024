@@ -30,7 +30,7 @@ namespace CineQuebec.Windows.BLL.Services
             return preference;
         }
 
-        public List<Preference> ObtenirPreferencesAbonne(ObjectId idAbonne)
+        public virtual List<Preference> ObtenirPreferencesAbonne(ObjectId idAbonne)
         {
             var preferences = new List<Preference>();
 

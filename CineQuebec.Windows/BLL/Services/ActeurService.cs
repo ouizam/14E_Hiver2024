@@ -35,7 +35,7 @@ namespace CineQuebec.Windows.BLL.Services
             return acteurs;
         }
 
-        public Acteur ObtenirActeur(ObjectId idActeur)
+        public virtual Acteur ObtenirActeur(ObjectId idActeur)
         {
             var acteur = new Acteur();
 

@@ -35,7 +35,7 @@ namespace CineQuebec.Windows.BLL.Services
             return realisateurs;
         }
 
-        public Realisateur ObtenirRealisateur(ObjectId idRealisateur)
+        public virtual Realisateur ObtenirRealisateur(ObjectId idRealisateur)
         {
             var realisateur = new Realisateur();
 

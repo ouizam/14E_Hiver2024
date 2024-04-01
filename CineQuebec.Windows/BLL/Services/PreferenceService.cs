@@ -23,8 +23,21 @@ namespace CineQuebec.Windows.BLL.Services
             _realisateurService = new RealisateurService();
             _categorieService = new CategorieService();
         }
-
-        public Preference ObtenirPreference(ObjectId idPrefernce)
+        public PreferenceService(PreferenceRepository preferenceRepository)
+        {
+            _preferenceRepository = preferenceRepository;
+            //_acteurService = acteurService;
+            //_realisateurService = realisateurService;
+            //_categorieService = categorieService;
+        }
+        public PreferenceService(PreferenceRepository preferenceRepository, ActeurService acteurService, RealisateurService realisateurService, CategorieService categorieService)
+        {
+            _preferenceRepository = preferenceRepository;
+            _acteurService = acteurService;
+            _realisateurService = realisateurService;
+            _categorieService = categorieService;
+        }
+        public virtual Preference ObtenirPreference(ObjectId idPrefernce)
         {
             var preference = new Preference();
 
