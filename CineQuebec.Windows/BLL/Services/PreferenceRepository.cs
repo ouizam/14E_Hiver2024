@@ -14,7 +14,7 @@ namespace CineQuebec.Windows.BLL.Services
     {
         public PreferenceRepository() { }
 
-        public Preference ObtenirePreference(ObjectId idPreference)
+        public virtual Preference ObtenirePreference(ObjectId idPreference)
         {
             var preference = new Preference();
 

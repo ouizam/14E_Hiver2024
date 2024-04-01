@@ -16,7 +16,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 
         }
 
-        public List<Reservation> ObtenirReservationsAbonne(ObjectId idAbonne)
+        public virtual List<Reservation> ObtenirReservationsAbonne(ObjectId idAbonne)
         {
             var reservations = new List<Reservation>();
 

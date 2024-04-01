@@ -21,7 +21,7 @@ namespace CineQuebec.Windows.BLL.Services
             _projectionService = new ProjectionService();
         }
 
-        public List<Reservation> ObtenirReservationsAbonne(ObjectId idAbonne)
+        public virtual List<Reservation> ObtenirReservationsAbonne(ObjectId idAbonne)
         {
             var reservations = new List<Reservation>();
 

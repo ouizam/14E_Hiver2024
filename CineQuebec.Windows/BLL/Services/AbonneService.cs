@@ -21,6 +21,12 @@ namespace CineQuebec.Windows.BLL.Services
             _reservationService = new ReservationService();
             _preferenceSrvice = new PreferenceService();
         }
+        public AbonneService (AbonneRepository pAbonneRepo, ReservationService pReservationService, PreferenceService pPrefService )
+        {
+            _abonneRepository = pAbonneRepo;
+            _reservationService = pReservationService;
+            _preferenceSrvice = pPrefService;
+        }
         public List<Abonne> ReadAbonnes()
         {
             var abonnes = new List<Abonne>();
