@@ -14,7 +14,7 @@ namespace CineQuebec.Windows.DAL.Repositories
         public ProjectionRepository() { }
 
 
-        public Projection ObtenirProjection(ObjectId idProjection)
+        public virtual Projection ObtenirProjection(ObjectId idProjection)
         {
             var projection = new Projection();
 

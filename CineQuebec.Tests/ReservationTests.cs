@@ -14,7 +14,7 @@ namespace CineQuebec.Tests
     public class ReservationTests
     {
         [Fact]
-        public void ObtenirReservationsAbonne_By_id_Abonne()
+        public void ObtenirReservationsAbonne_By_Id_Abonne()
         {
             Mock<ReservationRepository> mockRepo = new Mock<ReservationRepository>();
             Mock<ProjectionService> mockProjection = new Mock<ProjectionService>();

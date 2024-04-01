@@ -18,6 +18,10 @@ namespace CineQuebec.Windows.BLL.Services
         {
             _projectionRepository = new ProjectionRepository();
         }
+        public ProjectionService(ProjectionRepository projectionRepository)
+        {
+            _projectionRepository = projectionRepository;
+        }
 
         public virtual Projection ObtenirProjection(ObjectId idProjection)
         {
