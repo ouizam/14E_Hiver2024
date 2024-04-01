@@ -20,7 +20,11 @@ namespace CineQuebec.Windows.BLL.Services
             _reservationRepository = new ReservationRepository();
             _projectionService = new ProjectionService();
         }
-
+        public ReservationService(ReservationRepository pReservationRep, ProjectionService pProjecService)
+        {
+            _reservationRepository = pReservationRep;
+            _projectionService = pProjecService;
+        }
         public virtual List<Reservation> ObtenirReservationsAbonne(ObjectId idAbonne)
         {
             var reservations = new List<Reservation>();
