@@ -17,14 +17,18 @@ namespace CineQuebec.Windows.BLL.Services
         {
             _realisateurRepository = new RealisateurRepository();
         }
+         public RealisateurService(RealisateurRepository pRealisateurRepository)
+        {
+            _realisateurRepository = pRealisateurRepository;
+        }
 
-        public List<Realisateur> ReadRealisateurs()
+        public virtual List<Realisateur> ObtenirRealisateurs()
         {
             var realisateurs = new List<Realisateur>();
 
             try
             {
-                realisateurs = _realisateurRepository.ReadRealisateurs();
+                realisateurs = _realisateurRepository.ObtenirRealisateurs();
 
 
             }
@@ -35,13 +39,13 @@ namespace CineQuebec.Windows.BLL.Services
             return realisateurs;
         }
 
-        public virtual Realisateur ObtenirRealisateur(ObjectId idRealisateur)
+        public virtual Realisateur ObtenirUnRealisateur(ObjectId idRealisateur)
         {
             var realisateur = new Realisateur();
 
             try
             {
-                realisateur = _realisateurRepository.ObtenireRealisateur(idRealisateur);
+                realisateur = _realisateurRepository.ObtenireUnRealisateur(idRealisateur);
 
             }
             catch (Exception ex)

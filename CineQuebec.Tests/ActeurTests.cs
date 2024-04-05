@@ -1,6 +1,7 @@
 ﻿using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Repositories;
+using MongoDB.Bson;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,22 @@ namespace CineQuebec.Tests
 
             Assert.NotNull(resultat);
             Assert.Equal(acteurs.Count, resultat.Count);
+        }
+
+        [Fact]
+        public void ObtenirUnActeur_By_Id()
+        {
+            Mock<ActeurRepository> mockRepoActeur = new Mock<ActeurRepository>();
+            ObjectId idActeur = ObjectId.GenerateNewId();
+            Acteur acteur = new Acteur() {  Id = idActeur };
+            mockRepoActeur.Setup(x => x.ObtenirUnActeur(idActeur)).Returns(acteur);
+            ActeurService acteurService = new ActeurService(mockRepoActeur.Object);
+
+
+            Acteur resultat = acteurService.ObtenirUnActeur(idActeur);
+
+            Assert.NotNull(resultat);
+            Assert.Equal(acteur.Id, resultat.Id);
         }
     }
 }

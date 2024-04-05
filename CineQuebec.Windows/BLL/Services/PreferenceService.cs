@@ -59,7 +59,7 @@ namespace CineQuebec.Windows.BLL.Services
                 preferences = _preferenceRepository.ObtenirPreferencesAbonne(idAbonne);
                 foreach (var preference in preferences)
                 {
-                    preference.Realisateur = _realisateurService.ObtenirRealisateur(preference.IdRealisateur);
+                    preference.Realisateur = _realisateurService.ObtenirUnRealisateur(preference.IdRealisateur);
                     preference.Acteur = _acteurService.ObtenirUnActeur(preference.IdActeur);
                     preference.Categorie = _categorieService.ObteniCategorie(preference.IdCategorie);
                                   

@@ -42,7 +42,7 @@ namespace CineQuebec.Tests
 
             ObjectId realisateurId = ObjectId.GenerateNewId();
             Realisateur realiasteur = new Realisateur { Id = realisateurId };
-            realisateurService.Setup(x => x.ObtenirRealisateur(realisateurId)).Returns(realiasteur);
+            realisateurService.Setup(x => x.ObtenirUnRealisateur(realisateurId)).Returns(realiasteur);
 
             ObjectId acteurId = ObjectId.GenerateNewId();
             Acteur acteur = new Acteur {  Id = acteurId };
