@@ -17,6 +17,11 @@ namespace CineQuebec.Windows.BLL.Services
             _categorieRepository = new CategorieRepository();
         }
 
+        public CategorieService(CategorieRepository pCategorieRepository)
+        {
+            _categorieRepository = pCategorieRepository;
+        }
+
         public virtual Categorie ObteniCategorie(ObjectId idCategorie)
         {
             var categorie = new Categorie();

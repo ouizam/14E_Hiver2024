@@ -16,7 +16,7 @@ namespace CineQuebec.Tests
     {
         Mock<PreferenceRepository> mockRepo = new Mock<PreferenceRepository>();
         [Fact]
-        public void ObtenirPreference_By_Id()
+        public void ObtenirPreference_ById()
         {
           
             ObjectId idPreference = ObjectId.GenerateNewId();
@@ -31,6 +31,7 @@ namespace CineQuebec.Tests
             Assert.NotNull(result);
             Assert.Equal(preference.Id, result.Id);
         }
+
         [Fact]
         public void Obtenir_Preferences_Abonne_By_Id_Abonne()
         {

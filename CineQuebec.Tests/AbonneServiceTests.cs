@@ -14,7 +14,7 @@ namespace CineQuebec.Tests
     public class AbonneServiceTests
     {
         [Fact]
-        public void ReadAbonnes_Retourne_Liste_Abonnes()
+        public void ObtenirAbonnes_RetourneListeAbonnes()
         {
             //Arrange
             Mock<AbonneRepository> mockRepo = new Mock<AbonneRepository>();
