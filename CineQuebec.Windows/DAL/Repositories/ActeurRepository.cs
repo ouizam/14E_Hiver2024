@@ -14,7 +14,7 @@ namespace CineQuebec.Windows.DAL.Repositories
         public ActeurRepository() { }
 
 
-        public List<Acteur> ReadActeurs()
+        public virtual List<Acteur> ObtenirActeurs()
         {
             var acteurs = new List<Acteur>();
 
@@ -30,7 +30,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             return acteurs;
         }
 
-        public Acteur ObtenireActeur(ObjectId idActeur)
+        public virtual Acteur ObtenirUnActeur(ObjectId idActeur)
         {
             var acteur = new Acteur();
 

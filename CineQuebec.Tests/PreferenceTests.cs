@@ -46,7 +46,7 @@ namespace CineQuebec.Tests
 
             ObjectId acteurId = ObjectId.GenerateNewId();
             Acteur acteur = new Acteur {  Id = acteurId };
-            acteurService.Setup(y => y.ObtenirActeur(acteurId)).Returns(acteur);
+            acteurService.Setup(y => y.ObtenirUnActeur(acteurId)).Returns(acteur);
 
             ObjectId categorieId = ObjectId.GenerateNewId();
             Categorie categorie = new Categorie {  Id = categorieId };

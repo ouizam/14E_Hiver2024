@@ -27,13 +27,13 @@ namespace CineQuebec.Windows.BLL.Services
             _reservationService = pReservationService;
             _preferenceSrvice = pPrefService;
         }
-        public List<Abonne> ReadAbonnes()
+        public List<Abonne> ObtenirAbonnes()
         {
             var abonnes = new List<Abonne>();
 
             try
             {
-                abonnes = _abonneRepository.ReadAbonnes();
+                abonnes = _abonneRepository.ObtenirAbonnes();
                 foreach (var abonne in abonnes)
                 {
                     abonne.Reservations = _reservationService.ObtenirReservationsAbonne(abonne.Id);
