@@ -50,7 +50,7 @@ namespace CineQuebec.Tests
 
             ObjectId categorieId = ObjectId.GenerateNewId();
             Categorie categorie = new Categorie {  Id = categorieId };
-            categorieService.Setup(z =>z.ObteniCategorie(categorieId)).Returns(categorie);
+            categorieService.Setup(z =>z.ObtenirCategorie(categorieId)).Returns(categorie);
 
             List<Preference> preferences = new List<Preference>() { new Preference { Acteur = acteur, Categorie = categorie, Realisateur = realiasteur }, new Preference { Acteur = acteur, Categorie = categorie, Realisateur = realiasteur } };
 

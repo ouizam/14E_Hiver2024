@@ -23,7 +23,7 @@ namespace CineQuebec.Tests
             CategorieService categorieService = new CategorieService(repoCategorie.Object);
 
 
-            Categorie resultatAttendu = categorieService.ObteniCategorie(idCategorie);
+            Categorie resultatAttendu = categorieService.ObtenirCategorie(idCategorie);
 
 
             Assert.NotNull(resultatAttendu);
