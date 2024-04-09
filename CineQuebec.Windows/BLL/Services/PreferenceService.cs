@@ -25,10 +25,7 @@ namespace CineQuebec.Windows.BLL.Services
         }
         public PreferenceService(PreferenceRepository preferenceRepository)
         {
-            _preferenceRepository = preferenceRepository;
-            //_acteurService = acteurService;
-            //_realisateurService = realisateurService;
-            //_categorieService = categorieService;
+            _preferenceRepository = preferenceRepository;           
         }
         public PreferenceService(PreferenceRepository preferenceRepository, ActeurService acteurService, RealisateurService realisateurService, CategorieService categorieService)
         {
@@ -62,8 +59,8 @@ namespace CineQuebec.Windows.BLL.Services
                 preferences = _preferenceRepository.ObtenirPreferencesAbonne(idAbonne);
                 foreach (var preference in preferences)
                 {
-                    preference.Realisateur = _realisateurService.ObtenirRealisateur(preference.IdRealisateur);
-                    preference.Acteur = _acteurService.ObtenirActeur(preference.IdActeur);
+                    preference.Realisateur = _realisateurService.ObtenirUnRealisateur(preference.IdRealisateur);
+                    preference.Acteur = _acteurService.ObtenirUnActeur(preference.IdActeur);
                     preference.Categorie = _categorieService.ObteniCategorie(preference.IdCategorie);
                                   
                 }

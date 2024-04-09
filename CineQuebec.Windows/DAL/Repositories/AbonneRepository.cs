@@ -17,7 +17,7 @@ namespace CineQuebec.Windows.DAL.Repositories
           
         }
 
-        public virtual List<Abonne> ReadAbonnes()
+        public virtual List<Abonne> ObtenirAbonnes()
         {
             var abonnes = new List<Abonne>();
 

@@ -18,13 +18,18 @@ namespace CineQuebec.Windows.BLL.Services
             _acteurRepository = new ActeurRepository();
         }
 
-        public List<Acteur> ReadActeurs()
+        public ActeurService(ActeurRepository pActeurRepository)
+        {
+            _acteurRepository = pActeurRepository;
+        }
+
+        public List<Acteur> ObtenirActeurs()
         {
             var acteurs = new List<Acteur>();
 
             try
             {
-                acteurs = _acteurRepository.ReadActeurs();
+                acteurs = _acteurRepository.ObtenirActeurs();
               
 
             }
@@ -35,13 +40,13 @@ namespace CineQuebec.Windows.BLL.Services
             return acteurs;
         }
 
-        public virtual Acteur ObtenirActeur(ObjectId idActeur)
+        public virtual Acteur ObtenirUnActeur(ObjectId idActeur)
         {
             var acteur = new Acteur();
 
             try
             {
-                acteur = _acteurRepository.ObtenireActeur(idActeur);
+                acteur = _acteurRepository.ObtenirUnActeur(idActeur);
 
             }
             catch (Exception ex)

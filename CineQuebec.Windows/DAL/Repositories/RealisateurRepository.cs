@@ -13,7 +13,7 @@ namespace CineQuebec.Windows.DAL.Repositories
     {
         public RealisateurRepository() { }
 
-        public List<Realisateur> ReadRealisateurs()
+        public virtual List<Realisateur> ObtenirRealisateurs()
         {
             var realisateurs = new List<Realisateur>();
 
@@ -29,7 +29,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             return realisateurs;
         }
 
-        public Realisateur ObtenireRealisateur(ObjectId IdRealisateur)
+        public virtual Realisateur ObtenireUnRealisateur(ObjectId IdRealisateur)
         {
             var realisateur = new Realisateur();
 

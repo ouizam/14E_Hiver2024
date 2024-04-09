@@ -16,7 +16,7 @@ namespace CineQuebec.Tests
     {
         Mock<PreferenceRepository> mockRepo = new Mock<PreferenceRepository>();
         [Fact]
-        public void ObtenirPreference_By_Id()
+        public void ObtenirPreference_ById()
         {
           
             ObjectId idPreference = ObjectId.GenerateNewId();
@@ -31,6 +31,7 @@ namespace CineQuebec.Tests
             Assert.NotNull(result);
             Assert.Equal(preference.Id, result.Id);
         }
+
         [Fact]
         public void Obtenir_Preferences_Abonne_By_Id_Abonne()
         {
@@ -41,11 +42,11 @@ namespace CineQuebec.Tests
 
             ObjectId realisateurId = ObjectId.GenerateNewId();
             Realisateur realiasteur = new Realisateur { Id = realisateurId };
-            realisateurService.Setup(x => x.ObtenirRealisateur(realisateurId)).Returns(realiasteur);
+            realisateurService.Setup(x => x.ObtenirUnRealisateur(realisateurId)).Returns(realiasteur);
 
             ObjectId acteurId = ObjectId.GenerateNewId();
             Acteur acteur = new Acteur {  Id = acteurId };
-            acteurService.Setup(y => y.ObtenirActeur(acteurId)).Returns(acteur);
+            acteurService.Setup(y => y.ObtenirUnActeur(acteurId)).Returns(acteur);
 
             ObjectId categorieId = ObjectId.GenerateNewId();
             Categorie categorie = new Categorie {  Id = categorieId };

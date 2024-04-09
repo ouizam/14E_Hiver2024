@@ -31,7 +31,7 @@ namespace CineQuebec.Windows.View
         {
             InitializeComponent();
            
-            _listeDesUsers= _abonneService.ReadAbonnes().OrderByDescending(x=>x.Reservations.Count).ToList();
+            _listeDesUsers= _abonneService.ObtenirAbonnes().OrderByDescending(x=>x.Reservations.Count).ToList();
             AfficherListeUtilisateurs();
         }
 

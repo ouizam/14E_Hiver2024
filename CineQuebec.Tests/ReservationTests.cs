@@ -17,8 +17,7 @@ namespace CineQuebec.Tests
         public void ObtenirReservationsAbonne_By_Id_Abonne()
         {
             Mock<ReservationRepository> mockRepo = new Mock<ReservationRepository>();
-            Mock<ProjectionService> mockProjection = new Mock<ProjectionService>();
-           
+            Mock<ProjectionService> mockProjection = new Mock<ProjectionService>();           
             ObjectId idAbonne = ObjectId.GenerateNewId();
             ObjectId idProjection = ObjectId.GenerateNewId();
             Projection projection = new Projection { Id = idProjection };
@@ -28,10 +27,10 @@ namespace CineQuebec.Tests
             mockProjection.Setup(y => y.ObtenirProjection(idProjection)).Returns(projection);
             ReservationService reservationService = new ReservationService(mockRepo.Object, mockProjection.Object);
 
-            //act
+           
             List<Reservation> resultat = reservationService.ObtenirReservationsAbonne(idAbonne);
 
-            //Assert
+
             Assert.NotNull(resultat);
             Assert.Equal(reservations.Count, resultat.Count);
             Assert.Equal(reservations[0].Projection, resultat[0].Projection);

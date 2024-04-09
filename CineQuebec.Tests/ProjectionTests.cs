@@ -14,7 +14,7 @@ namespace CineQuebec.Tests
     public class ProjectionTests
     {
         [Fact]
-        public void ObtenirProjection_By_Id_Projection()
+        public void ObtenirProjection_By_Id()
         {
             Mock<ProjectionRepository> mockRepo = new Mock<ProjectionRepository>();
             ObjectId idProjection = ObjectId.GenerateNewId();
@@ -22,10 +22,10 @@ namespace CineQuebec.Tests
             mockRepo.Setup(y => y.ObtenirProjection(idProjection)).Returns(projection);
             ProjectionService projectionService = new ProjectionService(mockRepo.Object);
 
-            //act
+           
             Projection resultat = projectionService.ObtenirProjection(idProjection);
 
-            //Assert
+           
             Assert.NotNull(resultat);
             Assert.Equal(projection.Id, resultat.Id);
         }
