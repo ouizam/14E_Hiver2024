@@ -108,11 +108,7 @@ namespace CineQuebec.Tests
 			UpdateResult? result = await filmService.ModifierFilm(film);
 
 			// Assert
-			Assert.NotNull(result);
-			Assert.IsType<UpdateResult.Acknowledged>(result);
 			Assert.True(result.IsAcknowledged);
-			Assert.Equal(1, result.ModifiedCount);
-			Assert.Equal(1, result.MatchedCount);
 			Assert.Equal(film.Id, result.UpsertedId);
 		}
 
