@@ -46,7 +46,7 @@ namespace CineQuebec.Windows.View
 			dateSortieFilm.Text = _film.DateSortieFilm.ToShortDateString();
 		}
 
-		private async void ModifierFilmButton_Click(object sender, RoutedEventArgs e)
+		private async void Button_ModifierFilm_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBoxResult resultat = MessageBox.Show("Voulez-vous apporter les modifications sur le films ?", "Modification d'un film", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 

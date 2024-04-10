@@ -85,7 +85,7 @@ namespace CineQuebec.Windows.View
 			}
 		}
 
-		private void Button_Ajouter_Film(object sender, RoutedEventArgs e)
+		private void Button_Ajouter_Film_Formulaire(object sender, RoutedEventArgs e)
 		{
 			AjouterFilm ajouterFilm = new AjouterFilm();
 
@@ -98,7 +98,7 @@ namespace CineQuebec.Windows.View
 
 		}
 
-		private async void Button_Click_SupprimerFilm(object sender, RoutedEventArgs e)
+		private async void Button_SupprimerFilm_Click(object sender, RoutedEventArgs e)
 		{
 			// Obtenez le film associé au bouton cliqué
 			Film? film = ((Button)sender).DataContext as Film;
@@ -122,7 +122,7 @@ namespace CineQuebec.Windows.View
 
 		}
 
-		private void Button_Click_DetailsFilm(object sender, RoutedEventArgs e)
+		private void Button_DetailsFilm_Click(object sender, RoutedEventArgs e)
 		{
 
 			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
@@ -134,7 +134,7 @@ namespace CineQuebec.Windows.View
 				ChargerFilms();
 		}
 
-		private void Button_Click_Update(object sender, RoutedEventArgs e)
+		private void Button_UpdateFilm_Click(object sender, RoutedEventArgs e)
 		{
 			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
 

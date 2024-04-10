@@ -178,35 +178,35 @@ namespace CineQuebec.Windows.View
 			cmbActeurs.ItemsSource = acteursSelectionnes;
 		}
 
-		private void CheckBox_Checked_Realisateurs(object sender, RoutedEventArgs e)
+		private void CheckBox_Realisateurs_Checked(object sender, RoutedEventArgs e)
 		{
 			RealisateurSelectionne realisateur = (RealisateurSelectionne)((CheckBox)sender).DataContext;
 
 			_checkedRealisateurs.Add(realisateur.Realisateur);
 		}
 
-		private void CheckBox_Unchecked_Realisateurs(object sender, RoutedEventArgs e)
+		private void CheckBox_Realisateurs_Unchecked(object sender, RoutedEventArgs e)
 		{
 			RealisateurSelectionne realisateur = (RealisateurSelectionne)((CheckBox)sender).DataContext;
 
 			_checkedRealisateurs.Remove(realisateur.Realisateur);
 		}
 
-		private void CheckBox_Unchecked_Acteurs(object sender, RoutedEventArgs e)
+		private void CheckBox_Acteurs_Unchecked(object sender, RoutedEventArgs e)
 		{
 			ActeursSelectionne acteur = (ActeursSelectionne)((CheckBox)sender).DataContext;
 
 			_checkedActeurs.Remove(acteur.Acteur);
 		}
 
-		private void CheckBox_Checked_Acteurs(object sender, RoutedEventArgs e)
+		private void CheckBox_Acteurs_Checked(object sender, RoutedEventArgs e)
 		{
 			ActeursSelectionne acteur = (ActeursSelectionne)((CheckBox)sender).DataContext;
 
 			_checkedActeurs.Add(acteur.Acteur);
 		}
 
-		private void Button_Click_UpdateFilm(object sender, RoutedEventArgs e)
+		private void Button_UpdateFilm_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBoxResult resultat = MessageBox.Show("Voulez-vous vraiment modifier ce film ?", "Modification Film", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
 
