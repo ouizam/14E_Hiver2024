@@ -23,12 +23,12 @@ namespace CineQuebec.Windows.BLL.Services
 			_filmRepo = pFilmRepo;
 		}
 
-		public async Task<List<Film>?> ChargerListeFilms()
+		public async Task<List<Film>?> GetAllFilms()
 		{
 			try
 			{
 
-				return await _filmRepo.ChargerListeFilms();
+				return await _filmRepo.GetAllFilms();
 
 			}catch (Exception ex)
 			{
@@ -37,11 +37,11 @@ namespace CineQuebec.Windows.BLL.Services
 			return null;
 		}
 
-		public async Task<bool> CreerFilm(Film film)
+		public async Task<bool> CreateFilm(Film film)
 		{
 			try
 			{
-				return await _filmRepo.CreerFilm(film);
+				return await _filmRepo.CreateFilm(film);
 			}catch (Exception ex)
 			{
 				Console.Error.WriteLine(ex.Message);
@@ -49,11 +49,11 @@ namespace CineQuebec.Windows.BLL.Services
 			return false;
 		}
 
-		public async Task<DeleteResult?> SupprimerFilm(Film pFilm)
+		public async Task<DeleteResult?> DeleteFilm(Film pFilm)
 		{
 			try
 			{
-				return await _filmRepo.SupprimerFilm(pFilm);
+				return await _filmRepo.DeleteFilm(pFilm);
 			}catch (Exception ex)
 			{
 				Console.Error.WriteLine(ex.Message);
@@ -73,11 +73,11 @@ namespace CineQuebec.Windows.BLL.Services
 			return null;
 		}
 
-		public async Task<UpdateResult?> ModifierFilm(Film film)
+		public async Task<UpdateResult?> UpdateFilm(Film film)
 		{
 			try
 			{
-				return await _filmRepo.ModifierFilm(film);
+				return await _filmRepo.UpdateFilm(film);
 			}catch (Exception ex)
 			{
 				Console.Error.WriteLine(ex.Message);

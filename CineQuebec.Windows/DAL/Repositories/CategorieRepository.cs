@@ -34,7 +34,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             return categorie;
         }
 
-        public virtual async Task<List<Categorie>> GetCategories()
+        public virtual async Task<List<Categorie>> GetAllCategories()
         {
             try
             {

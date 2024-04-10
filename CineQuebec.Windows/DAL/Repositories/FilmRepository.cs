@@ -17,7 +17,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			_collection = database.GetCollection<Film>(name: "Films");
 		}
 
-		public virtual async Task<List<Film>?> ChargerListeFilms()
+		public virtual async Task<List<Film>?> GetAllFilms()
 		{
 			try
 			{
@@ -30,7 +30,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public virtual async Task<bool> CreerFilm(Film film)
+		public virtual async Task<bool> CreateFilm(Film film)
 		{
 			try
 			{
@@ -44,7 +44,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			}
 		}
 
-		public virtual async Task<DeleteResult?> SupprimerFilm(Film pFilm)
+		public virtual async Task<DeleteResult?> DeleteFilm(Film pFilm)
 		{
 			try
 			{
@@ -74,7 +74,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public virtual async Task<UpdateResult?> ModifierFilm(Film film)
+		public virtual async Task<UpdateResult?> UpdateFilm(Film film)
 		{
 			try
 			{

@@ -57,7 +57,7 @@ namespace CineQuebec.Windows.View
 				try
 				{
 					InitialiserFilm();
-					UpdateResult? reponse = await _filmService.ModifierFilm(_film!);
+					UpdateResult? reponse = await _filmService.UpdateFilm(_film!);
 
 					if (reponse!.IsAcknowledged)
 						this.DialogResult = true;

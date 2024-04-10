@@ -38,11 +38,11 @@ namespace CineQuebec.Windows.BLL.Services
             return categorie;
         }
 
-        public virtual async  Task<List<Categorie>> GetCategories()
+        public virtual async  Task<List<Categorie>> GetAllCategories()
         {
             try
             {
-                return await _categorieRepository.GetCategories();
+                return await _categorieRepository.GetAllCategories();
             }catch (Exception ex)
             {
 				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");

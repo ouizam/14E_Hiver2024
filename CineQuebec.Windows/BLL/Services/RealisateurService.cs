@@ -45,7 +45,7 @@ namespace CineQuebec.Windows.BLL.Services
 
             try
             {
-                realisateur = _realisateurRepository.ObtenireUnRealisateur(idRealisateur);
+                realisateur = _realisateurRepository.ObtenirUnRealisateur(idRealisateur);
 
             }
             catch (Exception ex)
@@ -53,6 +53,18 @@ namespace CineQuebec.Windows.BLL.Services
                 Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
             }
             return realisateur;
+        }
+
+        public virtual async Task<List<Realisateur>?> GetAllRealisateurs()
+        {
+            try
+            {
+                return await _realisateurRepository.GetAllRealisateurs();
+            }catch(Exception ex)
+            {
+                Console.WriteLine("Erreur lors de la recuperation des Realisateurs: " + ex.Message, "Erreur");
+            }
+            return null;
         }
     }
 }

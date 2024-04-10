@@ -11,7 +11,11 @@ namespace CineQuebec.Windows.DAL.Repositories
 {
     public class RealisateurRepository:BaseRepository
     {
-        public RealisateurRepository() { }
+        IMongoCollection<Realisateur> _collection;
+        public RealisateurRepository()
+        { 
+            _collection = database.GetCollection<Realisateur>("Realisateurs");
+		}
 
         public virtual List<Realisateur> ObtenirRealisateurs()
         {
@@ -19,8 +23,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             try
             {
-                IMongoCollection<Realisateur> collection = database.GetCollection<Realisateur>("Realisateurs");
-                realisateurs = collection.Aggregate().ToList();
+                realisateurs = _collection.Aggregate().ToList();
             }
             catch (Exception ex)
             {
@@ -29,20 +32,30 @@ namespace CineQuebec.Windows.DAL.Repositories
             return realisateurs;
         }
 
-        public virtual Realisateur ObtenireUnRealisateur(ObjectId IdRealisateur)
+        public virtual Realisateur ObtenirUnRealisateur(ObjectId IdRealisateur)
         {
             var realisateur = new Realisateur();
 
             try
             {
-                IMongoCollection<Realisateur> collection = database.GetCollection<Realisateur>("Realisateurs");
-                realisateur = collection.Aggregate().ToList().FirstOrDefault(x => x.Id == IdRealisateur);
+                realisateur = _collection.Aggregate().ToList().FirstOrDefault(x => x.Id == IdRealisateur);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
             }
             return realisateur;
+        }
+
+        public virtual async Task<List<Realisateur>?> GetAllRealisateurs()
+        {
+            try
+            {
+                return await _collection.Aggregate().ToListAsync();
+            }catch(Exception ex){
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+			}
+            return null;
         }
     }
 }

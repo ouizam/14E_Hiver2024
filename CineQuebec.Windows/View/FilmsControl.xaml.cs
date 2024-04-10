@@ -43,7 +43,7 @@ namespace CineQuebec.Windows.View
 		{
 			try
 			{
-				_films = await _filmService.ChargerListeFilms();
+				_films = await _filmService.GetAllFilms();
 				_filmAffiche = await _filmService.ChargerListeFilmsAffiche();
 
 				AfficherListeFilms();
@@ -106,7 +106,7 @@ namespace CineQuebec.Windows.View
 			{
 				try
 				{
-					DeleteResult? reponse = await _filmService.SupprimerFilm(pFilm: film!);
+					DeleteResult? reponse = await _filmService.DeleteFilm(pFilm: film!);
 
 					if (reponse!.IsAcknowledged)
 						ChargerFilms();

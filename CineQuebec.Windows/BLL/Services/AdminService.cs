@@ -20,7 +20,6 @@ namespace CineQuebec.Windows.BLL.Services
         private  Dictionary<string, byte[]> _dicoSalts;
         private AdminRepository _adminRepository;
         private List<Administrateur> _admins = new List<Administrateur>();
-        private IMongoDatabase database;
 
 
         public AdminService()

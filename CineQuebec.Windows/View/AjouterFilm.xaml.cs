@@ -25,15 +25,24 @@ namespace CineQuebec.Windows.View
 
         FilmService _filmService;
         CategorieService _categorieService;
-        List<Categorie> _categories;
+        RealisateurService _realisateurService;
+        ActeurService _acteurService;
+
+        List<Categorie>? _categories;
+        List<Realisateur>? _realisateurs;
+        List<Acteur>? _acteurs;
+
         public AjouterFilm()
         {
             InitializeComponent();
             _filmService = new FilmService();
-            _categorieService = new CategorieService();
+            _categorieService = new();
+            _realisateurService = new();
+			_acteurService = new();
 
-            ChargerCategories();
-            AfficherCategories();
+
+			ChargerCategories();
+            ChargerRealisateurs();
 
 		}
 
@@ -41,16 +50,43 @@ namespace CineQuebec.Windows.View
         {
             try
             {
-                _categories =  await _categorieService.GetCategories();
-            }catch (Exception ex)
+                _categories =  await _categorieService.GetAllCategories();
+				AfficherCategories();
+			}
+			catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erreur lors de la récupération des Catégories", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void ChargerRealisateurs()
+        {
+            try
+            {
+                _realisateurs = await _realisateurService.GetAllRealisateurs();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur lors de la récupération des Realisateurs", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public async void ChargerActeurs()
+        {
+            try
+            {
+                _acteurs = await _acteurService.GetAllActeurs();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur lors de la récupération des Acteurs", MessageBoxButton.OK, MessageBoxImage.None);
             }
         }
 
         public void AfficherCategories()
         {
-            cmbCategorie.DataContext = _categories;
+            cmbCategorie.Items.Clear();
+            foreach(Categorie cat in _categories)
+            {
+                cmbCategorie.Items.Add(cat);
+            }
 		}
 
 		private async void Button_Click(object sender, RoutedEventArgs e)
@@ -121,7 +157,7 @@ namespace CineQuebec.Windows.View
 
             try
             {
-                return await _filmService.CreerFilm(film);
+                return await _filmService.CreateFilm(film);
             }catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erreur lors de la création", MessageBoxButton.OK, MessageBoxImage.Error);

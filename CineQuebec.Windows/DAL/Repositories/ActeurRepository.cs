@@ -11,7 +11,13 @@ namespace CineQuebec.Windows.DAL.Repositories
 {
     public class ActeurRepository: BaseRepository
     {
-        public ActeurRepository() { }
+        IMongoCollection<Acteur> _collection;
+
+
+		public ActeurRepository() 
+        {
+            _collection = database.GetCollection<Acteur>("Acteurs");
+		}
 
 
         public virtual List<Acteur> ObtenirActeurs()
@@ -20,8 +26,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             try
             {
-                IMongoCollection<Acteur> collection = database.GetCollection<Acteur>("Acteurs");
-                acteurs = collection.Aggregate().ToList();
+                acteurs = _collection.Aggregate().ToList();
             }
             catch (Exception ex)
             {
@@ -36,8 +41,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             try
             {
-                IMongoCollection<Acteur> collection = database.GetCollection<Acteur>("Acteurs");
-                acteur = collection.Aggregate().ToList().FirstOrDefault(x => x.Id == idActeur);
+                acteur = _collection.Aggregate().ToList().FirstOrDefault(x => x.Id == idActeur);
             }
             catch (Exception ex)
             {
@@ -45,5 +49,16 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return acteur;
         }
+
+        public virtual async Task<List<Acteur>?> GetAllActeurs()
+        {
+            try
+            {
+                return await _collection.Aggregate().ToListAsync();
+            } catch (Exception ex)
+            {
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+			}
+            return null;
     }
 }

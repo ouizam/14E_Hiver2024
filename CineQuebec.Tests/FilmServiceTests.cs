@@ -17,12 +17,12 @@ namespace CineQuebec.Tests
 
 			List<Film> films = new List<Film> { new Film(), new Film()};
 
-			mockRepo.Setup(repo => repo.ChargerListeFilms()).ReturnsAsync(films);
+			mockRepo.Setup(repo => repo.GetAllFilms()).ReturnsAsync(films);
 
 			FilmService filmService = new FilmService(mockRepo.Object);
 
 			// Act
-			List<Film>? result = await filmService.ChargerListeFilms();
+			List<Film>? result = await filmService.GetAllFilms();
 
 			// Assert
 			Assert.NotNull(result);
@@ -36,11 +36,11 @@ namespace CineQuebec.Tests
 			Mock<FilmRepository> mockRepository = new Mock<FilmRepository>();
 			Film film = new Film();
 
-			mockRepository.Setup(repo => repo.CreerFilm(film)).ReturnsAsync(true);
+			mockRepository.Setup(repo => repo.CreateFilm(film)).ReturnsAsync(true);
 			FilmService filmService = new FilmService(mockRepository.Object);
 
 			// Act
-			bool result = await filmService.CreerFilm(film);
+			bool result = await filmService.CreateFilm(film);
 
 			// Assert
 			Assert.True(result);
@@ -53,11 +53,11 @@ namespace CineQuebec.Tests
 			Mock<FilmRepository> mockRepo = new Mock<FilmRepository>();
 			Film film = new Film();
 
-			mockRepo.Setup(repo => repo.SupprimerFilm(film)).ReturnsAsync(new DeleteResult.Acknowledged(1));
+			mockRepo.Setup(repo => repo.DeleteFilm(film)).ReturnsAsync(new DeleteResult.Acknowledged(1));
 			FilmService filmService = new FilmService(mockRepo.Object);
 
 			//Act
-			DeleteResult? result = await filmService.SupprimerFilm(film);
+			DeleteResult? result = await filmService.DeleteFilm(film);
 
 			//Assert
 			Assert.True(result!.IsAcknowledged);
@@ -101,11 +101,11 @@ namespace CineQuebec.Tests
 				Acteurs = new List<Acteur> { new Acteur { NameActeur = "Nom Acteur" } }
 			};
 			UpdateResult updateResult = new UpdateResult.Acknowledged(1, 1, film.Id);
-			mockRepo.Setup(repo => repo.ModifierFilm(It.IsAny<Film>())).ReturnsAsync(updateResult);
+			mockRepo.Setup(repo => repo.UpdateFilm(It.IsAny<Film>())).ReturnsAsync(updateResult);
 			FilmService filmService = new FilmService(mockRepo.Object);
 
 			// Act
-			UpdateResult? result = await filmService.ModifierFilm(film);
+			UpdateResult? result = await filmService.UpdateFilm(film);
 
 			// Assert
 			Assert.True(result.IsAcknowledged);

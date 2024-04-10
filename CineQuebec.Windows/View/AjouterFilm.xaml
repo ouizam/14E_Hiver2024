@@ -53,10 +53,8 @@
                           HorizontalAlignment="Left"
                           VerticalAlignment="Center"
                           Margin="21,0,0,0"
-                          Grid.ColumnSpan="2"
-                          DisplayMemberPath="NameCategorie"
-                          SelectedValuePath="Id"
-                          ItemsSource="{Binding Categories}" />
+                          Grid.ColumnSpan="2">
+                </ComboBox>
 
 
 

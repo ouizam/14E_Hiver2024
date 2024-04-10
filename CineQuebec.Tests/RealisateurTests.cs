@@ -35,7 +35,7 @@ namespace CineQuebec.Tests
             Mock<RealisateurRepository> mockRepoRealisateur = new Mock<RealisateurRepository>();
             ObjectId idRealisateur = ObjectId.GenerateNewId();
             Realisateur realisateur = new Realisateur() { Id = idRealisateur };
-            mockRepoRealisateur.Setup(x => x.ObtenireUnRealisateur(idRealisateur)).Returns(realisateur);
+            mockRepoRealisateur.Setup(x => x.ObtenirUnRealisateur(idRealisateur)).Returns(realisateur);
             RealisateurService realisateurService = new RealisateurService(mockRepoRealisateur.Object);
 
             Realisateur resultat = realisateurService.ObtenirUnRealisateur(idRealisateur);

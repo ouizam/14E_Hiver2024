@@ -55,5 +55,17 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return acteur;
         }
+
+        public virtual async Task<List<Acteur>?> GetAllActeurs()
+        {
+            try
+            {
+                return await _acteurRepository.GetAllActeurs();
+            }catch(Exception ex)
+            {
+                Console.WriteLine("Impossible de recupere les Acteurs: ", ex.Message, "Erreur");
+            }
+            return null;
+        }
     }
 }
