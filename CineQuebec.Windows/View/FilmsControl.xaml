@@ -17,43 +17,53 @@
             <RowDefinition Height="0.15*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.15*"/>
-
-
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Liste des films" Margin="5, 0, 5, 0">
             <ListBox x:Name="lstFilms">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Nom}" Margin="0,0,10,0"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120px"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                                <Button Content="Détails" Background="LightGreen" Padding="5,2"  Margin="0, 0, 0, 0" FontWeight="Bold"  DataContext="{Binding}" Click="Button_Click_DetailsFilm"/>
-                                <Button Content="Supprimer" Background="IndianRed" Padding="5,2" Margin="5, 0, 0, 0" FontWeight="Bold" Click="Button_Click_SupprimerFilm"/>
-                            </StackPanel>
-                            
-                        </StackPanel>
+                            <TextBlock Text="{Binding Nom}"  Grid.Column="0"/>
+
+                            <Button  Grid.Column="1" Content="Détails" Background="LightGreen" Padding="5,2"  Margin="0, 0, 0, 0" FontWeight="Bold"  DataContext="{Binding}" Click="Button_Click_DetailsFilm"/>
+                            <Button  Grid.Column="2" Content="Modifier" Background="LightYellow" Padding="5,2" Margin="5,0,0,0" FontWeight="Bold" DataContext="{Binding}"  Click="Button_Click_Update"/>
+                            <Button  Grid.Column="3" Content="-" Background="IndianRed" Padding="5,2" Margin="5, 0, 0, 0" FontWeight="Bold" Click="Button_Click_SupprimerFilm"/>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="2" Header="À l'affiche" Margin="5, 0, 5, 0">
+        <GroupBox Grid.Row="1" Grid.Column="2" Header="À l'affiche" Margin="5,0,5,0">
             <ListBox x:Name="lstFilmsAffiche">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Nom}" Margin="0,0,10,0"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120px"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                                <Button Content="Détails" Background="LightGreen" Padding="5,2"  Margin="0, 0, 0, 0" FontWeight="Bold"  DataContext="{Binding}" Click="Button_Click_DetailsFilm"/>
-                                <Button Content="Supprimer" Background="IndianRed" Padding="5,2" Margin="5, 0, 0, 0" FontWeight="Bold" Click="Button_Click_SupprimerFilm"/>
-                            </StackPanel>
+                            <TextBlock Text="{Binding Nom}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
 
-                        </StackPanel>
+                            <Button Grid.Column="1" Content="Détails" Background="LightGreen" Padding="5,2" FontWeight="Bold" DataContext="{Binding}" Click="Button_Click_DetailsFilm"/>
+                            <Button Grid.Column="2" Content="Modifier" Background="LightYellow" Padding="5,2" Margin="5,0,0,0" FontWeight="Bold" DataContext="{Binding}" Click="Button_Click_Update"/>
+                            <Button Grid.Column="3" Content="-" Background="IndianRed" Padding="5,2" Margin="5,0,0,0" FontWeight="Bold" Click="Button_Click_SupprimerFilm"/>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </GroupBox>
+
+
         <Button Grid.Column="3" Grid.Row="0" Margin="15" Background="LightGreen" FontWeight="Bold" Click="Button_Ajouter_Film">Ajouter</Button>
     </Grid>
 </Window>

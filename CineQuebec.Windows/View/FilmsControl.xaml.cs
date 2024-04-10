@@ -133,5 +133,16 @@ namespace CineQuebec.Windows.View
 			if (resultat == true)
 				ChargerFilms();
 		}
-	}
+
+		private void Button_Click_Update(object sender, RoutedEventArgs e)
+		{
+			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
+
+			UpdateFilm updateFilm = new UpdateFilm(filmSelectionnee);
+			bool? resultat = updateFilm.ShowDialog();
+
+			if (resultat == true)
+				ChargerFilms();
+        }
+    }
 }

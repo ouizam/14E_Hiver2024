@@ -23,5 +23,19 @@ namespace CineQuebec.Windows.DAL.Data
 		{
 			return NameActeur;
 		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Acteur other)
+			{
+				return this.Id == other.Id;
+			}
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode(); 
+		}
 	}
 }

@@ -42,8 +42,6 @@ namespace CineQuebec.Windows.View
 			txtActeurs.Text = string.Join(", ", _film.Acteurs);
 			txtCategorie.Text = _film.Categorie.ToString();
 
-			if (_film.EstAffiche)
-				checkAffiche.IsChecked = true;
 
 			dateSortieFilm.Text = _film.DateSortieFilm.ToShortDateString();
 		}
@@ -80,12 +78,6 @@ namespace CineQuebec.Windows.View
 			_film!.Nom = txtNomFilm.Text.ToString().Trim();
 			_film.Categorie.NameCategorie = txtCategorie.Text.ToString().Trim();
 			_film.DateSortieFilm = dateSortieFilm.SelectedDate!.Value;
-
-			if (checkAffiche.IsChecked == true)
-				_film.EstAffiche = true;
-			else
-				_film.EstAffiche = false;
-
 
 			_film.Realisateurs.Clear();
 			_film.Acteurs.Clear();

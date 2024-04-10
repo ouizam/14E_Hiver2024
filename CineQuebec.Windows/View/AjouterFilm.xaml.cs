@@ -192,28 +192,28 @@ namespace CineQuebec.Windows.View
 
 		}
 
-		private void CheckBox_Checked(object sender, RoutedEventArgs e)
+		private void CheckBox_Checked_Acteurs(object sender, RoutedEventArgs e)
 		{
             Acteur acteur = (Acteur)((CheckBox)sender).DataContext;
 
 			_checkedActeurs.Add(acteur);
 		}
 
-		private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+		private void CheckBox_Unchecked_Acteurs(object sender, RoutedEventArgs e)
 		{
 			Acteur acteur = (Acteur)((CheckBox)sender).DataContext;
 
 			_checkedActeurs.Remove(acteur);
 		}
 
-		private void CheckBox_Unchecked_1(object sender, RoutedEventArgs e)
+		private void CheckBox_Unchecked_Realisateurs(object sender, RoutedEventArgs e)
 		{
             Realisateur realisateur = (Realisateur)((CheckBox)sender).DataContext;
 
             _checkedRealisateurs.Remove(realisateur);
 		}
 
-		private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
+		private void CheckBox_Checked_Realisateurs(object sender, RoutedEventArgs e)
 		{
 			Realisateur realisateur = (Realisateur)((CheckBox)sender).DataContext;
 
