@@ -61,11 +61,11 @@ namespace CineQuebec.Windows.BLL.Services
 			return null;
 		}
 
-		public async Task<List<Film>?> ChargerListeFilmsAffiche()
+		public async Task<List<Film>?> GetAllFilmsAffiche(List<Projection> projections)
 		{
 			try
 			{
-				return await _filmRepo.ChargerListeFilmsAffiche();
+				return await _filmRepo.GetAllFilmsAffiche(projections);
 			}catch(Exception ex)
 			{
 				Console.Error.WriteLine(ex.Message);

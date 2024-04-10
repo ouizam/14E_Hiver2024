@@ -75,11 +75,11 @@ namespace CineQuebec.Tests
 				new Film() { Nom = "Film 2", EstAffiche = false }
 			};
 
-			mockRepo.Setup(repo => repo.ChargerListeFilmsAffiche()).ReturnsAsync(new List<Film> { films[0] });
+			mockRepo.Setup(repo => repo.GetAllFilmsAffiche()).ReturnsAsync(new List<Film> { films[0] });
 			FilmService filmService = new FilmService(mockRepo.Object);
 
 			// Act
-			List<Film>? result = await filmService.ChargerListeFilmsAffiche();
+			List<Film>? result = await filmService.GetAllFilmsAffiche();
 
 			// Assert
 			Assert.NotNull(result);

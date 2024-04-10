@@ -24,9 +24,9 @@ namespace CineQuebec.Windows.View
 	public partial class FilmsControl : Window
 	{
 		private FilmService _filmService;
+		private ProjectionService _projectionService;
 
 		private List<Film>? _films;
-
 		private List<Film>? _filmAffiche;
 
 		public FilmsControl()
@@ -34,6 +34,7 @@ namespace CineQuebec.Windows.View
 			InitializeComponent();
 
 			_filmService = new FilmService();
+			_projectionService = new();
 
 			ChargerFilms();
 
@@ -44,7 +45,9 @@ namespace CineQuebec.Windows.View
 			try
 			{
 				_films = await _filmService.GetAllFilms();
-				_filmAffiche = await _filmService.ChargerListeFilmsAffiche();
+
+				List<Projection>? projections = await _projectionService.GetAllProjections();
+				_filmAffiche = await _filmService.GetAllFilmsAffiche(projections!);
 
 				AfficherListeFilms();
 				AfficherListeFilmsAffiche();

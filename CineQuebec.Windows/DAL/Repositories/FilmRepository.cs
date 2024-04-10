@@ -12,6 +12,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 	public class FilmRepository:BaseRepository
 	{
 		IMongoCollection<Film> _collection;
+
 		public FilmRepository()
 		{
 			_collection = database.GetCollection<Film>(name: "Films");
@@ -61,11 +62,16 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public virtual async Task<List<Film>?> ChargerListeFilmsAffiche()
+		public virtual async Task<List<Film>?> GetAllFilmsAffiche(List<Projection> projections)
 		{
 			try
 			{
-				return await _collection.Find(Builders<Film>.Filter.Eq(f => f.EstAffiche, true)).ToListAsync<Film>(); ;
+				List<ObjectId> filmIds = projections.Select(p => p.IdFilm).ToList();
+				var filter = Builders<Film>.Filter.And(
+				Builders<Film>.Filter.In(f => f.Id, filmIds)
+				);
+
+				return await _collection.Find(filter).ToListAsync();
 			}
 			catch (Exception ex)
 			{
