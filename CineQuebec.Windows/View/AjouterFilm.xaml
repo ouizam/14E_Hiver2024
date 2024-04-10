@@ -46,8 +46,19 @@
                 <DatePicker x:Name="dateSortieFilm" Width="197" Height="26" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="21,0,0,0" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" />
 
                 <TextBlock Grid.Row="3" Grid.Column="0" Margin="20,5,20,12" Text="Catégorie" Grid.ColumnSpan="3"/>
-                <TextBox x:Name="txtCategorie" Grid.Column="3" Grid.Row="3" Height="26"  Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0" Grid.ColumnSpan="2"  />
-                
+                <ComboBox x:Name="cmbCategorie"
+                          Grid.Row="3"
+                          Grid.Column="3"
+                          Width="200"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Margin="21,0,0,0"
+                          Grid.ColumnSpan="2"
+                          DisplayMemberPath="NameCategorie"
+                          SelectedValuePath="Id"
+                          ItemsSource="{Binding Categories}" />
+
+
 
                 <TextBlock Grid.Row="4" Grid.Column="0" Margin="20,5,36,11" Text="Réalisateur(s)" Grid.ColumnSpan="4"/>
                 <TextBox x:Name="txtRealisateurs" Grid.Row="4" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />

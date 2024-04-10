@@ -24,11 +24,34 @@ namespace CineQuebec.Windows.View
     {
 
         FilmService _filmService;
+        CategorieService _categorieService;
+        List<Categorie> _categories;
         public AjouterFilm()
         {
             InitializeComponent();
             _filmService = new FilmService();
+            _categorieService = new CategorieService();
+
+            ChargerCategories();
+            AfficherCategories();
+
+		}
+
+        private async void ChargerCategories()
+        {
+            try
+            {
+                _categories =  await _categorieService.GetCategories();
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erreur lors de la récupération des Catégories", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+        public void AfficherCategories()
+        {
+            cmbCategorie.DataContext = _categories;
+		}
 
 		private async void Button_Click(object sender, RoutedEventArgs e)
 		{
@@ -55,7 +78,7 @@ namespace CineQuebec.Windows.View
 
         private bool ValidationChamps()
         {
-            if (string.IsNullOrEmpty(txtNomFilm.Text.ToString().Trim()) || string.IsNullOrEmpty(txtActeurs.Text.ToString().Trim()) || string.IsNullOrEmpty(txtCategorie.Text.ToString().Trim()) || string.IsNullOrEmpty(txtRealisateurs.Text.ToString().Trim())
+            if (string.IsNullOrEmpty(txtNomFilm.Text.ToString().Trim()) || string.IsNullOrEmpty(txtActeurs.Text.ToString().Trim()) || cmbCategorie.SelectedItem is null || string.IsNullOrEmpty(txtRealisateurs.Text.ToString().Trim())
                 || dateSortieFilm.SelectedDate is null)
                 return false;
             return true;
@@ -63,19 +86,20 @@ namespace CineQuebec.Windows.View
 
         private Film InitialiserFilm()
         {
-			Film nouveau_film = new Film();
+			Film nouveau_film = new Film
+			{
+				Acteurs = new List<Acteur>(),
+				Realisateurs = new List<Realisateur>(),
 
-            nouveau_film.Acteurs = new List<Acteur>();
-            nouveau_film.Realisateurs = new List<Realisateur>();
 
+				Nom = txtNomFilm.Text.ToString().Trim(),
 
-			nouveau_film.Nom = txtNomFilm.Text.ToString().Trim();
+				DateSortieFilm = dateSortieFilm.SelectedDate!.Value,
 
-			nouveau_film.DateSortieFilm = dateSortieFilm.SelectedDate!.Value;
+				EstAffiche = checkAffiche.IsChecked.GetValueOrDefault(defaultValue: false),
 
-			nouveau_film.EstAffiche = checkAffiche.IsChecked.GetValueOrDefault(defaultValue: false);
-
-			nouveau_film.Categorie = new Categorie(txtCategorie.Text.ToString().Trim());
+				Categorie = (Categorie)cmbCategorie.SelectedItem
+			};
 
 			foreach (string nom in txtActeurs.Text.ToString().Split(','))
 			{

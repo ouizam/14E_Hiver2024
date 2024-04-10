@@ -11,7 +11,13 @@ namespace CineQuebec.Windows.DAL.Repositories
 {
     public class CategorieRepository: BaseRepository
     {
-        public CategorieRepository() { }
+
+        IMongoCollection<Categorie> _collection;
+
+		public CategorieRepository()
+        {
+            _collection = database.GetCollection<Categorie>(name: "Categories");
+        }
 
         public virtual Categorie ObtenirCategorie(ObjectId idCategorie)
         {
@@ -19,14 +25,25 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             try
             {
-                IMongoCollection<Categorie> collection = database.GetCollection<Categorie>("Categories");
-                categorie = collection.Aggregate().ToList().FirstOrDefault(x => x.Id == idCategorie);
+                categorie = _collection.Aggregate().ToList().FirstOrDefault(x => x.Id == idCategorie);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+                
             }
             return categorie;
+        }
+
+        public virtual async Task<List<Categorie>> GetCategories()
+        {
+            try
+            {
+                return await _collection.Aggregate().ToListAsync();
+            }catch (Exception ex)
+            {
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+			}
+            return new List<Categorie>();
         }
     }
 }
