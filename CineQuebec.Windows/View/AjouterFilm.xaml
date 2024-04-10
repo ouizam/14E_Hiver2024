@@ -59,13 +59,41 @@
 
 
                 <TextBlock Grid.Row="4" Grid.Column="0" Margin="20,5,36,11" Text="Réalisateur(s)" Grid.ColumnSpan="4"/>
-                <TextBox x:Name="txtRealisateurs" Grid.Row="4" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />
+                <ComboBox x:Name="cmbRealisateurs"
+                  Grid.Row="4"
+                  Grid.Column="3"
+                  Width="200"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Margin="21,0,0,0"
+                  Grid.ColumnSpan="2"
+                  >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding NameRealisateur}" Unchecked="CheckBox_Unchecked_1" Checked="CheckBox_Checked_1" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
                 <TextBlock Grid.Row="5" Grid.Column="0" Margin="20,5,36,11" Text="Acteur(s)" Grid.ColumnSpan="4"/>
-                <TextBox x:Name="txtActeurs" Grid.Row="5" Grid.Column="3" Height="26" Width="200" Margin="21,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"  />
+                <ComboBox x:Name="cmbActeurs"
+                  Grid.Row="5"
+                  Grid.Column="3"
+                  Width="200"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Margin="21,0,0,0"
+                  Grid.ColumnSpan="2"
+                  >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding NameActeur}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-                <TextBlock Grid.Row="6" Grid.Column="0" Margin="20,5,36,11" Text="À l'affiche" Grid.ColumnSpan="4"/>
-                <CheckBox x:Name="checkAffiche"  Grid.Row="6" Grid.Column="3"  Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0" />
+                <!--<TextBlock Grid.Row="6" Grid.Column="0" Margin="20,5,36,11" Text="À l'affiche" Grid.ColumnSpan="4"/>
+                <CheckBox x:Name="checkAffiche"  Grid.Row="6" Grid.Column="3"  Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0" />-->
             </Grid>
         </GroupBox>
         <Button Grid.Column="2" Grid.Row="2" Margin="20" Background="LightGreen" FontWeight="Bold" Click="Button_Click">Ajouter</Button>

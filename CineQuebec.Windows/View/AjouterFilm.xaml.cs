@@ -32,7 +32,11 @@ namespace CineQuebec.Windows.View
         List<Realisateur>? _realisateurs;
         List<Acteur>? _acteurs;
 
-        public AjouterFilm()
+        List<Acteur> _checkedActeurs;
+        List<Realisateur> _checkedRealisateurs;
+
+
+		public AjouterFilm()
         {
             InitializeComponent();
             _filmService = new FilmService();
@@ -41,9 +45,12 @@ namespace CineQuebec.Windows.View
 			_acteurService = new();
 
 
+            _checkedActeurs = new();
+            _checkedRealisateurs = new();
+
 			ChargerCategories();
             ChargerRealisateurs();
-
+            ChargerActeurs();
 		}
 
         private async void ChargerCategories()
@@ -63,24 +70,29 @@ namespace CineQuebec.Windows.View
             try
             {
                 _realisateurs = await _realisateurService.GetAllRealisateurs();
-            }catch(Exception ex)
+                AfficherRealisateurs();
+
+			}
+			catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erreur lors de la récupération des Realisateurs", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        public async void ChargerActeurs()
+		private async void ChargerActeurs()
         {
             try
             {
                 _acteurs = await _acteurService.GetAllActeurs();
-            }catch(Exception ex)
+                AfficherActeurs();
+			}
+			catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erreur lors de la récupération des Acteurs", MessageBoxButton.OK, MessageBoxImage.None);
             }
         }
 
-        public void AfficherCategories()
+		private void AfficherCategories()
         {
             cmbCategorie.Items.Clear();
             foreach(Categorie cat in _categories)
@@ -88,6 +100,18 @@ namespace CineQuebec.Windows.View
                 cmbCategorie.Items.Add(cat);
             }
 		}
+
+        private void AfficherRealisateurs()
+        {
+            cmbRealisateurs.Items.Clear();
+            cmbRealisateurs.ItemsSource = _realisateurs;
+		}
+
+        private void AfficherActeurs()
+        {
+            cmbActeurs.Items.Clear();
+            cmbActeurs.ItemsSource = _acteurs;
+        }
 
 		private async void Button_Click(object sender, RoutedEventArgs e)
 		{
@@ -112,15 +136,24 @@ namespace CineQuebec.Windows.View
 
         }
 
-        private bool ValidationChamps()
-        {
-            if (string.IsNullOrEmpty(txtNomFilm.Text.ToString().Trim()) || string.IsNullOrEmpty(txtActeurs.Text.ToString().Trim()) || cmbCategorie.SelectedItem is null || string.IsNullOrEmpty(txtRealisateurs.Text.ToString().Trim())
-                || dateSortieFilm.SelectedDate is null)
-                return false;
-            return true;
-        }
+		private bool ValidationChamps()
+		{
+			if (string.IsNullOrEmpty(txtNomFilm.Text.Trim()))
+				return false;
 
-        private Film InitialiserFilm()
+            if (_checkedActeurs.Count == 0)
+                return false;
+            if (_checkedRealisateurs.Count == 0)
+                return false;
+
+			if (dateSortieFilm.SelectedDate == null)
+				return false;
+
+			return true;
+		}
+
+
+		private Film InitialiserFilm()
         {
 			Film nouveau_film = new Film
 			{
@@ -132,20 +165,13 @@ namespace CineQuebec.Windows.View
 
 				DateSortieFilm = dateSortieFilm.SelectedDate!.Value,
 
-				EstAffiche = checkAffiche.IsChecked.GetValueOrDefault(defaultValue: false),
+				EstAffiche = false,
 
 				Categorie = (Categorie)cmbCategorie.SelectedItem
 			};
 
-			foreach (string nom in txtActeurs.Text.ToString().Split(','))
-			{
-				nouveau_film.Acteurs.Add(new Acteur(nom.Trim()));
-			}
-
-			foreach (string nom in txtRealisateurs.Text.ToString().Split(","))
-			{
-				nouveau_film.Realisateurs.Add(new Realisateur(nom.Trim()));
-			}
+            nouveau_film.Acteurs = _checkedActeurs;
+            nouveau_film.Realisateurs = _checkedRealisateurs;
 
             return nouveau_film;
 		}
@@ -165,5 +191,33 @@ namespace CineQuebec.Windows.View
 			}
 
 		}
-    }
+
+		private void CheckBox_Checked(object sender, RoutedEventArgs e)
+		{
+            Acteur acteur = (Acteur)((CheckBox)sender).DataContext;
+
+			_checkedActeurs.Add(acteur);
+		}
+
+		private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+		{
+			Acteur acteur = (Acteur)((CheckBox)sender).DataContext;
+
+			_checkedActeurs.Remove(acteur);
+		}
+
+		private void CheckBox_Unchecked_1(object sender, RoutedEventArgs e)
+		{
+            Realisateur realisateur = (Realisateur)((CheckBox)sender).DataContext;
+
+            _checkedRealisateurs.Remove(realisateur);
+		}
+
+		private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
+		{
+			Realisateur realisateur = (Realisateur)((CheckBox)sender).DataContext;
+
+			_checkedRealisateurs.Add(realisateur);
+		}
+	}
 }

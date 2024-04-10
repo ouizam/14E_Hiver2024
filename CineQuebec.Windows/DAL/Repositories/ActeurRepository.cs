@@ -55,10 +55,12 @@ namespace CineQuebec.Windows.DAL.Repositories
             try
             {
                 return await _collection.Aggregate().ToListAsync();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
-			}
+                Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+            }
             return null;
+        }
     }
 }
