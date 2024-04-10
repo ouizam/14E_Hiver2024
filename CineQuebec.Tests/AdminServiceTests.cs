@@ -21,7 +21,7 @@ namespace CineQuebec.Tests
 			AdminService authService = new AdminService(mockAdminRepo.Object);
 			Administrateur expectedAdmin = new Administrateur { Name = "user", Password = new byte[16] };
 
-			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<byte[]>())).ReturnsAsync(expectedAdmin);
+			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).ReturnsAsync(expectedAdmin);
 
 			// Act
 			Administrateur? result = await authService.ConnexionUtilisateur("user", "password");
@@ -40,7 +40,7 @@ namespace CineQuebec.Tests
 			Mock<AdminRepository> mockAdminRepo = new Mock<AdminRepository>();
 			AdminService authService = new AdminService(mockAdminRepo.Object);
 
-			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<byte[]>())).Throws<UtilisateurNotFoundException>();
+			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).Throws<UtilisateurNotFoundException>();
 
 			// Act
 			Administrateur? result = await authService.ConnexionUtilisateur("user", "password");
@@ -56,7 +56,7 @@ namespace CineQuebec.Tests
 			Mock<AdminRepository> mockAdminRepo = new Mock<AdminRepository>();
 			AdminService authService = new AdminService(mockAdminRepo.Object);
 
-			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<byte[]>())).Throws<Exception>();
+			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).Throws<Exception>();
 
 			// Act
 			Administrateur? result = await authService.ConnexionUtilisateur("user", "password");
@@ -79,7 +79,7 @@ namespace CineQuebec.Tests
 			Administrateur? result = await adminService.ConnexionUtilisateur(nom, password);
 
 			// Assert
-			mockRepo.Verify(repo => repo.ConnexionUtilisateur(nom, It.IsAny<byte[]>()), Times.Once);
+			mockRepo.Verify(repo => repo.ConnexionUtilisateur(nom, It.IsAny<string>()), Times.Once);
 		}
 	}
 }

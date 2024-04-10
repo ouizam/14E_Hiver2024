@@ -19,11 +19,15 @@ namespace CineQuebec.Windows.BLL.Services
     {
         private  Dictionary<string, byte[]> _dicoSalts;
         private AdminRepository _adminRepository;
+        private List<Administrateur> _admins = new List<Administrateur>();
+        private IMongoDatabase database;
+
 
         public AdminService()
         {
             _adminRepository = new AdminRepository();
             _dicoSalts = new Dictionary<string, byte[]>();
+
         }
 
         public AdminService(AdminRepository pAdminRepo)
@@ -36,9 +40,11 @@ namespace CineQuebec.Windows.BLL.Services
         {
             try
             {
-                
-                byte[] pswordHache = HacherMotDePasse(pPassword);
-                return await  _adminRepository.ConnexionUtilisateur(pUsername, pswordHache);
+                //Methode appelé juste si on veux créer des admin, utile pour notre application pour la première connexion
+               // AddAdmin();
+                var salt = CreerSALT();
+                byte[] pswordHache = HacherMotDePasse(pPassword, salt);
+                return await  _adminRepository.ConnexionUtilisateur(pUsername, pPassword);
 
             }catch (UtilisateurNotFoundException)
             {
@@ -49,11 +55,11 @@ namespace CineQuebec.Windows.BLL.Services
 				return null;
 			}
 		}
-        public  byte[] HacherMotDePasse(string password)
+        public  byte[] HacherMotDePasse(string password, byte[] pSalt)
         {
             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
             {
-                Salt = CreerSALT(),
+                Salt = pSalt,
                 DegreeOfParallelism = 8,
                 Iterations = 4,
                 MemorySize = 1024 * 1024
@@ -68,7 +74,18 @@ namespace CineQuebec.Windows.BLL.Services
             rng.GetBytes(buffer);
             return buffer;
         }
-      
-      
+
+        public void AddAdmin()
+        {
+            var admins = new Administrateur
+            {
+
+               
+            };
+           // _adminRepository.AddAdmin();
+
+        }
+
+
     }
 }
