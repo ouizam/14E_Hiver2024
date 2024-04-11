@@ -30,5 +30,30 @@ namespace CineQuebec.Tests
             Assert.Equal(projection.Id, resultat.Id);
         }
 
+        [Fact]
+        public async Task GetAllProjections_Retourne_Liste_Des_Projections()
+        {
+            Mock<ProjectionRepository> mockRepo = new();
+
+            List<Projection> projections = new List<Projection>
+            {
+                new Projection { Id = ObjectId.GenerateNewId(), NoSalle=1 },
+                new Projection { Id = ObjectId.GenerateNewId(), NoSalle=2 },
+                new Projection { Id = ObjectId.GenerateNewId(), NoSalle=3 },
+                new Projection { Id = ObjectId.GenerateNewId(), NoSalle=4 },
+                new Projection { Id = ObjectId.GenerateNewId(), NoSalle=5 },
+			};
+
+            mockRepo.Setup(x => x.GetAllProjections()).ReturnsAsync(projections);
+
+            ProjectionService projectionService = new(mockRepo.Object);
+
+            List<Projection>? resultat = await projectionService.GetAllProjections();
+
+
+            Assert.NotNull(resultat);
+            Assert.Equal(resultat, projections);
+        }
+
     }
 }

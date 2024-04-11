@@ -44,5 +44,28 @@ namespace CineQuebec.Tests
             Assert.NotNull(resultat);
             Assert.Equivalent(resultat, realisateur);
         }
-    }
+
+        [Fact]
+        public async Task GetAllRealisateurs_Retourne_Liste_Des_Utilisateurs()
+        {
+            Mock<RealisateurRepository> mockRepo = new();
+
+            List<Realisateur> realisateurs = new List<Realisateur>
+            {
+                new Realisateur { Id = ObjectId.GenerateNewId(), NameRealisateur="Bob" },
+                new Realisateur { Id = ObjectId.GenerateNewId(), NameRealisateur="Joe" },
+                new Realisateur { Id = ObjectId.GenerateNewId(), NameRealisateur="Dan" },
+                new Realisateur { Id = ObjectId.GenerateNewId(), NameRealisateur="Dylan" },
+			};
+
+			mockRepo.Setup(x => x.GetAllRealisateurs()).ReturnsAsync(realisateurs);
+			RealisateurService realisateurService = new RealisateurService(mockRepo.Object);
+
+            List<Realisateur>? resultat = await realisateurService.GetAllRealisateurs();
+
+            Assert.NotNull(resultat);
+            Assert.Equal(realisateurs, resultat);
+
+		}
+	}
 }

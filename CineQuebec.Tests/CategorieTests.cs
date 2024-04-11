@@ -29,5 +29,29 @@ namespace CineQuebec.Tests
             Assert.NotNull(resultatAttendu);
             Assert.Equal(categorie.Id, resultatAttendu.Id);
         }
+
+        [Fact]
+        public async Task GetAllCategories_Retourne_Liste_Des_Categories()
+        {
+            Mock<CategorieRepository> mockRep = new();
+
+            List<Categorie> categories = new List<Categorie>
+            {
+                new Categorie() {NameCategorie="Action"},
+                new Categorie() {NameCategorie="Aventure"},
+                new Categorie() {NameCategorie="Science Fiction"},
+                new Categorie() {NameCategorie="Documentaire"},
+                new Categorie() {NameCategorie="Drame"},
+			};
+
+            mockRep.Setup(x => x.GetAllCategories()).ReturnsAsync(categories);
+
+            CategorieService categorieService = new(mockRep.Object);
+
+            List<Categorie>? resultat = await categorieService.GetAllCategories();
+
+            Assert.NotNull(resultat);
+            Assert.Equal(resultat, categories);
+        }
     }
 }
