@@ -20,7 +20,7 @@
                      Margin="0 0 0 20"  x:Name="passwordTXT"/>
                     
             <Button Content="{x:Static rs:Resource.connexion_connect}" 
-                    Style="{StaticResource defautButton}" Width="100" Click="Button_Click" />
+                    Style="{StaticResource defautButton}" Width="100" Click="Button_Connexion_Click" />
         </StackPanel>
     </Grid>
 </UserControl>

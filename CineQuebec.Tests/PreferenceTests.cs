@@ -33,7 +33,7 @@ namespace CineQuebec.Tests
         }
 
         [Fact]
-        public void Obtenir_Preferences_De_Chaque_Abonne_By_Id_Abonne()
+        public void Obtenir_Preferences_Abonne_By_Id_Abonne()
         {
             Mock<RealisateurService> realisateurService = new Mock<RealisateurService>();
             Mock<ActeurService> acteurService = new Mock<ActeurService>();

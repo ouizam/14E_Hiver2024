@@ -55,5 +55,6 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return acteur;
         }
+
     }
 }

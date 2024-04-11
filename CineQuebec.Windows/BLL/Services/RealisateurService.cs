@@ -45,7 +45,7 @@ namespace CineQuebec.Windows.BLL.Services
 
             try
             {
-                realisateur = _realisateurRepository.ObtenireUnRealisateur(idRealisateur);
+                realisateur = _realisateurRepository.ObtenirUnRealisateur(idRealisateur);
 
             }
             catch (Exception ex)

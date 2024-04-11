@@ -34,7 +34,7 @@ namespace CineQuebec.Windows.View
             _adminService = new AdminService();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Connexion_Click(object sender, RoutedEventArgs e)
         {
 
             string username = usernameTXT.Text.ToString();

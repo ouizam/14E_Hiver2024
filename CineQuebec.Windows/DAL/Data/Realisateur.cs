@@ -19,6 +19,20 @@ namespace CineQuebec.Windows.DAL.Data
 			NameRealisateur = pNom;
 			Id= ObjectId.GenerateNewId();
 		}
+		public override bool Equals(object obj)
+		{
+			if (obj is Realisateur other)
+			{
+				return this.Id == other.Id;
+			}
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode();
+		}
+
 		public override string ToString()
 		{
 			return NameRealisateur;

@@ -12,12 +12,13 @@ namespace CineQuebec.Windows.DAL.Repositories
 	public class FilmRepository:BaseRepository
 	{
 		IMongoCollection<Film> _collection;
+
 		public FilmRepository()
 		{
 			_collection = database.GetCollection<Film>(name: "Films");
 		}
 
-		public virtual async Task<List<Film>?> ChargerListeFilms()
+		public virtual async Task<List<Film>?> GetAllFilms()
 		{
 			try
 			{
@@ -30,7 +31,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public virtual async Task<bool> CreerFilm(Film film)
+		public virtual async Task<bool> CreateFilm(Film film)
 		{
 			try
 			{
@@ -44,7 +45,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			}
 		}
 
-		public virtual async Task<DeleteResult?> SupprimerFilm(Film pFilm)
+		public virtual async Task<DeleteResult?> DeleteFilm(Film pFilm)
 		{
 			try
 			{
@@ -61,11 +62,16 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public virtual async Task<List<Film>?> ChargerListeFilmsAffiche()
+		public virtual async Task<List<Film>?> GetAllFilmsAffiche(List<Projection> projections)
 		{
 			try
 			{
-				return await _collection.Find(Builders<Film>.Filter.Eq(f => f.EstAffiche, true)).ToListAsync<Film>(); ;
+				List<ObjectId> filmIds = projections.Where(p => p.DateProjection > DateTime.Now).Select(p => p.IdFilm).ToList();
+				var filter = Builders<Film>.Filter.And(
+				Builders<Film>.Filter.In(f => f.Id, filmIds)
+				);
+
+				return await _collection.Find(filter).ToListAsync();
 			}
 			catch (Exception ex)
 			{
@@ -74,7 +80,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
-		public virtual async Task<UpdateResult?> ModifierFilm(Film film)
+		public virtual async Task<UpdateResult?> UpdateFilm(Film film)
 		{
 			try
 			{

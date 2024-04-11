@@ -42,13 +42,11 @@ namespace CineQuebec.Windows.View
 			txtActeurs.Text = string.Join(", ", _film.Acteurs);
 			txtCategorie.Text = _film.Categorie.ToString();
 
-			if (_film.EstAffiche)
-				checkAffiche.IsChecked = true;
 
 			dateSortieFilm.Text = _film.DateSortieFilm.ToShortDateString();
 		}
 
-		private async void ModifierFilmButton_Click(object sender, RoutedEventArgs e)
+		private async void Button_ModifierFilm_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBoxResult resultat = MessageBox.Show("Voulez-vous apporter les modifications sur le films ?", "Modification d'un film", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -57,7 +55,7 @@ namespace CineQuebec.Windows.View
 				try
 				{
 					InitialiserFilm();
-					UpdateResult? reponse = await _filmService.ModifierFilm(_film!);
+					UpdateResult? reponse = await _filmService.UpdateFilm(_film!);
 
 					if (reponse!.IsAcknowledged)
 						this.DialogResult = true;
@@ -80,12 +78,6 @@ namespace CineQuebec.Windows.View
 			_film!.Nom = txtNomFilm.Text.ToString().Trim();
 			_film.Categorie.NameCategorie = txtCategorie.Text.ToString().Trim();
 			_film.DateSortieFilm = dateSortieFilm.SelectedDate!.Value;
-
-			if (checkAffiche.IsChecked == true)
-				_film.EstAffiche = true;
-			else
-				_film.EstAffiche = false;
-
 
 			_film.Realisateurs.Clear();
 			_film.Acteurs.Clear();

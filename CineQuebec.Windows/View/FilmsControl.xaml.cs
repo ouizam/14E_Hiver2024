@@ -24,9 +24,9 @@ namespace CineQuebec.Windows.View
 	public partial class FilmsControl : Window
 	{
 		private FilmService _filmService;
+		private ProjectionService _projectionService;
 
 		private List<Film>? _films;
-
 		private List<Film>? _filmAffiche;
 
 		public FilmsControl()
@@ -34,6 +34,7 @@ namespace CineQuebec.Windows.View
 			InitializeComponent();
 
 			_filmService = new FilmService();
+			_projectionService = new();
 
 			ChargerFilms();
 
@@ -43,8 +44,10 @@ namespace CineQuebec.Windows.View
 		{
 			try
 			{
-				_films = await _filmService.ChargerListeFilms();
-				_filmAffiche = await _filmService.ChargerListeFilmsAffiche();
+				_films = await _filmService.GetAllFilms();
+
+				List<Projection>? projections = await _projectionService.GetAllProjections();
+				_filmAffiche = await _filmService.GetAllFilmsAffiche(projections!);
 
 				AfficherListeFilms();
 				AfficherListeFilmsAffiche();
@@ -82,7 +85,7 @@ namespace CineQuebec.Windows.View
 			}
 		}
 
-		private void Button_Ajouter_Film(object sender, RoutedEventArgs e)
+		private void Button_Ajouter_Film_Formulaire(object sender, RoutedEventArgs e)
 		{
 			AjouterFilm ajouterFilm = new AjouterFilm();
 
@@ -95,7 +98,7 @@ namespace CineQuebec.Windows.View
 
 		}
 
-		private async void Button_Click_SupprimerFilm(object sender, RoutedEventArgs e)
+		private async void Button_SupprimerFilm_Click(object sender, RoutedEventArgs e)
 		{
 			// Obtenez le film associé au bouton cliqué
 			Film? film = ((Button)sender).DataContext as Film;
@@ -106,7 +109,7 @@ namespace CineQuebec.Windows.View
 			{
 				try
 				{
-					DeleteResult? reponse = await _filmService.SupprimerFilm(pFilm: film!);
+					DeleteResult? reponse = await _filmService.DeleteFilm(pFilm: film!);
 
 					if (reponse!.IsAcknowledged)
 						ChargerFilms();
@@ -119,7 +122,7 @@ namespace CineQuebec.Windows.View
 
 		}
 
-		private void Button_Click_DetailsFilm(object sender, RoutedEventArgs e)
+		private void Button_DetailsFilm_Click(object sender, RoutedEventArgs e)
 		{
 
 			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
@@ -130,5 +133,16 @@ namespace CineQuebec.Windows.View
 			if (resultat == true)
 				ChargerFilms();
 		}
-	}
+
+		private void Button_UpdateFilm_Click(object sender, RoutedEventArgs e)
+		{
+			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
+
+			UpdateFilm updateFilm = new UpdateFilm(filmSelectionnee);
+			bool? resultat = updateFilm.ShowDialog();
+
+			if (resultat == true)
+				ChargerFilms();
+        }
+    }
 }

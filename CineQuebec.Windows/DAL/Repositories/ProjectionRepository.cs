@@ -11,7 +11,12 @@ namespace CineQuebec.Windows.DAL.Repositories
 {
     public class ProjectionRepository:BaseRepository
     {
-        public ProjectionRepository() { }
+        IMongoCollection<Projection> _collection;
+
+		public ProjectionRepository()
+        {
+            _collection = database.GetCollection<Projection>("Projections");
+		}
 
 
         public virtual Projection ObtenirProjection(ObjectId idProjection)
@@ -20,14 +25,25 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             try
             {
-                IMongoCollection<Projection> collection = database.GetCollection<Projection>("Projections");
-                projection = collection.Aggregate().ToList().FirstOrDefault(x => x.Id == idProjection);
+                projection = _collection.Aggregate().ToList().FirstOrDefault(x => x.Id == idProjection);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
             }
             return projection;
+        }
+
+        public virtual async Task<List<Projection>?> GetAllProjections()
+        {
+            try
+            {
+                return await _collection.Aggregate().ToListAsync();
+            }catch (Exception ex)
+            {
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+			}
+            return null;
         }
     }
 }

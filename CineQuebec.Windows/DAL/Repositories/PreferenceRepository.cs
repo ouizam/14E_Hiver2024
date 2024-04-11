@@ -1,5 +1,4 @@
 ﻿using CineQuebec.Windows.DAL.Data;
-using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -8,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CineQuebec.Windows.BLL.Services
+namespace CineQuebec.Windows.DAL.Repositories
 {
-    public class PreferenceRepository:BaseRepository
+    public class PreferenceRepository : BaseRepository
     {
-        public PreferenceRepository() { }
+        IMongoCollection<Preference> _collection;
+
+        public PreferenceRepository()
+        {
+            _collection = database.GetCollection<Preference>("Preferences");
+        }
 
         public virtual Preference ObtenirePreference(ObjectId idPreference)
         {
@@ -20,8 +24,7 @@ namespace CineQuebec.Windows.BLL.Services
 
             try
             {
-                IMongoCollection<Preference> collection = database.GetCollection<Preference>("Preferences");
-                preference = collection.Aggregate().ToList().FirstOrDefault(x => x.Id == idPreference);
+                preference = _collection.Aggregate().ToList().FirstOrDefault(x => x.Id == idPreference);
             }
             catch (Exception ex)
             {
@@ -36,8 +39,7 @@ namespace CineQuebec.Windows.BLL.Services
 
             try
             {
-                IMongoCollection<Preference> collection = database.GetCollection<Preference>("Preferences");
-                preferences = collection.Aggregate().ToList().Where(x => x.IdAbonne == idAbonne).ToList();
+                preferences = _collection.Aggregate().ToList().Where(x => x.IdAbonne == idAbonne).ToList();
             }
             catch (Exception ex)
             {
