@@ -54,17 +54,5 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return realisateur;
         }
-
-        public virtual async Task<List<Realisateur>?> GetAllRealisateurs()
-        {
-            try
-            {
-                return await _realisateurRepository.GetAllRealisateurs();
-            }catch(Exception ex)
-            {
-                Console.WriteLine("Erreur lors de la recuperation des Realisateurs: " + ex.Message, "Erreur");
-            }
-            return null;
-        }
     }
 }

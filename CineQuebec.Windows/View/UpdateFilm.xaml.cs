@@ -91,11 +91,11 @@ namespace CineQuebec.Windows.View
 				MessageBox.Show(ex.Message, "Erreur lors de la récupération des Catégories", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
-		private async void ChargerRealisateurs()
+		private void ChargerRealisateurs()
 		{
 			try
 			{
-				_realisateurs = await _realisateurService.GetAllRealisateurs();
+				_realisateurs = _realisateurService.ObtenirRealisateurs();
 				AfficherRealisateurs();
 
 			}
@@ -105,11 +105,11 @@ namespace CineQuebec.Windows.View
 			}
 		}
 
-		private async void ChargerActeurs()
+		private void ChargerActeurs()
 		{
 			try
 			{
-				_acteurs = await _acteurService.GetAllActeurs();
+				_acteurs =  _acteurService.ObtenirActeurs();
 				AfficherActeurs();
 			}
 			catch (Exception ex)

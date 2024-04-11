@@ -66,7 +66,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 		{
 			try
 			{
-				List<ObjectId> filmIds = projections.Select(p => p.IdFilm).ToList();
+				List<ObjectId> filmIds = projections.Where(p => p.DateProjection > DateTime.Now).Select(p => p.IdFilm).ToList();
 				var filter = Builders<Film>.Filter.And(
 				Builders<Film>.Filter.In(f => f.Id, filmIds)
 				);

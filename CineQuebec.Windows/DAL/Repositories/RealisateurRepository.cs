@@ -46,16 +46,5 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return realisateur;
         }
-
-        public virtual async Task<List<Realisateur>?> GetAllRealisateurs()
-        {
-            try
-            {
-                return await _collection.Aggregate().ToListAsync();
-            }catch(Exception ex){
-				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
-			}
-            return null;
-        }
     }
 }

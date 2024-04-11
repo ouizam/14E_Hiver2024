@@ -43,31 +43,5 @@ namespace CineQuebec.Tests
             Assert.NotNull(resultat);
             Assert.Equal(acteur.Id, resultat.Id);
         }
-
-        [Fact]
-        public async Task GetAllActeurs_Retourne_Liste_De_Tous_Les_Acteurs()
-        {
-            Mock<ActeurRepository> mockRepo = new();
-
-            List<Acteur> acteurs = new List<Acteur> 
-            { 
-                new Acteur("Jean"),
-                new Acteur("Simon"),
-                new Acteur("Sophie"),
-                new Acteur("Sarah"),
-                new Acteur("Natalie"),
-                new Acteur("Ema"),
-                new Acteur("Arthur"),
-			};
-
-            mockRepo.Setup(x => x.GetAllActeurs()).ReturnsAsync(acteurs);
-
-            ActeurService acteurService = new(mockRepo.Object);
-
-            List<Acteur>? resultat = await acteurService.GetAllActeurs();
-
-            Assert.NotNull(resultat);
-            Assert.Equal(resultat, acteurs);
-        }
     }
 }

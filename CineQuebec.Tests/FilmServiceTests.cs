@@ -77,14 +77,13 @@ namespace CineQuebec.Tests
 
 			List<Projection> projections = new List<Projection>
 			{
-				new Projection() {DateProjection = DateTime.Now, Id = ObjectId.GenerateNewId(), NoSalle= 1, IdFilm = films[0].Id, Film = films[0]},
-				new Projection() {DateProjection = DateTime.Now, Id = ObjectId.GenerateNewId(), NoSalle= 2, IdFilm = films[0].Id, Film = films[0]},
-				new Projection() {DateProjection = DateTime.Now, Id = ObjectId.GenerateNewId(), NoSalle= 1, IdFilm = films[1].Id, Film = films[1]},
+				new Projection() {DateProjection = new DateTime(2024, 4, 10, 15, 30, 0), Id = ObjectId.GenerateNewId(), NoSalle= 1, IdFilm = films[0].Id, Film = films[0]},
+				new Projection() {DateProjection = new DateTime(2024, 6, 13, 15, 30, 0), Id = ObjectId.GenerateNewId(), NoSalle= 1, IdFilm = films[1].Id, Film = films[1]},
 			};
 
 			
 
-			mockRepo.Setup(repo => repo.GetAllFilmsAffiche(projections)).ReturnsAsync(new List<Film> { films[0] });
+			mockRepo.Setup(repo => repo.GetAllFilmsAffiche(projections)).ReturnsAsync(new List<Film> { films[1] });
 			FilmService filmService = new FilmService(mockRepo.Object);
 
 			// Act
