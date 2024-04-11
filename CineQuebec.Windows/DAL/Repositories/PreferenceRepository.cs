@@ -18,7 +18,12 @@ namespace CineQuebec.Windows.DAL.Repositories
             _collection = database.GetCollection<Preference>("Preferences");
         }
 
-        public virtual Preference ObtenirePreference(ObjectId idPreference)
+        /// <summary>
+        /// Obtiens la Préférence associé à l'ID passé en paramètre.
+        /// </summary>
+        /// <param name="idPreference">L'ID de la Préférence</param>
+        /// <returns>Une Préférence</returns>
+        public virtual Preference ObtenirPreference(ObjectId idPreference)
         {
             var preference = new Preference();
 
@@ -32,7 +37,12 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return preference;
         }
-
+        
+        /// <summary>
+        /// Obtiens la liste de Préférence associé à un Abonné grâce à l'ID passé en paramètre.
+        /// </summary>
+        /// <param name="idAbonne">L'ID de l'Abonné</param>
+        /// <returns>Une Liste des Préférences</returns>
         public virtual List<Preference> ObtenirPreferencesAbonne(ObjectId idAbonne)
         {
             var preferences = new List<Preference>();

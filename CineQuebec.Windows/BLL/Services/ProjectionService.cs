@@ -23,6 +23,11 @@ namespace CineQuebec.Windows.BLL.Services
             _projectionRepository = projectionRepository;
         }
 
+        /// <summary>
+        /// Obtiens la Projection associé à l'ID passé en paramètre.
+        /// </summary>
+        /// <param name="idProjection">L'ID de la Projection</param>
+        /// <returns>Une Projectiom</returns>
         public virtual Projection ObtenirProjection(ObjectId idProjection)
         {
             var projection = new Projection();
@@ -39,6 +44,10 @@ namespace CineQuebec.Windows.BLL.Services
             return projection;
         }
 
+        /// <summary>
+        /// Obtiens une liste de tous les Projections contenuent dans la base de donnée.
+        /// </summary>
+        /// <returns>Une Liste des Projections ou null si une Exception est survenue</returns>
         public virtual async Task<List<Projection>?> GetAllProjections()
         {
             try

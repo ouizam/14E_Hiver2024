@@ -22,6 +22,10 @@ namespace CineQuebec.Windows.BLL.Services
             _realisateurRepository = pRealisateurRepository;
         }
 
+        /// <summary>
+        /// Obtiens tous les Réalisateurs contenuent dans la base de donnée.
+        /// </summary>
+        /// <returns>Une Liste des Réalisateurs</returns>
         public virtual List<Realisateur> ObtenirRealisateurs()
         {
             var realisateurs = new List<Realisateur>();
@@ -39,6 +43,11 @@ namespace CineQuebec.Windows.BLL.Services
             return realisateurs;
         }
 
+        /// <summary>
+        /// Obtiens le Réalisateur associé à l'ID passé en paramètre.
+        /// </summary>
+        /// <param name="idRealisateur">L'ID du Réalisateur</param>
+        /// <returns>Un Réalisateur</returns>
         public virtual Realisateur ObtenirUnRealisateur(ObjectId idRealisateur)
         {
             var realisateur = new Realisateur();

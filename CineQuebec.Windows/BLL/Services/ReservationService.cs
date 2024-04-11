@@ -25,6 +25,12 @@ namespace CineQuebec.Windows.BLL.Services
             _reservationRepository = pReservationRep;
             _projectionService = pProjecService;
         }
+
+        /// <summary>
+        /// Obtiens les Réservations associées à l'Abonné contenuent dans la base de donnée.
+        /// </summary>
+        /// <param name="idAbonne">L'ID de l'Abonné</param>
+        /// <returns>Une Liste des Réservations</returns>
         public virtual List<Reservation> ObtenirReservationsAbonne(ObjectId idAbonne)
         {
             var reservations = new List<Reservation>();
