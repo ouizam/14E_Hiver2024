@@ -19,7 +19,10 @@ namespace CineQuebec.Windows.DAL.Repositories
             _collection = database.GetCollection<Acteur>("Acteurs");
 		}
 
-
+        /// <summary>
+        /// Méthode qui retourn la liste de tous les acteurs qui existent dans la base de donné
+        /// </summary>
+        /// <returns></returns>
         public virtual List<Acteur> ObtenirActeurs()
         {
             var acteurs = new List<Acteur>();
@@ -35,6 +38,11 @@ namespace CineQuebec.Windows.DAL.Repositories
             return acteurs;
         }
 
+        /// <summary>
+        /// Méthode qui retourne un acteurs selon un id spécifique dans la base de donnée
+        /// </summary>
+        /// <param name="idActeur"></param>
+        /// <returns></returns>
         public virtual Acteur ObtenirUnActeur(ObjectId idActeur)
         {
             var acteur = new Acteur();

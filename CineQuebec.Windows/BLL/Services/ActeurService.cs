@@ -22,7 +22,10 @@ namespace CineQuebec.Windows.BLL.Services
         {
             _acteurRepository = pActeurRepository;
         }
-
+        /// <summary>
+        /// Méthode qui récupère tous les acteurs sous form d'une liste
+        /// </summary>
+        /// <returns></returns>
         public List<Acteur> ObtenirActeurs()
         {
             var acteurs = new List<Acteur>();
@@ -39,7 +42,11 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return acteurs;
         }
-
+        /// <summary>
+        /// Méthode qui return un acteuer selon son id d'acteur
+        /// </summary>
+        /// <param name="idActeur"></param>
+        /// <returns></returns>
         public virtual Acteur ObtenirUnActeur(ObjectId idActeur)
         {
             var acteur = new Acteur();

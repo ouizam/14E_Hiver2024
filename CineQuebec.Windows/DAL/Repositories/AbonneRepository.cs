@@ -17,6 +17,10 @@ namespace CineQuebec.Windows.DAL.Repositories
           
         }
 
+        /// <summary>
+        /// Méthode qui retoune la liste des abonnés
+        /// </summary>
+        /// <returns></returns>
         public virtual List<Abonne> ObtenirAbonnes()
         {
             var abonnes = new List<Abonne>();

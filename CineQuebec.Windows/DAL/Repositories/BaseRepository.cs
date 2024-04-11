@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL.Repositories
 {
+    /// <summary>
+    /// Un repository de base qu'on appel pour les autres repositories au besoin, c'est fais pour éviter de dupliquer du code 
+    /// dans chaque méthode. en Gros elle fais la conncexion a la base de donnée.
+    /// </summary>
     public class BaseRepository
     {
         private IMongoClient mongoDBClient;
@@ -19,6 +23,11 @@ namespace CineQuebec.Windows.DAL.Repositories
             database = ConnectDatabase();
         }
 
+        /// <summary>
+        /// Méthode qui assure et ouvre la connexion, elle utilise la chaine de caractères connectionString pour pouvoir accéder 
+        /// a la base de donnée
+        /// </summary>
+        /// <returns></returns>
         private IMongoClient OuvrirConnexion()
         {
             MongoClient dbClient = null;
@@ -32,6 +41,10 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return dbClient;
         }
+        /// <summary>
+        /// Méthode assure la connexion a la base de donnée
+        /// </summary>
+        /// <returns></returns>
         private IMongoDatabase ConnectDatabase()
         {
             IMongoDatabase db = null;

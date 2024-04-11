@@ -22,6 +22,13 @@ namespace CineQuebec.Windows.DAL.Repositories
             _collection = database.GetCollection<Administrateur>("Administrateurs");
         }
 
+        /// <summary>
+        /// Méthode qui assure la connexion avec un username et password, elle vérifie si le mot de passe saisie et haché est le même
+        /// que celui haché dans la base de donnée
+        /// </summary>
+        /// <param name="pUsername"></param>
+        /// <param name="pPassword"></param>
+        /// <returns></returns>
         public virtual async Task<Administrateur> ConnexionUtilisateur(string pUsername, string pPassword)
         {
             Administrateur utilisateur = new Administrateur();
@@ -52,6 +59,12 @@ namespace CineQuebec.Windows.DAL.Repositories
             return utilisateur;
         }
 
+        /// <summary>
+        /// Méthode qui hache le mot de passe 
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="pSalt"></param>
+        /// <returns></returns>
         public byte[] HacherMotDePasse(string password, byte[] pSalt)
         {
             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
@@ -64,6 +77,10 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             return argon2.GetBytes(16);
         }
+        /// <summary>
+        /// Méthode qui crée le salt pour le mot de passe 
+        /// </summary>
+        /// <returns></returns>
         public byte[] CreerSALT()
         {
             var buffer = new byte[16];
@@ -71,27 +88,6 @@ namespace CineQuebec.Windows.DAL.Repositories
             rng.GetBytes(buffer);
             return buffer;
         }
-
-        //public void AddAdmin()
-        //{
-
-        //    var name = "admin";
-        //    var email = "admin@gmail.com";
-        //    var password = "Admin@12";
-        //    var salt = CreerSALT();
-        //    try
-        //    {
-        //        Administrateur admin = new Administrateur { Name = name, Email = email, Password = HacherMotDePasse(password, salt), Salt = salt };
-        //        var collection = database.GetCollection<Administrateur>("Administrateurs");
-        //        collection.InsertOne(admin);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
-        //    }
-
-        //}
 
 
     }

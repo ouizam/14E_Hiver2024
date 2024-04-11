@@ -21,6 +21,11 @@ namespace CineQuebec.Windows.BLL.Services
         {
             _categorieRepository = pCategorieRepository;
         }
+        /// <summary>
+        /// Méthode qui obtient une catégorie selon son id
+        /// </summary>
+        /// <param name="idCategorie"></param>
+        /// <returns></returns>
 
         public virtual Categorie ObtenirCategorie(ObjectId idCategorie)
         {
@@ -38,6 +43,10 @@ namespace CineQuebec.Windows.BLL.Services
             return categorie;
         }
 
+        /// <summary>
+        /// Méthode qui obtient la liste de toutes les catégories
+        /// </summary>
+        /// <returns></returns>
         public virtual async  Task<List<Categorie>> GetAllCategories()
         {
             try

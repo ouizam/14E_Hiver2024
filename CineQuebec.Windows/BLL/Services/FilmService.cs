@@ -23,6 +23,10 @@ namespace CineQuebec.Windows.BLL.Services
 			_filmRepo = pFilmRepo;
 		}
 
+		/// <summary>
+		/// Méthode qui retourne la liste de tous les films
+		/// </summary>
+		/// <returns></returns>
 		public async Task<List<Film>?> GetAllFilms()
 		{
 			try
@@ -37,6 +41,11 @@ namespace CineQuebec.Windows.BLL.Services
 			return null;
 		}
 
+		/// <summary>
+		/// Méthode qui crée un film dans la base de donnée
+		/// </summary>
+		/// <param name="film"></param>
+		/// <returns></returns>
 		public async Task<bool> CreateFilm(Film film)
 		{
 			try
@@ -49,6 +58,11 @@ namespace CineQuebec.Windows.BLL.Services
 			return false;
 		}
 
+		/// <summary>
+		/// Méthode qui supprime un film dans la base de donnée
+		/// </summary>
+		/// <param name="pFilm"></param>
+		/// <returns></returns>
 		public async Task<DeleteResult?> DeleteFilm(Film pFilm)
 		{
 			try
@@ -61,6 +75,11 @@ namespace CineQuebec.Windows.BLL.Services
 			return null;
 		}
 
+		/// <summary>
+		/// Méthode qui retourne la liste des films qui sont a l'affiche
+		/// </summary>
+		/// <param name="projections"></param>
+		/// <returns></returns>
 		public async Task<List<Film>?> GetAllFilmsAffiche(List<Projection> projections)
 		{
 			try
@@ -73,6 +92,11 @@ namespace CineQuebec.Windows.BLL.Services
 			return null;
 		}
 
+		/// <summary>
+		/// Méthode qui médifie un film
+		/// </summary>
+		/// <param name="film"></param>
+		/// <returns></returns>
 		public async Task<UpdateResult?> UpdateFilm(Film film)
 		{
 			try

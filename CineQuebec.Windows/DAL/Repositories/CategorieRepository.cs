@@ -17,8 +17,13 @@ namespace CineQuebec.Windows.DAL.Repositories
 		public CategorieRepository()
         {
             _collection = database.GetCollection<Categorie>(name: "Categories");
-        }
+        } 
 
+        /// <summary>
+        /// Méthode qui retourne une catgorie existe dans la base de donnée avec un id
+        /// </summary>
+        /// <param name="idCategorie"></param>
+        /// <returns></returns>
         public virtual Categorie ObtenirCategorie(ObjectId idCategorie)
         {
             var categorie = new Categorie();
@@ -34,6 +39,10 @@ namespace CineQuebec.Windows.DAL.Repositories
             return categorie;
         }
 
+        /// <summary>
+        /// Méthode qui return la liste de touts les catégoreis dans la base de données.
+        /// </summary>
+        /// <returns></returns>
         public virtual async Task<List<Categorie>> GetAllCategories()
         {
             try

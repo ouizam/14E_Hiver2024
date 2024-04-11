@@ -34,13 +34,17 @@ namespace CineQuebec.Windows.BLL.Services
             _adminRepository = pAdminRepo;
             _dicoSalts = new Dictionary<string, byte[]>();
         }
-
+        /// <summary>
+        /// Méthode qui assure la conexion avce un username et un mot de passe, elle fait appel a la méthode HacherMotde  passe pour et CreerSalt assurer
+        /// une connexion sécurisé
+        /// </summary>
+        /// <param name="pUsername"></param>
+        /// <param name="pPassword"></param>
+        /// <returns></returns>
         public async Task<Administrateur?> ConnexionUtilisateur(string pUsername, string pPassword)
         {
             try
-            {
-                //Methode appelé juste si on veux créer des admin, utile pour notre application pour la première connexion
-               // AddAdmin();
+            {              
                 var salt = CreerSALT();
                 byte[] pswordHache = HacherMotDePasse(pPassword, salt);
                 return await  _adminRepository.ConnexionUtilisateur(pUsername, pPassword);
@@ -54,6 +58,12 @@ namespace CineQuebec.Windows.BLL.Services
 				return null;
 			}
 		}
+        /// <summary>
+        /// Méthode pour hacher le mot de passe
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="pSalt"></param>
+        /// <returns></returns>
         public  byte[] HacherMotDePasse(string password, byte[] pSalt)
         {
             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
@@ -77,11 +87,9 @@ namespace CineQuebec.Windows.BLL.Services
         public void AddAdmin()
         {
             var admins = new Administrateur
-            {
-
-               
+            {              
             };
-           // _adminRepository.AddAdmin();
+          
 
         }
 
