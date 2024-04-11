@@ -17,6 +17,10 @@ namespace CineQuebec.Windows.DAL.Repositories
             _collection = database.GetCollection<Realisateur>("Realisateurs");
 		}
 
+        /// <summary>
+        /// Obtiens une liste de tous les Réalisateurs dans la base de donnée.
+        /// </summary>
+        /// <returns>Une Liste des Réalisateurs</returns>
         public virtual List<Realisateur> ObtenirRealisateurs()
         {
             var realisateurs = new List<Realisateur>();
@@ -32,6 +36,11 @@ namespace CineQuebec.Windows.DAL.Repositories
             return realisateurs;
         }
 
+        /// <summary>
+        /// Obtiens un Rèalisateur associé à l'ID passé en paramètre.
+        /// </summary>
+        /// <param name="IdRealisateur">L'ID du Réalisateur</param>
+        /// <returns>Une Réalisateur</returns>
         public virtual Realisateur ObtenirUnRealisateur(ObjectId IdRealisateur)
         {
             var realisateur = new Realisateur();

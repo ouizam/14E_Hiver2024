@@ -11,19 +11,25 @@ namespace CineQuebec.Windows.DAL.Repositories
 {
     public class ReservationRepository:BaseRepository
     {
+        IMongoCollection<Reservation> _collection;
+
         public ReservationRepository()
         {
+            _collection = database.GetCollection<Reservation>("Reservations");
+		}
 
-        }
-
+        /// <summary>
+        /// Obtiens les Réservations associés à un Abonné grâce à son ID passé en paramètre.
+        /// </summary>
+        /// <param name="idAbonne">L'ID de l'Abonné</param>
+        /// <returns>Une Liste des Réservation</returns>
         public virtual List<Reservation> ObtenirReservationsAbonne(ObjectId idAbonne)
         {
             var reservations = new List<Reservation>();
 
             try
             {
-                IMongoCollection<Reservation> collection = database.GetCollection<Reservation>("Reservations");
-                reservations = collection.Aggregate().ToList().Where(x => x.IdAbonne == idAbonne).ToList();
+                reservations = _collection.Aggregate().ToList().Where(x => x.IdAbonne == idAbonne).ToList();
             }
             catch (Exception ex)
             {

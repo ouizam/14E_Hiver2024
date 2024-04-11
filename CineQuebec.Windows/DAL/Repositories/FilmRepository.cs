@@ -18,6 +18,10 @@ namespace CineQuebec.Windows.DAL.Repositories
 			_collection = database.GetCollection<Film>(name: "Films");
 		}
 
+		/// <summary>
+		/// Obtiens la liste de tous les Films contenuent dans la base de donnée.
+		/// </summary>
+		/// <returns>Une Liste de Films ou null si une Exception est survenue</returns>
 		public virtual async Task<List<Film>?> GetAllFilms()
 		{
 			try
@@ -31,6 +35,11 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
+		/// <summary>
+		/// Crée un Film dans la base de donnée.
+		/// </summary>
+		/// <param name="film">L'objet Film à créer</param>
+		/// <returns>True si créé sinon false</returns>
 		public virtual async Task<bool> CreateFilm(Film film)
 		{
 			try
@@ -45,6 +54,11 @@ namespace CineQuebec.Windows.DAL.Repositories
 			}
 		}
 
+		/// <summary>
+		/// Supprime un Film de la base de donnée.
+		/// </summary>
+		/// <param name="pFilm">L'objet Film à supprimer</param>
+		/// <returns>Un DeleteResult ou null si une Exception est survenue</returns>
 		public virtual async Task<DeleteResult?> DeleteFilm(Film pFilm)
 		{
 			try
@@ -62,6 +76,11 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
+		/// <summary>
+		/// Obtiens la liste des Films à l'affiche grâce à une liste des Projections passé en paramètre.
+		/// </summary>
+		/// <param name="projections">Une Liste de Projection</param>
+		/// <returns>Une Liste de Films</returns>
 		public virtual async Task<List<Film>?> GetAllFilmsAffiche(List<Projection> projections)
 		{
 			try
@@ -80,6 +99,11 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
+		/// <summary>
+		/// Modifie un Film dans la base de donnée.
+		/// </summary>
+		/// <param name="film">L'objet Film Modifié</param>
+		/// <returns>Un UpdateResult ou null si une Exception est survenue</returns>
 		public virtual async Task<UpdateResult?> UpdateFilm(Film film)
 		{
 			try

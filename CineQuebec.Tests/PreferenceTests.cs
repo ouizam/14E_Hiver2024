@@ -21,7 +21,7 @@ namespace CineQuebec.Tests
           
             ObjectId idPreference = ObjectId.GenerateNewId();
             Preference preference = new Preference { Id = idPreference };
-            mockRepo.Setup(x => x.ObtenirePreference(idPreference)).Returns(preference);
+            mockRepo.Setup(x => x.ObtenirPreference(idPreference)).Returns(preference);
             PreferenceService prefernceService = new PreferenceService(mockRepo.Object);
 
             //act

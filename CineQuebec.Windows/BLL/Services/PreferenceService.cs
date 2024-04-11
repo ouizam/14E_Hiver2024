@@ -34,13 +34,19 @@ namespace CineQuebec.Windows.BLL.Services
             _realisateurService = realisateurService;
             _categorieService = categorieService;
         }
-        public virtual Preference ObtenirPreference(ObjectId idPrefernce)
+
+        /// <summary>
+        /// Obtiens la Préférence associé à l'ID passé en paramètre.
+        /// </summary>
+        /// <param name="idPreference">L'ID de la Préférence</param>
+        /// <returns>La Préférence</returns>
+        public virtual Preference ObtenirPreference(ObjectId idPreference)
         {
             var preference = new Preference();
 
             try
             {
-                preference = _preferenceRepository.ObtenirePreference(idPrefernce);
+                preference = _preferenceRepository.ObtenirPreference(idPreference);
 
             }
             catch (Exception ex)
@@ -50,6 +56,11 @@ namespace CineQuebec.Windows.BLL.Services
             return preference;
         }
 
+        /// <summary>
+        /// Obtiens une liste des Préférences associés à un Abonné grâche à son ID.
+        /// </summary>
+        /// <param name="idAbonne">L'ID de l'Abonné</param>
+        /// <returns>Une Liste des Préférences</returns>
         public virtual List<Preference> ObtenirPreferencesAbonne(ObjectId idAbonne)
         {
             var preferences = new List<Preference>();

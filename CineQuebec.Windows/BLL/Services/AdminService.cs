@@ -83,16 +83,5 @@ namespace CineQuebec.Windows.BLL.Services
             rng.GetBytes(buffer);
             return buffer;
         }
-
-        public void AddAdmin()
-        {
-            var admins = new Administrateur
-            {              
-            };
-          
-
-        }
-
-
     }
 }

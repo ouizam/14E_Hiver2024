@@ -18,7 +18,11 @@ namespace CineQuebec.Windows.DAL.Repositories
             _collection = database.GetCollection<Projection>("Projections");
 		}
 
-
+        /// <summary>
+        /// Obtiens une Projection associé à l'ID passé en paramètre.
+        /// </summary>
+        /// <param name="idProjection">L'ID de la Projection</param>
+        /// <returns>Une Projection</returns>
         public virtual Projection ObtenirProjection(ObjectId idProjection)
         {
             var projection = new Projection();
@@ -34,6 +38,10 @@ namespace CineQuebec.Windows.DAL.Repositories
             return projection;
         }
 
+        /// <summary>
+        /// Obtiens une liste de tous les Projections contenuent dans la base de donnée.
+        /// </summary>
+        /// <returns>Une Listes des Projections</returns>
         public virtual async Task<List<Projection>?> GetAllProjections()
         {
             try
