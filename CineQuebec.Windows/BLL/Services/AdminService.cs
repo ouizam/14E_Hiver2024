@@ -39,8 +39,6 @@ namespace CineQuebec.Windows.BLL.Services
         {
             try
             {
-                //Methode appelé juste si on veux créer des admin, utile pour notre application pour la première connexion
-               // AddAdmin();
                 var salt = CreerSALT();
                 byte[] pswordHache = HacherMotDePasse(pPassword, salt);
                 return await  _adminRepository.ConnexionUtilisateur(pUsername, pPassword);

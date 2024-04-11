@@ -100,7 +100,6 @@ namespace CineQuebec.Windows.View
 
 		private async void Button_SupprimerFilm_Click(object sender, RoutedEventArgs e)
 		{
-			// Obtenez le film associé au bouton cliqué
 			Film? film = ((Button)sender).DataContext as Film;
 
 			MessageBoxResult result = MessageBox.Show("Voulez-vous vraiment supprimer ce film ?", "Attention", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -138,7 +137,7 @@ namespace CineQuebec.Windows.View
 		{
 			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
 
-			UpdateFilm updateFilm = new UpdateFilm(filmSelectionnee);
+			UpdateFilm updateFilm = new UpdateFilm(filmSelectionnee!);
 			bool? resultat = updateFilm.ShowDialog();
 
 			if (resultat == true)
