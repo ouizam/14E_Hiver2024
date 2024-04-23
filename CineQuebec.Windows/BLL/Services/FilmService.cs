@@ -1,4 +1,5 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Driver;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-	public class FilmService
+	public class FilmService: IFilmService
 	{
 		private FilmRepository _filmRepo;
 

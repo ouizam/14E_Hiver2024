@@ -1,4 +1,5 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Driver;
 using System;
@@ -12,7 +13,7 @@ namespace CineQuebec.Windows.BLL.Services
     /// <summary>
     /// Servive pour abonné
     /// </summary>
-    public class AbonneService
+    public class AbonneService: IAbonneService
     {
         private AbonneRepository _abonneRepository;
         private ReservationService _reservationService;

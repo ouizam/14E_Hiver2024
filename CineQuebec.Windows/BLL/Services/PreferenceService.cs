@@ -1,4 +1,5 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using System;
@@ -9,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-    public class PreferenceService
-    {
+    public class PreferenceService: IPreferenceService
+	{
         private PreferenceRepository _preferenceRepository;
         private ActeurService _acteurService;
         private RealisateurService _realisateurService;
