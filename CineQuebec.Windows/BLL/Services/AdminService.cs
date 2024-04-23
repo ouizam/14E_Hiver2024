@@ -12,10 +12,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using Konscious.Security.Cryptography;
+using CineQuebec.Windows.BLL.Interfaces;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-    public class AdminService
+    public class AdminService: IAdminService
     {
         private  Dictionary<string, byte[]> _dicoSalts;
         private AdminRepository _adminRepository;
