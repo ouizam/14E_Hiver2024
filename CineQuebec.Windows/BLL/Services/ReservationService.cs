@@ -1,5 +1,6 @@
 ﻿using CineQuebec.Windows.BLL.Interfaces;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -13,15 +14,16 @@ namespace CineQuebec.Windows.BLL.Services
 {
     public class ReservationService: IReservationService
     {
-        private ReservationRepository _reservationRepository;
-        private ProjectionService _projectionService;
+        private readonly IReservationRepository _reservationRepository;
+        private readonly IProjectionService _projectionService;
 
-        public ReservationService()
-        {
-            _reservationRepository = new ReservationRepository();
-            _projectionService = new ProjectionService();
-        }
-        public ReservationService(ReservationRepository pReservationRep, ProjectionService pProjecService)
+        //public ReservationService()
+        //{
+        //    _reservationRepository = new ReservationRepository();
+        //    _projectionService = new ProjectionService();
+        //}
+
+        public ReservationService(IReservationRepository pReservationRep, IProjectionService pProjecService)
         {
             _reservationRepository = pReservationRep;
             _projectionService = pProjecService;

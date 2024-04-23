@@ -1,5 +1,6 @@
 ﻿using CineQuebec.Windows.BLL.Interfaces;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using System;
@@ -12,14 +13,14 @@ namespace CineQuebec.Windows.BLL.Services
 {
     public class ActeurService: IActeurService
 	{
-        private ActeurRepository _acteurRepository;
+        private readonly IActeurRepository _acteurRepository;
 
         public ActeurService()
         {
             _acteurRepository = new ActeurRepository();
         }
 
-        public ActeurService(ActeurRepository pActeurRepository)
+        public ActeurService(IActeurRepository pActeurRepository)
         {
             _acteurRepository = pActeurRepository;
         }

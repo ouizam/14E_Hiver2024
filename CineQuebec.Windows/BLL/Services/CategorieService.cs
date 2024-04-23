@@ -1,5 +1,6 @@
 ﻿using CineQuebec.Windows.BLL.Interfaces;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using System;
@@ -12,16 +13,18 @@ namespace CineQuebec.Windows.BLL.Services
 {
     public class CategorieService: ICategorieService
 	{
-        private CategorieRepository _categorieRepository;
-        public CategorieService() 
+        private readonly ICategorieRepository _categorieRepository;
+
+        public CategorieService()
         {
             _categorieRepository = new CategorieRepository();
         }
 
-        public CategorieService(CategorieRepository pCategorieRepository)
+        public CategorieService(ICategorieRepository pCategorieRepository)
         {
             _categorieRepository = pCategorieRepository;
         }
+
         /// <summary>
         /// Méthode qui obtient une catégorie selon son id
         /// </summary>

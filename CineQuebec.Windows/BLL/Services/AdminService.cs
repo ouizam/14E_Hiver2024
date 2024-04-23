@@ -13,13 +13,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using Konscious.Security.Cryptography;
 using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Interfaces;
 
 namespace CineQuebec.Windows.BLL.Services
 {
     public class AdminService: IAdminService
     {
         private  Dictionary<string, byte[]> _dicoSalts;
-        private AdminRepository _adminRepository;
+        private readonly IAdminRepository _adminRepository;
         private List<Administrateur> _admins = new List<Administrateur>();
 
 
@@ -30,7 +31,7 @@ namespace CineQuebec.Windows.BLL.Services
 
         }
 
-        public AdminService(AdminRepository pAdminRepo)
+        public AdminService(IAdminRepository pAdminRepo)
         {
             _adminRepository = pAdminRepo;
             _dicoSalts = new Dictionary<string, byte[]>();

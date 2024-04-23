@@ -16,15 +16,22 @@ namespace CineQuebec.Windows.BLL.Services
     /// </summary>
     public class AbonneService: IAbonneService
     {
-        private IAbonneRepository _abonneRepository;
-        private IReservationService _reservationService;
-        private IPreferenceService _preferenceSrvice;
+        private readonly IAbonneRepository _abonneRepository;
+        private readonly IReservationRepository _reservationRepository;
+        private readonly IPreferenceRepository _preferenceRepository;
 
-        public AbonneService(IAbonneRepository abonneRepository, IReservationService reservationService, IPreferenceService preferenceService)
+		public AbonneService()
+		{
+			_abonneRepository = new AbonneRepository();
+			_reservationRepository = new ReservationRepository();
+			_preferenceRepository = new PreferenceRepository();
+		}
+
+		public AbonneService (IAbonneRepository pAbonneRepo, IReservationRepository pReservationService, IPreferenceRepository pPrefService )
         {
-            _abonneRepository = abonneRepository;
-            _reservationService = reservationService;
-            _preferenceSrvice = preferenceService;
+            _abonneRepository = pAbonneRepo;
+            _reservationRepository = pReservationService;
+			_preferenceRepository = pPrefService;
         }
         //public AbonneService (AbonneRepository pAbonneRepo, ReservationService pReservationService, PreferenceService pPrefService )
         //{
@@ -47,8 +54,8 @@ namespace CineQuebec.Windows.BLL.Services
                 abonnes = _abonneRepository.ObtenirAbonnes();
                 foreach (var abonne in abonnes)
                 {
-                    abonne.Reservations = _reservationService.ObtenirReservationsAbonne(abonne.Id);
-                    abonne.Preferences =  _preferenceSrvice.ObtenirPreferencesAbonne(abonne.Id);
+                    abonne.Reservations = _reservationRepository.ObtenirReservationsAbonne(abonne.Id);
+                    abonne.Preferences = _preferenceRepository.ObtenirPreferencesAbonne(abonne.Id);
                 }
                
             }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL.Interfaces
 {
-    internal interface ICategorieRepository
+    public interface ICategorieRepository
     {
         Categorie ObtenirCategorie(ObjectId idCategorie);
         Task<List<Categorie>> GetAllCategories();
