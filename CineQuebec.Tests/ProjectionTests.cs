@@ -1,5 +1,7 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using Moq;
@@ -16,7 +18,7 @@ namespace CineQuebec.Tests
         [Fact]
         public void ObtenirProjection_By_Id()
         {
-            Mock<ProjectionRepository> mockRepo = new Mock<ProjectionRepository>();
+            Mock<IProjectionRepository> mockRepo = new Mock<IProjectionRepository>();
             ObjectId idProjection = ObjectId.GenerateNewId();
             Projection projection = new Projection { Id = idProjection };
             mockRepo.Setup(y => y.ObtenirProjection(idProjection)).Returns(projection);
@@ -33,7 +35,7 @@ namespace CineQuebec.Tests
         [Fact]
         public async Task GetAllProjections_Retourne_Liste_Des_Projections()
         {
-            Mock<ProjectionRepository> mockRepo = new();
+            Mock<IProjectionRepository> mockRepo = new();
 
             List<Projection> projections = new List<Projection>
             {
@@ -46,7 +48,7 @@ namespace CineQuebec.Tests
 
             mockRepo.Setup(x => x.GetAllProjections()).ReturnsAsync(projections);
 
-            IProjectionService projectionService = new(mockRepo.Object);
+            IProjectionService projectionService = new ProjectionService(mockRepo.Object);
 
             List<Projection>? resultat = await projectionService.GetAllProjections();
 
