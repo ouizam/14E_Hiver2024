@@ -4,6 +4,8 @@ using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.BLL.Services;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using CineQuebec.Windows.DAL.Interfaces;
+using CineQuebec.Windows.BLL.Interfaces;
 
 namespace CineQuebec.Tests
 {
@@ -13,13 +15,13 @@ namespace CineQuebec.Tests
 		public async Task GetAllFilms_Retourne_Liste_Films()
 		{
 			// Arrange
-			Mock<FilmRepository> mockRepo = new Mock<FilmRepository>();
+			Mock<IFilmRepository> mockRepo = new Mock<IFilmRepository>();
 
 			List<Film> films = new List<Film> { new Film(), new Film()};
 
 			mockRepo.Setup(repo => repo.GetAllFilms()).ReturnsAsync(films);
 
-			FilmService filmService = new FilmService(mockRepo.Object);
+			IFilmService filmService = new FilmService(mockRepo.Object);
 
 			// Act
 			List<Film>? result = await filmService.GetAllFilms();
@@ -33,11 +35,11 @@ namespace CineQuebec.Tests
 		public async Task CreateFilm_Retourne_True_Si_Succes()
 		{
 			// Arrange
-			Mock<FilmRepository> mockRepository = new Mock<FilmRepository>();
+			Mock<IFilmRepository> mockRepository = new Mock<IFilmRepository>();
 			Film film = new Film();
 
 			mockRepository.Setup(repo => repo.CreateFilm(film)).ReturnsAsync(true);
-			FilmService filmService = new FilmService(mockRepository.Object);
+			IFilmService filmService = new FilmService(mockRepository.Object);
 
 			// Act
 			bool result = await filmService.CreateFilm(film);
@@ -50,11 +52,11 @@ namespace CineQuebec.Tests
 		public async Task DeleteFilm_Retourne_DeleteResultIsAcknowledged_True()
 		{
 			//Arrange
-			Mock<FilmRepository> mockRepo = new Mock<FilmRepository>();
+			Mock<IFilmRepository> mockRepo = new Mock<IFilmRepository>();
 			Film film = new Film();
 
 			mockRepo.Setup(repo => repo.DeleteFilm(film)).ReturnsAsync(new DeleteResult.Acknowledged(1));
-			FilmService filmService = new FilmService(mockRepo.Object);
+			IFilmService filmService = new FilmService(mockRepo.Object);
 
 			//Act
 			DeleteResult? result = await filmService.DeleteFilm(film);
@@ -67,7 +69,7 @@ namespace CineQuebec.Tests
 		public async Task GetAllFilmsAffiche_Retourne_Liste_Film_Affiche()
 		{
 			// Arrange
-			Mock<FilmRepository> mockRepo = new Mock<FilmRepository>();
+			Mock<IFilmRepository> mockRepo = new Mock<IFilmRepository>();
 
 			List<Film> films = new List<Film>
 			{
@@ -84,7 +86,7 @@ namespace CineQuebec.Tests
 			
 
 			mockRepo.Setup(repo => repo.GetAllFilmsAffiche(projections)).ReturnsAsync(new List<Film> { films[1] });
-			FilmService filmService = new FilmService(mockRepo.Object);
+			IFilmService filmService = new FilmService(mockRepo.Object);
 
 			// Act
 			List<Film>? result = await filmService.GetAllFilmsAffiche(projections);
@@ -98,7 +100,7 @@ namespace CineQuebec.Tests
 		public async Task UpdateFilm_Retourne_UpdateResult()
 		{
 			// Arrange
-			Mock<FilmRepository> mockRepo = new Mock<FilmRepository>();
+			Mock<IFilmRepository> mockRepo = new Mock<IFilmRepository>();
 
 			Film film = new Film
 			{
@@ -113,7 +115,7 @@ namespace CineQuebec.Tests
 
 			UpdateResult updateResult = new UpdateResult.Acknowledged(1, 1, film.Id);
 			mockRepo.Setup(repo => repo.UpdateFilm(It.IsAny<Film>())).ReturnsAsync(updateResult);
-			FilmService filmService = new FilmService(mockRepo.Object);
+			IFilmService filmService = new FilmService(mockRepo.Object);
 
 			// Act
 			UpdateResult? result = await filmService.UpdateFilm(film);

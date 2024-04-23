@@ -1,5 +1,7 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using Moq;
@@ -16,7 +18,7 @@ namespace CineQuebec.Tests
         [Fact]
         public void ObtenirReservationsAbonne_By_Id_Abonne()
         {
-            Mock<ReservationRepository> mockRepo = new Mock<ReservationRepository>();
+            Mock<IReservationRepository> mockRepo = new Mock<IReservationRepository>();
             Mock<IProjectionService> mockProjection = new Mock<IProjectionService>();           
             ObjectId idAbonne = ObjectId.GenerateNewId();
             ObjectId idProjection = ObjectId.GenerateNewId();
@@ -25,7 +27,7 @@ namespace CineQuebec.Tests
 
             mockRepo.Setup(x => x.ObtenirReservationsAbonne(idAbonne)).Returns(reservations);
             mockProjection.Setup(y => y.ObtenirProjection(idProjection)).Returns(projection);
-            ReservationService reservationService = new ReservationService(mockRepo.Object, mockProjection.Object);
+            IReservationService reservationService = new ReservationService(mockRepo.Object, mockProjection.Object);
 
            
             List<Reservation> resultat = reservationService.ObtenirReservationsAbonne(idAbonne);
