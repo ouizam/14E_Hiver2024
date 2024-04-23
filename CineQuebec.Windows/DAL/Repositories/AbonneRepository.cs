@@ -1,4 +1,5 @@
 ﻿using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL.Repositories
 {
-    public class AbonneRepository:BaseRepository
+    public class AbonneRepository:BaseRepository, IAbonneRepository
     {
       
 
@@ -17,6 +18,7 @@ namespace CineQuebec.Windows.DAL.Repositories
           
         }
 
+      
         /// <summary>
         /// Méthode qui retoune la liste des abonnés
         /// </summary>

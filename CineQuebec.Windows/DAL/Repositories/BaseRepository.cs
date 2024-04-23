@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using CineQuebec.Windows.DAL.Interfaces;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace CineQuebec.Windows.DAL.Repositories
     /// Un repository de base qu'on appel pour les autres repositories au besoin, c'est fais pour éviter de dupliquer du code 
     /// dans chaque méthode. en Gros elle fais la conncexion a la base de donnée.
     /// </summary>
-    public class BaseRepository
+    public class BaseRepository :IBaseRepository
     {
         private IMongoClient mongoDBClient;
         protected IMongoDatabase database;
@@ -28,7 +29,7 @@ namespace CineQuebec.Windows.DAL.Repositories
         /// a la base de donnée
         /// </summary>
         /// <returns></returns>
-        private IMongoClient OuvrirConnexion()
+        public IMongoClient OuvrirConnexion()
         {
             MongoClient dbClient = null;
             try
