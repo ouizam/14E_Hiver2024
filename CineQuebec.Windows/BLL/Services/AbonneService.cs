@@ -1,5 +1,6 @@
 ﻿using CineQuebec.Windows.BLL.Interfaces;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Driver;
 using System;
@@ -15,22 +16,22 @@ namespace CineQuebec.Windows.BLL.Services
     /// </summary>
     public class AbonneService: IAbonneService
     {
-        private AbonneRepository _abonneRepository;
-        private ReservationService _reservationService;
-        private PreferenceService _preferenceSrvice;
+        private IAbonneRepository _abonneRepository;
+        private IReservationService _reservationService;
+        private IPreferenceService _preferenceSrvice;
 
-        public AbonneService()
+        public AbonneService(IAbonneRepository abonneRepository, IReservationService reservationService, IPreferenceService preferenceService)
         {
-            _abonneRepository = new AbonneRepository();
-            _reservationService = new ReservationService();
-            _preferenceSrvice = new PreferenceService();
+            _abonneRepository = abonneRepository;
+            _reservationService = reservationService;
+            _preferenceSrvice = preferenceService;
         }
-        public AbonneService (AbonneRepository pAbonneRepo, ReservationService pReservationService, PreferenceService pPrefService )
-        {
-            _abonneRepository = pAbonneRepo;
-            _reservationService = pReservationService;
-            _preferenceSrvice = pPrefService;
-        }
+        //public AbonneService (AbonneRepository pAbonneRepo, ReservationService pReservationService, PreferenceService pPrefService )
+        //{
+        //    _abonneRepository = pAbonneRepo;
+        //    _reservationService = pReservationService;
+        //    _preferenceSrvice = pPrefService;
+        //}
         /// <summary>
         /// Méthode qui obtient une liste de tous les sbonnés, elle fais appel a la méthode ObtenirReservation pour obtenir toutes les 
         /// réservation qu'un abonné fait, et auusi elle appelle la méthode obtenir préférence pour obtenir toutes les préférence de 

@@ -1,5 +1,7 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using Moq;
@@ -17,9 +19,9 @@ namespace CineQuebec.Tests
         public void ObtenirAbonnes_RetourneListeAbonnes()
         {
             //Arrange
-            Mock<AbonneRepository> mockRepo = new Mock<AbonneRepository>();
-            Mock<ReservationService> mockReservation = new Mock<ReservationService>();
-            Mock<PreferenceService> mockPreference = new Mock<PreferenceService>();
+            Mock<IAbonneRepository> mockRepo = new Mock<IAbonneRepository>();
+            Mock<IReservationService> mockReservation = new Mock<IReservationService>();
+            Mock<IPreferenceService> mockPreference = new Mock<IPreferenceService>();
             List<Reservation> reservations = new List<Reservation> { new Reservation(), new Reservation() };
             List<Preference> preferences = new List<Preference>() { new Preference(), new Preference() };
             List<Abonne> abonnes = new List<Abonne> { new Abonne { Id = ObjectId.GenerateNewId(), Reservations = reservations, Preferences = preferences }, new Abonne { Id = ObjectId.GenerateNewId(), Reservations = reservations, Preferences = preferences } };
