@@ -1,6 +1,8 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -23,15 +25,17 @@ namespace CineQuebec.Windows.View
     /// </summary>
     public partial class UtilisateursControl : Window
     {
-        AbonneService _abonneService=new AbonneService();
+        AbonneService _abonneService;
 
-        List<Abonne> _listeDesUsers=new List<Abonne>();
+        List<Abonne> _listeDesUsers;
         
         public UtilisateursControl()
         {
             InitializeComponent();
-           
-            _listeDesUsers= _abonneService.ObtenirAbonnes().OrderByDescending(x=>x.Reservations.Count).ToList();
+
+			_abonneService = new AbonneService();
+			_listeDesUsers = _abonneService.ObtenirAbonnes().OrderByDescending(x=>x.Reservations.Count).ToList();
+
             AfficherListeUtilisateurs();
         }
 

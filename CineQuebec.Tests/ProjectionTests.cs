@@ -20,7 +20,7 @@ namespace CineQuebec.Tests
             ObjectId idProjection = ObjectId.GenerateNewId();
             Projection projection = new Projection { Id = idProjection };
             mockRepo.Setup(y => y.ObtenirProjection(idProjection)).Returns(projection);
-            ProjectionService projectionService = new ProjectionService(mockRepo.Object);
+            IProjectionService projectionService = new ProjectionService(mockRepo.Object);
 
            
             Projection resultat = projectionService.ObtenirProjection(idProjection);
@@ -46,7 +46,7 @@ namespace CineQuebec.Tests
 
             mockRepo.Setup(x => x.GetAllProjections()).ReturnsAsync(projections);
 
-            ProjectionService projectionService = new(mockRepo.Object);
+            IProjectionService projectionService = new(mockRepo.Object);
 
             List<Projection>? resultat = await projectionService.GetAllProjections();
 

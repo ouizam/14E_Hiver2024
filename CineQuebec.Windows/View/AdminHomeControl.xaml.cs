@@ -1,4 +1,6 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Services;
+using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +30,9 @@ namespace CineQuebec.Windows.View
 
         private void Button_Utilisateurs_Click(object sender, RoutedEventArgs e)
         {
-            UtilisateursControl utilisateursControl = new UtilisateursControl();
-            utilisateursControl.Show();
-        }
+			var utilisateursControl = new UtilisateursControl();
+			utilisateursControl.Show(); 
+		}
 
 		private void Button_Films_Click(object sender, RoutedEventArgs e)
 		{

@@ -1,5 +1,6 @@
 ﻿using CineQuebec.Windows.BLL.Interfaces;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Driver;
 using System;
@@ -15,21 +16,22 @@ namespace CineQuebec.Windows.BLL.Services
     /// </summary>
     public class AbonneService: IAbonneService
     {
-        private AbonneRepository _abonneRepository;
-        private ReservationService _reservationService;
-        private PreferenceService _preferenceSrvice;
+        private readonly IAbonneRepository _abonneRepository;
+        private readonly IReservationRepository _reservationRepository;
+        private readonly IPreferenceRepository _preferenceRepository;
 
-        public AbonneService()
-        {
-            _abonneRepository = new AbonneRepository();
-            _reservationService = new ReservationService();
-            _preferenceSrvice = new PreferenceService();
-        }
-        public AbonneService (AbonneRepository pAbonneRepo, ReservationService pReservationService, PreferenceService pPrefService )
+		public AbonneService()
+		{
+			_abonneRepository = new AbonneRepository();
+			_reservationRepository = new ReservationRepository();
+			_preferenceRepository = new PreferenceRepository();
+		}
+
+		public AbonneService (IAbonneRepository pAbonneRepo, IReservationRepository pReservationService, IPreferenceRepository pPrefService )
         {
             _abonneRepository = pAbonneRepo;
-            _reservationService = pReservationService;
-            _preferenceSrvice = pPrefService;
+            _reservationRepository = pReservationService;
+			_preferenceRepository = pPrefService;
         }
         /// <summary>
         /// Méthode qui obtient une liste de tous les sbonnés, elle fais appel a la méthode ObtenirReservation pour obtenir toutes les 
@@ -46,8 +48,8 @@ namespace CineQuebec.Windows.BLL.Services
                 abonnes = _abonneRepository.ObtenirAbonnes();
                 foreach (var abonne in abonnes)
                 {
-                    abonne.Reservations = _reservationService.ObtenirReservationsAbonne(abonne.Id);
-                    abonne.Preferences =  _preferenceSrvice.ObtenirPreferencesAbonne(abonne.Id);
+                    abonne.Reservations = _reservationRepository.ObtenirReservationsAbonne(abonne.Id);
+                    abonne.Preferences = _preferenceRepository.ObtenirPreferencesAbonne(abonne.Id);
                 }
                
             }

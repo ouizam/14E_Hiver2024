@@ -1,5 +1,6 @@
 ﻿using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Exceptions;
+using CineQuebec.Windows.DAL.Interfaces;
 using Konscious.Security.Cryptography;
 using MongoDB.Driver;
 using System;
@@ -13,7 +14,7 @@ using System.Xml.Linq;
 
 namespace CineQuebec.Windows.DAL.Repositories
 {
-    public class AdminRepository:BaseRepository
+    public class AdminRepository:BaseRepository, IAdminRepository
     {
         private IMongoCollection<Administrateur> _collection;
        
