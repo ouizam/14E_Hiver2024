@@ -12,7 +12,7 @@ namespace CineQuebec.Windows.DAL.Repositories
     /// Un repository de base qu'on appel pour les autres repositories au besoin, c'est fais pour éviter de dupliquer du code 
     /// dans chaque méthode. en Gros elle fais la conncexion a la base de donnée.
     /// </summary>
-    public class BaseRepository :IBaseRepository
+    public class BaseRepository 
     {
         private IMongoClient mongoDBClient;
         protected IMongoDatabase database;
