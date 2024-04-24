@@ -25,15 +25,15 @@ namespace CineQuebec.Windows.View
     /// </summary>
     public partial class UtilisateursControl : Window
     {
-        AbonneService _abonneService;
+        private readonly IAbonneService _abonneService;
 
         List<Abonne> _listeDesUsers;
         
-        public UtilisateursControl()
+        public UtilisateursControl(IAbonneService abonneService)
         {
             InitializeComponent();
 
-			_abonneService = new AbonneService();
+			_abonneService = abonneService;
 			_listeDesUsers = _abonneService.ObtenirAbonnes().OrderByDescending(x=>x.Reservations.Count).ToList();
 
             AfficherListeUtilisateurs();

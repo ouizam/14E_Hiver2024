@@ -13,8 +13,11 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Tests
 {
+  
     public class AbonneServiceTests
     {
+       
+       
         [Fact]
         public void ObtenirAbonnes_RetourneListeAbonnes()
         {
@@ -28,7 +31,7 @@ namespace CineQuebec.Tests
             mockRepo.Setup(repo => repo.ObtenirAbonnes()).Returns(abonnes);
             mockReservation.Setup(x => x.ObtenirReservationsAbonne(It.IsAny<ObjectId>())).Returns(reservations);
             mockPreference.Setup(y => y.ObtenirPreferencesAbonne(It.IsAny<ObjectId>())).Returns(preferences);
-            IAbonneService abonneService = new AbonneService(mockRepo.Object, mockReservation.Object, mockPreference.Object);
+           var abonneService = new AbonneService(mockRepo.Object, mockReservation.Object, mockPreference.Object);
 
            
             List<Abonne> resultat = abonneService.ObtenirAbonnes();

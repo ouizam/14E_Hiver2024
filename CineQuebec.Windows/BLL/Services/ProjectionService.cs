@@ -16,10 +16,10 @@ namespace CineQuebec.Windows.BLL.Services
     {
         private readonly IProjectionRepository _projectionRepository;
 
-        public ProjectionService()
-        {
-            _projectionRepository = new ProjectionRepository();
-        }
+        //public ProjectionService()
+        //{
+        //    _projectionRepository = new ProjectionRepository();
+        //}
         public ProjectionService(IProjectionRepository projectionRepository)
         {
             _projectionRepository = projectionRepository;

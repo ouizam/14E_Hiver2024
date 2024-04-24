@@ -16,6 +16,8 @@ namespace CineQuebec.Tests
 {
     public class PreferenceTests
     {
+      
+
         Mock<IPreferenceRepository> mockRepo = new Mock<IPreferenceRepository>();
         [Fact]
         public void ObtenirPreference_ById()

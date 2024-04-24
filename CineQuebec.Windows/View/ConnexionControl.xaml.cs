@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.BLL.Services;
 using System.Text.RegularExpressions;
+using CineQuebec.Windows.BLL.Interfaces;
 
 namespace CineQuebec.Windows.View
 {
@@ -26,12 +27,12 @@ namespace CineQuebec.Windows.View
 	public partial class ConnexionControl : UserControl
     {
 
-		private AdminService _adminService;
+		private IAdminService _adminService;
         private const int NB_MIN_USER = 2;
-		public ConnexionControl()
+		public ConnexionControl(IAdminService adminService)
         {
             InitializeComponent();
-            _adminService = new AdminService();
+            _adminService = adminService;
         }
 
         private async void Button_Connexion_Click(object sender, RoutedEventArgs e)

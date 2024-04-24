@@ -15,6 +15,8 @@ namespace CineQuebec.Tests
 {
     public class ProjectionTests
     {
+      
+
         [Fact]
         public void ObtenirProjection_By_Id()
         {

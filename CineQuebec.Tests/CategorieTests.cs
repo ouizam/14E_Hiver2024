@@ -15,6 +15,12 @@ namespace CineQuebec.Tests
 {
     public class CategorieTests
     {
+        //private readonly ICategorieService _categorieService;
+        //public CategorieTests(ICategorieService categorieService)
+        //{
+        //    _categorieService = categorieService;
+        //}
+
         [Fact]
         public void ObteniCategorie_By_Id()
         {

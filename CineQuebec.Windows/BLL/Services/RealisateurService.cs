@@ -15,10 +15,10 @@ namespace CineQuebec.Windows.BLL.Services
 	{
         public readonly IRealisateurRepository _realisateurRepository;
 
-        public RealisateurService()
-        {
-            _realisateurRepository = new RealisateurRepository();
-        }
+        //public RealisateurService()
+        //{
+        //    _realisateurRepository = new RealisateurRepository();
+        //}
         public RealisateurService(IRealisateurRepository pRealisateurRepository)
         {
             _realisateurRepository = pRealisateurRepository;

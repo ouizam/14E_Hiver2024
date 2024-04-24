@@ -15,7 +15,8 @@ namespace CineQuebec.Tests
 {
 	public class AdminServiceTests
 	{
-		[Fact]
+		
+        [Fact]
 		public async Task ConnexionUtilisateur_UtilisateurTrouve_RetourneUtilisateur()
 		{
 			// Arrange

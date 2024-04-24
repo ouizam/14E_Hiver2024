@@ -15,13 +15,14 @@ namespace CineQuebec.Tests
 {
     public class ActeurTests
     {
+
         [Fact]
         public void ObtenitActeurs_Retourne_liste_des_acteurs()
         {
             Mock<IActeurRepository> mockRepoActeur  = new Mock<IActeurRepository>();
             List<Acteur> acteurs = new List<Acteur>() { new Acteur() , new Acteur()};
             mockRepoActeur.Setup(x => x.ObtenirActeurs()).Returns(acteurs);
-            IActeurService acteurService = new ActeurService(mockRepoActeur.Object);
+           var acteurService = new ActeurService(mockRepoActeur.Object);
 
 
             List<Acteur> resultat = acteurService.ObtenirActeurs();
