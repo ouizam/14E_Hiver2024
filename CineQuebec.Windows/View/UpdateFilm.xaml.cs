@@ -1,4 +1,5 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
 using MongoDB.Driver;
 using System;
@@ -25,10 +26,10 @@ namespace CineQuebec.Windows.View
     {
         private Film _film;
 
-		FilmService _filmService;
-		CategorieService _categorieService;
-		RealisateurService _realisateurService;
-		ActeurService _acteurService;
+		IFilmService _filmService;
+		ICategorieService _categorieService;
+		IRealisateurService _realisateurService;
+		IActeurService _acteurService;
 
 		List<Categorie>? _categories;
 		List<Realisateur>? _realisateurs;
@@ -50,16 +51,16 @@ namespace CineQuebec.Windows.View
 		}
 
 
-		public UpdateFilm(Film film)
+		public UpdateFilm(Film film, IFilmService filmService, ICategorieService categorieService, IRealisateurService realisateurService, IActeurService acteurService)
         {
             InitializeComponent();
 
             _film = film;
 
-            _filmService = new();
-            _categorieService = new();
-            _realisateurService = new();
-            _acteurService = new();
+            _filmService = filmService;
+            _categorieService = categorieService;
+            _realisateurService = realisateurService;
+            _acteurService = acteurService;
 
 			_checkedActeurs = new();
 			_checkedRealisateurs = new();

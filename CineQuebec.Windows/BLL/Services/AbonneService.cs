@@ -20,12 +20,6 @@ namespace CineQuebec.Windows.BLL.Services
         private readonly IReservationRepository _reservationRepository;
         private readonly IPreferenceRepository _preferenceRepository;
 
-		public AbonneService()
-		{
-			_abonneRepository = new AbonneRepository();
-			_reservationRepository = new ReservationRepository();
-			_preferenceRepository = new PreferenceRepository();
-		}
 
 		public AbonneService (IAbonneRepository pAbonneRepo, IReservationRepository pReservationService, IPreferenceRepository pPrefService )
         {
@@ -33,6 +27,7 @@ namespace CineQuebec.Windows.BLL.Services
             _reservationRepository = pReservationService;
 			_preferenceRepository = pPrefService;
         }
+     
         /// <summary>
         /// Méthode qui obtient une liste de tous les sbonnés, elle fais appel a la méthode ObtenirReservation pour obtenir toutes les 
         /// réservation qu'un abonné fait, et auusi elle appelle la méthode obtenir préférence pour obtenir toutes les préférence de 

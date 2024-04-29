@@ -15,6 +15,8 @@ namespace CineQuebec.Tests
 {
     public class ProjectionTests
     {
+      
+
         [Fact]
         public void ObtenirProjection_By_Id()
         {
@@ -35,7 +37,7 @@ namespace CineQuebec.Tests
         [Fact]
         public async Task GetAllProjections_Retourne_Liste_Des_Projections()
         {
-            Mock<ProjectionRepository> mockRepo = new();
+            Mock<IProjectionRepository> mockRepo = new();
 
             List<Projection> projections = new List<Projection>
             {
@@ -48,7 +50,7 @@ namespace CineQuebec.Tests
 
             mockRepo.Setup(x => x.GetAllProjections()).ReturnsAsync(projections);
 
-			IProjectionService projectionService = new ProjectionService(mockRepo.Object);
+            IProjectionService projectionService = new ProjectionService(mockRepo.Object);
 
             List<Projection>? resultat = await projectionService.GetAllProjections();
 

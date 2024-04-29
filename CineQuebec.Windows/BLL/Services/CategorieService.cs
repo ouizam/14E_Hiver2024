@@ -15,10 +15,10 @@ namespace CineQuebec.Windows.BLL.Services
 	{
         private readonly ICategorieRepository _categorieRepository;
 
-        public CategorieService()
-        {
-            _categorieRepository = new CategorieRepository();
-        }
+        //public CategorieService()
+        //{
+        //    _categorieRepository = new CategorieRepository();
+        //}
 
         public CategorieService(ICategorieRepository pCategorieRepository)
         {

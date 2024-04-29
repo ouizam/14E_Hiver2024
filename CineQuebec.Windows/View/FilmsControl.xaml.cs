@@ -1,4 +1,5 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -23,20 +24,25 @@ namespace CineQuebec.Windows.View
 	/// </summary>
 	public partial class FilmsControl : Window
 	{
-		private FilmService _filmService;
-		private ProjectionService _projectionService;
+		private IFilmService _filmService;
+		private IProjectionService _projectionService;
+		private ICategorieService _categorieService;
+		private IRealisateurService _realisateurService;
+		private IActeurService _acteurService;
 
 		private List<Film>? _films;
 		private List<Film>? _filmAffiche;
 
-		public FilmsControl()
+		public FilmsControl(IFilmService filmService, IProjectionService projectionService, ICategorieService categorieService, IRealisateurService realisateurService, IActeurService acteurService)
 		{
 			InitializeComponent();
 
-			_filmService = new FilmService();
-			_projectionService = new();
-
-			ChargerFilms();
+			_filmService = filmService;
+			_projectionService = projectionService;
+			_categorieService = categorieService;
+			_realisateurService = realisateurService;
+			_acteurService = acteurService;
+            ChargerFilms();
 
 		}
 
@@ -47,10 +53,19 @@ namespace CineQuebec.Windows.View
 				_films = await _filmService.GetAllFilms();
 
 				List<Projection>? projections = await _projectionService.GetAllProjections();
-				_filmAffiche = await _filmService.GetAllFilmsAffiche(projections!);
+				if (projections != null)
+				{
+                    _filmAffiche = await _filmService.GetAllFilmsAffiche(projections!);
 
-				AfficherListeFilms();
-				AfficherListeFilmsAffiche();
+                    AfficherListeFilms();
+                    AfficherListeFilmsAffiche();
+                }
+				else
+				{
+                    MessageBox.Show("Les projections ne sont pas disponibles pour le moment. Veuillez réessayer plus tard.", 
+						"Projections non disponibles", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+				
 
 			}
 			catch (Exception ex)
@@ -87,7 +102,7 @@ namespace CineQuebec.Windows.View
 
 		private void Button_Ajouter_Film_Formulaire(object sender, RoutedEventArgs e)
 		{
-			AjouterFilm ajouterFilm = new AjouterFilm();
+			AjouterFilm ajouterFilm = new AjouterFilm( _filmService,  _categorieService,  _realisateurService, _acteurService );
 
 			bool? resultat = ajouterFilm.ShowDialog();
 
@@ -126,7 +141,7 @@ namespace CineQuebec.Windows.View
 
 			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
 
-			InformationsFilm informationsFilm = new InformationsFilm(filmSelectionnee!);
+			InformationsFilm informationsFilm = new InformationsFilm(filmSelectionnee!, _filmService);
 			bool? resultat = informationsFilm.ShowDialog();
 
 			if (resultat == true)
@@ -137,7 +152,7 @@ namespace CineQuebec.Windows.View
 		{
 			Film? filmSelectionnee = ((Button)sender).DataContext as Film;
 
-			UpdateFilm updateFilm = new UpdateFilm(filmSelectionnee!);
+			UpdateFilm updateFilm = new UpdateFilm(filmSelectionnee!,  _filmService,  _categorieService,  _realisateurService,  _acteurService);
 			bool? resultat = updateFilm.ShowDialog();
 
 			if (resultat == true)

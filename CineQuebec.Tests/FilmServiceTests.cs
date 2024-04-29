@@ -11,7 +11,9 @@ namespace CineQuebec.Tests
 {
 	public class FilmServiceTests
 	{
-		[Fact]
+		
+
+        [Fact]
 		public async Task GetAllFilms_Retourne_Liste_Films()
 		{
 			// Arrange

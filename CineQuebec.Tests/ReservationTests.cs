@@ -15,6 +15,12 @@ namespace CineQuebec.Tests
 {
     public class ReservationTests
     {
+        //private readonly IReservationService _reservationService;
+        //public ReservationTests(IReservationService reservationService)
+        //{
+        //    _reservationService = reservationService;
+        //}
+
         [Fact]
         public void ObtenirReservationsAbonne_By_Id_Abonne()
         {

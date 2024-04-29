@@ -15,10 +15,16 @@ namespace CineQuebec.Tests
 {
     public class CategorieTests
     {
+        //private readonly ICategorieService _categorieService;
+        //public CategorieTests(ICategorieService categorieService)
+        //{
+        //    _categorieService = categorieService;
+        //}
+
         [Fact]
         public void ObteniCategorie_By_Id()
         {
-			Mock<ICategorieRepository> repoCategorie = new Mock<ICategorieRepository>();
+            Mock<ICategorieRepository> repoCategorie = new Mock<ICategorieRepository>();
             ObjectId idCategorie = ObjectId.GenerateNewId();
             Categorie categorie = new Categorie { Id = idCategorie };
             repoCategorie.Setup(x => x.ObtenirCategorie(idCategorie)).Returns(categorie);
@@ -48,7 +54,7 @@ namespace CineQuebec.Tests
 
             mockRep.Setup(x => x.GetAllCategories()).ReturnsAsync(categories);
 
-			ICategorieService categorieService = new CategorieService(mockRep.Object);
+            ICategorieService categorieService = new CategorieService(mockRep.Object);
 
             List<Categorie>? resultat = await categorieService.GetAllCategories();
 

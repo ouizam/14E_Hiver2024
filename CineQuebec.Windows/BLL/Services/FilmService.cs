@@ -15,10 +15,10 @@ namespace CineQuebec.Windows.BLL.Services
 	{
 		private readonly IFilmRepository _filmRepo;
 
-		public FilmService()
-		{
-			_filmRepo = new FilmRepository();
-		}
+		//public FilmService()
+		//{
+		//	_filmRepo = new FilmRepository();
+		//}
 
 		public FilmService(IFilmRepository pFilmRepo)
 		{
@@ -40,8 +40,8 @@ namespace CineQuebec.Windows.BLL.Services
 			{
 				Console.Error.WriteLine(ex.Message);
 			}
-			return null;
-		}
+            return new List<Film>();
+        }
 
 		/// <summary>
 		/// Méthode qui crée un film dans la base de donnée

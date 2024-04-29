@@ -24,12 +24,12 @@ namespace CineQuebec.Windows.BLL.Services
         private List<Administrateur> _admins = new List<Administrateur>();
 
 
-        public AdminService()
-        {
-            _adminRepository = new AdminRepository();
-            _dicoSalts = new Dictionary<string, byte[]>();
+        //public AdminService()
+        //{
+        //    _adminRepository = new AdminRepository();
+        //    _dicoSalts = new Dictionary<string, byte[]>();
 
-        }
+        //}
 
         public AdminService(IAdminRepository pAdminRepo)
         {

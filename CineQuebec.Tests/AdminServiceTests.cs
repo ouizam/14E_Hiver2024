@@ -8,17 +8,20 @@ using CineQuebec.Windows.DAL.Repositories;
 using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Exceptions;
+using CineQuebec.Windows.DAL.Interfaces;
+using CineQuebec.Windows.BLL.Interfaces;
 
 namespace CineQuebec.Tests
 {
 	public class AdminServiceTests
 	{
-		[Fact]
+		
+        [Fact]
 		public async Task ConnexionUtilisateur_UtilisateurTrouve_RetourneUtilisateur()
 		{
 			// Arrange
-			Mock<AdminRepository> mockAdminRepo = new Mock<AdminRepository>();
-			AdminService authService = new AdminService(mockAdminRepo.Object);
+			Mock<IAdminRepository> mockAdminRepo = new Mock<IAdminRepository>();
+			IAdminService authService = new AdminService(mockAdminRepo.Object);
 			Administrateur expectedAdmin = new Administrateur { Name = "user", Password = new byte[16] };
 
 			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).ReturnsAsync(expectedAdmin);
@@ -37,8 +40,8 @@ namespace CineQuebec.Tests
 		public async Task ConnexionUtilisateur_UtilisateurNonTrouve_RetourneNull()
 		{
 			// Arrange
-			Mock<AdminRepository> mockAdminRepo = new Mock<AdminRepository>();
-			AdminService authService = new AdminService(mockAdminRepo.Object);
+			Mock<IAdminRepository> mockAdminRepo = new Mock<IAdminRepository>();
+			IAdminService authService = new AdminService(mockAdminRepo.Object);
 
 			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).Throws<UtilisateurNotFoundException>();
 
@@ -53,8 +56,8 @@ namespace CineQuebec.Tests
 		public async Task ConnexionUtilisateur_Erreur_RetourneNull()
 		{
 			// Arrange
-			Mock<AdminRepository> mockAdminRepo = new Mock<AdminRepository>();
-			AdminService authService = new AdminService(mockAdminRepo.Object);
+			Mock<IAdminRepository> mockAdminRepo = new Mock<IAdminRepository>();
+			IAdminService authService = new AdminService(mockAdminRepo.Object);
 
 			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).Throws<Exception>();
 
@@ -69,8 +72,8 @@ namespace CineQuebec.Tests
 		public async Task ConnexionUtilisateur_Appelle_HacherMotDePasse()
 		{
 			// Arrange
-			Mock<AdminRepository> mockRepo = new Mock<AdminRepository>();
-			AdminService adminService = new AdminService(mockRepo.Object);
+			Mock<IAdminRepository> mockRepo = new Mock<IAdminRepository>();
+			IAdminService adminService = new AdminService(mockRepo.Object);
 
 			string nom = "user";
 			string password = "password";
