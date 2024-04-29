@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using CineQuebec.Windows.DAL.Interfaces;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace CineQuebec.Windows.DAL.Repositories
     /// Un repository de base qu'on appel pour les autres repositories au besoin, c'est fais pour éviter de dupliquer du code 
     /// dans chaque méthode. en Gros elle fais la conncexion a la base de donnée.
     /// </summary>
-    public class BaseRepository
+    public class BaseRepository 
     {
         private IMongoClient mongoDBClient;
         protected IMongoDatabase database;
-        private string connexionString = "mongodb+srv://dev:QWERTY123@cluster0.nfeagoi.mongodb.net/";
+        private string connexionString = "mongodb+srv://dev:QWERTY123@cluster0.usnpoav.mongodb.net/";
 
         public BaseRepository(IMongoClient client = null)
         {
@@ -28,7 +29,7 @@ namespace CineQuebec.Windows.DAL.Repositories
         /// a la base de donnée
         /// </summary>
         /// <returns></returns>
-        private IMongoClient OuvrirConnexion()
+        public IMongoClient OuvrirConnexion()
         {
             MongoClient dbClient = null;
             try
@@ -50,7 +51,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             IMongoDatabase db = null;
             try
             {
-                db = mongoDBClient.GetDatabase("CineQuebec");
+                db = mongoDBClient.GetDatabase("TP3_conception");
             }
             catch (Exception ex)
             {

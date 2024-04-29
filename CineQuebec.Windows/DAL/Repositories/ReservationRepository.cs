@@ -1,4 +1,5 @@
 ﻿using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL.Repositories
 {
-    public class ReservationRepository:BaseRepository
+    public class ReservationRepository:BaseRepository, IReservationRepository
     {
         IMongoCollection<Reservation> _collection;
 

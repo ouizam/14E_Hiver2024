@@ -1,4 +1,7 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
+using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,20 +24,42 @@ namespace CineQuebec.Windows.View
     /// </summary>
     public partial class AdminHomeControl : UserControl
     {
-        public AdminHomeControl()
+        private readonly IAbonneService _abonneService;
+        private readonly IFilmService _filmService;
+        private readonly IProjectionService _projectionService;
+        private readonly ICategorieService _categorieService;
+        private readonly IRealisateurService _realisateurService;
+        private readonly IActeurService _acteurService;
+        public AdminHomeControl(IAbonneService abonneService, IFilmService filmService, IProjectionService projectionService, ICategorieService categorieService,
+            IRealisateurService realisateurService, IActeurService acteurService)
         {
+            _abonneService = abonneService;
+            _filmService = filmService;
+            _projectionService = projectionService;
+            _categorieService = categorieService;
+            _realisateurService = realisateurService;
+            _acteurService = acteurService;
             InitializeComponent();
         }
 
         private void Button_Utilisateurs_Click(object sender, RoutedEventArgs e)
         {
-            UtilisateursControl utilisateursControl = new UtilisateursControl();
-            utilisateursControl.Show();
-        }
+            if (((Abonne)(App.Current.Properties["UserConnect"])).EstAdmin)
+            {
+                var utilisateursControl = new UtilisateursControl(_abonneService);
+                utilisateursControl.Show();
+            }
+            else
+            {
+                var utilisateursPreference = new PreferencesAbonne(_abonneService);
+                utilisateursPreference.Show();
+            }
+			
+		}
 
 		private void Button_Films_Click(object sender, RoutedEventArgs e)
 		{
-            new FilmsControl().Show();
+            new FilmsControl( _filmService,  _projectionService,  _categorieService, _realisateurService, _acteurService).Show();
 		}
 	}
 }

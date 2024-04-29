@@ -1,5 +1,7 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using Moq;
@@ -14,7 +16,9 @@ namespace CineQuebec.Tests
 {
     public class PreferenceTests
     {
-        Mock<PreferenceRepository> mockRepo = new Mock<PreferenceRepository>();
+      
+
+        Mock<IPreferenceRepository> mockRepo = new Mock<IPreferenceRepository>();
         [Fact]
         public void ObtenirPreference_ById()
         {
@@ -22,7 +26,7 @@ namespace CineQuebec.Tests
             ObjectId idPreference = ObjectId.GenerateNewId();
             Preference preference = new Preference { Id = idPreference };
             mockRepo.Setup(x => x.ObtenirPreference(idPreference)).Returns(preference);
-            PreferenceService prefernceService = new PreferenceService(mockRepo.Object);
+            IPreferenceService prefernceService = new PreferenceService(mockRepo.Object);
 
             //act
             Preference result = prefernceService.ObtenirPreference(idPreference);
@@ -35,10 +39,10 @@ namespace CineQuebec.Tests
         [Fact]
         public void Obtenir_Preferences_Abonne_By_Id_Abonne()
         {
-            Mock<RealisateurService> realisateurService = new Mock<RealisateurService>();
-            Mock<ActeurService> acteurService = new Mock<ActeurService>();
-            Mock<CategorieService> categorieService = new Mock<CategorieService>();
-            Mock<AbonneRepository> abonneRepo = new Mock<AbonneRepository>();
+            Mock<IRealisateurService> realisateurService = new Mock<IRealisateurService>();
+            Mock<IActeurService> acteurService = new Mock<IActeurService>();
+            Mock<ICategorieService> categorieService = new Mock<ICategorieService>();
+            Mock<IAbonneRepository> abonneRepo = new Mock<IAbonneRepository>();
 
             ObjectId realisateurId = ObjectId.GenerateNewId();
             Realisateur realiasteur = new Realisateur { Id = realisateurId };
@@ -60,7 +64,7 @@ namespace CineQuebec.Tests
             mockRepo.Setup(i => i.ObtenirPreferencesAbonne(abonneId)).Returns(preferences);
 
             //Act
-            PreferenceService preferenceService = new PreferenceService(mockRepo.Object, acteurService.Object, realisateurService.Object, categorieService.Object);
+            IPreferenceService preferenceService = new PreferenceService(mockRepo.Object, acteurService.Object, realisateurService.Object, categorieService.Object);
             List<Preference> resultat = preferenceService.ObtenirPreferencesAbonne(abonneId);
 
             //Assert

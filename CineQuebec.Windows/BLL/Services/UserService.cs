@@ -12,26 +12,22 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using Konscious.Security.Cryptography;
+using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Interfaces;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-    public class AdminService
+    public class UserService: IUserService
     {
         private  Dictionary<string, byte[]> _dicoSalts;
-        private AdminRepository _adminRepository;
-        private List<Administrateur> _admins = new List<Administrateur>();
+        private readonly IUserRepository _userRepository;
+        private List<User> _user = new List<User>();
 
+    
 
-        public AdminService()
+        public UserService(IUserRepository pUserRepo)
         {
-            _adminRepository = new AdminRepository();
-            _dicoSalts = new Dictionary<string, byte[]>();
-
-        }
-
-        public AdminService(AdminRepository pAdminRepo)
-        {
-            _adminRepository = pAdminRepo;
+            _userRepository = pUserRepo;
             _dicoSalts = new Dictionary<string, byte[]>();
         }
         /// <summary>
@@ -41,13 +37,13 @@ namespace CineQuebec.Windows.BLL.Services
         /// <param name="pUsername"></param>
         /// <param name="pPassword"></param>
         /// <returns></returns>
-        public async Task<Administrateur?> ConnexionUtilisateur(string pUsername, string pPassword)
+        public async Task<Abonne?> ConnexionUtilisateur(string pUsername, string pPassword)
         {
             try
             {              
                 var salt = CreerSALT();
                 byte[] pswordHache = HacherMotDePasse(pPassword, salt);
-                return await  _adminRepository.ConnexionUtilisateur(pUsername, pPassword);
+                return await  _userRepository.ConnexionUtilisateur(pUsername, pPassword);
 
             }catch (UtilisateurNotFoundException)
             {

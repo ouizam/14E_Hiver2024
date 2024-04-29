@@ -1,5 +1,7 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using Moq;
@@ -13,14 +15,20 @@ namespace CineQuebec.Tests
 {
     public class CategorieTests
     {
+        //private readonly ICategorieService _categorieService;
+        //public CategorieTests(ICategorieService categorieService)
+        //{
+        //    _categorieService = categorieService;
+        //}
+
         [Fact]
         public void ObteniCategorie_By_Id()
         {
-            Mock<CategorieRepository> repoCategorie = new Mock<CategorieRepository>();
+            Mock<ICategorieRepository> repoCategorie = new Mock<ICategorieRepository>();
             ObjectId idCategorie = ObjectId.GenerateNewId();
             Categorie categorie = new Categorie { Id = idCategorie };
             repoCategorie.Setup(x => x.ObtenirCategorie(idCategorie)).Returns(categorie);
-            CategorieService categorieService = new CategorieService(repoCategorie.Object);
+            ICategorieService categorieService = new CategorieService(repoCategorie.Object);
 
 
             Categorie resultatAttendu = categorieService.ObtenirCategorie(idCategorie);
@@ -33,7 +41,7 @@ namespace CineQuebec.Tests
         [Fact]
         public async Task GetAllCategories_Retourne_Liste_Des_Categories()
         {
-            Mock<CategorieRepository> mockRep = new();
+            Mock<ICategorieRepository> mockRep = new();
 
             List<Categorie> categories = new List<Categorie>
             {
@@ -46,7 +54,7 @@ namespace CineQuebec.Tests
 
             mockRep.Setup(x => x.GetAllCategories()).ReturnsAsync(categories);
 
-            CategorieService categorieService = new(mockRep.Object);
+            ICategorieService categorieService = new CategorieService(mockRep.Object);
 
             List<Categorie>? resultat = await categorieService.GetAllCategories();
 

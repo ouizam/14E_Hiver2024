@@ -1,4 +1,5 @@
-﻿using CineQuebec.Windows.BLL.Services;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.BLL.Services;
 using CineQuebec.Windows.DAL.Data;
 using MongoDB.Driver;
 using System;
@@ -24,12 +25,12 @@ namespace CineQuebec.Windows.View
 	public partial class InformationsFilm : Window
 	{
 		private Film? _film;
-		private FilmService _filmService;
-		public InformationsFilm(Film film)
+		private IFilmService _filmService;
+		public InformationsFilm(Film film, IFilmService filmService)
 		{
 			InitializeComponent();
 			_film = film;
-			_filmService = new FilmService();
+			_filmService = filmService;
 
 			if(_film is not null)
 				AfficherInformations();

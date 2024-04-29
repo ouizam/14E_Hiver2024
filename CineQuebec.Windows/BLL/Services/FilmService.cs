@@ -1,4 +1,6 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Driver;
 using System;
@@ -9,16 +11,16 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-	public class FilmService
+	public class FilmService: IFilmService
 	{
-		private FilmRepository _filmRepo;
+		private readonly IFilmRepository _filmRepo;
 
-		public FilmService()
-		{
-			_filmRepo = new FilmRepository();
-		}
+		//public FilmService()
+		//{
+		//	_filmRepo = new FilmRepository();
+		//}
 
-		public FilmService(FilmRepository pFilmRepo)
+		public FilmService(IFilmRepository pFilmRepo)
 		{
 			_filmRepo = pFilmRepo;
 		}
@@ -38,8 +40,8 @@ namespace CineQuebec.Windows.BLL.Services
 			{
 				Console.Error.WriteLine(ex.Message);
 			}
-			return null;
-		}
+            return new List<Film>();
+        }
 
 		/// <summary>
 		/// Méthode qui crée un film dans la base de donnée

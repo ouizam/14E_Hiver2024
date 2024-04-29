@@ -1,4 +1,6 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using System;
@@ -9,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-    public class RealisateurService
-    {
-        public RealisateurRepository _realisateurRepository;
+    public class RealisateurService: IRealisateurService
+	{
+        public readonly IRealisateurRepository _realisateurRepository;
 
-        public RealisateurService()
-        {
-            _realisateurRepository = new RealisateurRepository();
-        }
-         public RealisateurService(RealisateurRepository pRealisateurRepository)
+        //public RealisateurService()
+        //{
+        //    _realisateurRepository = new RealisateurRepository();
+        //}
+        public RealisateurService(IRealisateurRepository pRealisateurRepository)
         {
             _realisateurRepository = pRealisateurRepository;
         }

@@ -1,4 +1,6 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using System;
@@ -9,25 +11,25 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-    public class PreferenceService
-    {
-        private PreferenceRepository _preferenceRepository;
-        private ActeurService _acteurService;
-        private RealisateurService _realisateurService;
-        private CategorieService _categorieService;
+    public class PreferenceService: IPreferenceService
+	{
+        private readonly IPreferenceRepository _preferenceRepository;
+        private readonly IActeurService _acteurService;
+        private readonly IRealisateurService _realisateurService;
+        private readonly ICategorieService _categorieService;
 
-        public PreferenceService() 
-        {
-            _preferenceRepository = new PreferenceRepository();
-            _acteurService = new ActeurService();
-            _realisateurService = new RealisateurService();
-            _categorieService = new CategorieService();
-        }
-        public PreferenceService(PreferenceRepository preferenceRepository)
+   //     public PreferenceService()
+   //     {
+			//_preferenceRepository = new PreferenceRepository();
+   //         _acteurService = new ActeurService();
+   //         _realisateurService = new RealisateurService();
+   //         _categorieService = new CategorieService();
+   //     }
+        public PreferenceService(IPreferenceRepository preferenceRepository)
         {
             _preferenceRepository = preferenceRepository;        
         }
-        public PreferenceService(PreferenceRepository preferenceRepository, ActeurService acteurService, RealisateurService realisateurService, CategorieService categorieService)
+        public PreferenceService(IPreferenceRepository preferenceRepository, IActeurService acteurService, IRealisateurService realisateurService, ICategorieService categorieService)
         {
             _preferenceRepository = preferenceRepository;
             _acteurService = acteurService;

@@ -1,4 +1,5 @@
 ﻿using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL.Repositories
 {
-    public class ActeurRepository: BaseRepository
+    public class ActeurRepository: BaseRepository,IActeurRepository
     {
         IMongoCollection<Acteur> _collection;
 

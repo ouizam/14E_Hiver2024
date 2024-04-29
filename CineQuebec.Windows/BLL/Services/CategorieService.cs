@@ -1,4 +1,6 @@
-﻿using CineQuebec.Windows.DAL.Data;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
 using System;
@@ -9,18 +11,20 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-    public class CategorieService
-    {
-        private CategorieRepository _categorieRepository;
-        public CategorieService() 
-        {
-            _categorieRepository = new CategorieRepository();
-        }
+    public class CategorieService: ICategorieService
+	{
+        private readonly ICategorieRepository _categorieRepository;
 
-        public CategorieService(CategorieRepository pCategorieRepository)
+        //public CategorieService()
+        //{
+        //    _categorieRepository = new CategorieRepository();
+        //}
+
+        public CategorieService(ICategorieRepository pCategorieRepository)
         {
             _categorieRepository = pCategorieRepository;
         }
+
         /// <summary>
         /// Méthode qui obtient une catégorie selon son id
         /// </summary>
@@ -47,7 +51,7 @@ namespace CineQuebec.Windows.BLL.Services
         /// Méthode qui obtient la liste de toutes les catégories
         /// </summary>
         /// <returns></returns>
-        public virtual async  Task<List<Categorie>> GetAllCategories()
+        public virtual async Task<List<Categorie>> GetAllCategories()
         {
             try
             {
