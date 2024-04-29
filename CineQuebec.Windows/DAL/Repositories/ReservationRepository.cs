@@ -30,7 +30,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             try
             {
-                reservations = _collection.Aggregate().ToList().Where(x => x.IdAbonne == idAbonne).ToList();
+                reservations = _collection.Aggregate().ToList().Where(x => x.Abonne.Id == idAbonne).ToList();
             }
             catch (Exception ex)
             {
@@ -38,5 +38,22 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return reservations;
         }
-    }
+
+		public async Task<Reservation> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne, string pSiege)
+		{
+            try
+            {
+                Reservation new_reservation = new Reservation(pProjection, pAbonne, pSiege);
+
+                await _collection.InsertOneAsync(new_reservation);
+
+                return new_reservation;
+
+            }catch (Exception ex)
+            {
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+                throw;
+			}
+		}
+	}
 }

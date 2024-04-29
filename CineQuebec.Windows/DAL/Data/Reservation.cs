@@ -9,10 +9,22 @@ namespace CineQuebec.Windows.DAL.Data
 {
     public class Reservation
     {
-        public ObjectId Id {  get; set; }
-        public DateTime DateReservation { get; set; }
-        public ObjectId IdAbonne { get; set; }
-        public ObjectId IdProjection { get; set; }
+		public ObjectId Id { get; init; } = ObjectId.GenerateNewId();
+		public DateTime DateReservation { get; set; }
+        public Abonne Abonne { get; set; }
         public Projection Projection { get; set; }
+        
+        public string Siege { get; set; }
+
+        public Reservation() { }
+
+        public Reservation(Projection pProjection, Abonne pAbonne, string pSiege)
+        { 
+            DateReservation = DateTime.Now;
+            Projection = pProjection;
+            Abonne = pAbonne;
+            Siege = pSiege;
+        }
+
     }
 }

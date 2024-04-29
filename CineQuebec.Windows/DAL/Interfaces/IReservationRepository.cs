@@ -11,5 +11,7 @@ namespace CineQuebec.Windows.DAL.Interfaces
     public interface IReservationRepository
     {
         List<Reservation> ObtenirReservationsAbonne(ObjectId idAbonne);
-    }
+		Task<Reservation> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne, string pSiege);
+
+	}
 }
