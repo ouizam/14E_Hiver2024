@@ -32,7 +32,7 @@ namespace CineQuebec.Windows.View
         {
             if (abonne != null)
             {
-                txtUserName.Text = abonne.Username;
+                txtUserName.Text = abonne.Name;
                 datePickerDateAdhesion.Text = abonne.DateAdhesion.ToString();
                 txtEmail.Text = abonne.Email;
                 txtNbProjection.Text=abonne.Reservations.Count.ToString();

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.BLL.Interfaces
 {
-	public interface IAdminService
+	public interface IUserService
 	{
-		Task<Administrateur?> ConnexionUtilisateur(string pUsername, string pPassword);
+		Task<Abonne?> ConnexionUtilisateur(string pUsername, string pPassword);
 	}
 }

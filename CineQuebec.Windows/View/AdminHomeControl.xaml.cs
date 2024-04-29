@@ -44,8 +44,17 @@ namespace CineQuebec.Windows.View
 
         private void Button_Utilisateurs_Click(object sender, RoutedEventArgs e)
         {
-			var utilisateursControl = new UtilisateursControl(_abonneService);
-			utilisateursControl.Show(); 
+            if (((Abonne)(App.Current.Properties["UserConnect"])).EstAdmin)
+            {
+                var utilisateursControl = new UtilisateursControl(_abonneService);
+                utilisateursControl.Show();
+            }
+            else
+            {
+                var utilisateursPreference = new PreferencesAbonne(_abonneService);
+                utilisateursPreference.Show();
+            }
+			
 		}
 
 		private void Button_Films_Click(object sender, RoutedEventArgs e)

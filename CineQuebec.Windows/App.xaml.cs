@@ -30,7 +30,7 @@ namespace CineQuebec.Windows
                 services.AddSingleton<FilmsControl>();
                 services.AddSingleton<IAbonneService, AbonneService>();
                 services.AddSingleton<IActeurService, ActeurService>();
-                services.AddSingleton<IAdminService, AdminService>();
+                services.AddSingleton<IUserService, UserService>();
                 services.AddSingleton<ICategorieService, CategorieService>();
                 services.AddSingleton<IFilmService, FilmService>();
                 services.AddSingleton<IPreferenceService, PreferenceService>();
@@ -40,7 +40,7 @@ namespace CineQuebec.Windows
 
                 services.AddSingleton<IAbonneRepository, AbonneRepository>();
                 services.AddSingleton<IActeurRepository, ActeurRepository>();
-                services.AddSingleton<IAdminRepository, AdminRepository>();
+                services.AddSingleton<IUserRepository, UserRepository>();
                 services.AddSingleton<ICategorieRepository, CategorieRepository>();
                 services.AddSingleton<IFilmRepository, FilmRepository>();
                 services.AddSingleton<IPreferenceRepository, PreferenceRepository>();

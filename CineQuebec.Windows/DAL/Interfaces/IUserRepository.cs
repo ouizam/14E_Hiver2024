@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL.Interfaces
 {
-    public interface IAdminRepository
+    public interface IUserRepository
     {
-        Task<Administrateur> ConnexionUtilisateur(string pUsername, string pPassword);
+        Task<Abonne> ConnexionUtilisateur(string pUsername, string pPassword);
        
     }
 }

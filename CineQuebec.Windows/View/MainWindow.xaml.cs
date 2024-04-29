@@ -20,14 +20,14 @@ namespace CineQuebec.Windows
     public partial class MainWindow : Window
     {
         private readonly IAbonneService _abonneService;
-        private readonly IAdminService _adminService;
+        private readonly IUserService _adminService;
         private IFilmService _filmService;
         private IProjectionService _projectionService;
         private ICategorieService _categorieService;
         private IRealisateurService _realisateurService;
         private IActeurService _acteurService;
         private AdminHomeControl _adminHomeControl;
-        public MainWindow(IAbonneService abonneService, IAdminService adminService, AdminHomeControl adminHomeControl)
+        public MainWindow(IAbonneService abonneService, IUserService adminService, AdminHomeControl adminHomeControl)
         {
             _abonneService = abonneService;
             _adminService = adminService;
