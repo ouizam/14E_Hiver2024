@@ -31,7 +31,7 @@ namespace CineQuebec.Tests
             Abonne abonne = new Abonne { Id = ObjectId.GenerateNewId() };
             Projection projection = new Projection { Id = ObjectId.GenerateNewId()};
 
-            List<Reservation> reservations = new List<Reservation> { new Reservation { Abonne = abonne, Projection = projection }, new Reservation { Abonne = abonne, Projection = projection } };
+            List<Reservation> reservations = new List<Reservation> { new Reservation { IdAbonne = abonne.Id, IdProjection = projection.Id }, new Reservation { IdAbonne = abonne.Id, IdProjection = projection.Id } };
 
             mockRepo.Setup(x => x.ObtenirReservationsAbonne(abonne.Id)).Returns(reservations);
             mockProjection.Setup(y => y.ObtenirProjection(projection.Id)).Returns(projection);
@@ -43,7 +43,7 @@ namespace CineQuebec.Tests
 
             Assert.NotNull(resultat);
             Assert.Equal(reservations.Count, resultat.Count);
-            Assert.Equal(reservations[0].Projection, resultat[0].Projection);
+            Assert.Equal(reservations[0].IdProjection, resultat[0].IdProjection);
         }
     }
 }

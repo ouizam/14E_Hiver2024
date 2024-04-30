@@ -38,7 +38,7 @@ namespace CineQuebec.Windows.BLL.Services
                 reservations = _reservationRepository.ObtenirReservationsAbonne(idAbonne);
                 foreach (var reservation in reservations)
                 {
-                    reservation.Projection = _projectionService.ObtenirProjection(reservation.Projection.Id);
+                    reservation.Projection = _projectionService.ObtenirProjection(reservation.IdProjection);
                 }
             }
             catch (Exception ex)

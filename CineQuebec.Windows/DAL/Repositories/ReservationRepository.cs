@@ -30,7 +30,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             try
             {
-                reservations = _collection.Aggregate().ToList().Where(x => x.Abonne.Id == idAbonne).ToList();
+                reservations = _collection.Aggregate().ToList().Where(x => x.IdAbonne == idAbonne).ToList();
             }
             catch (Exception ex)
             {
