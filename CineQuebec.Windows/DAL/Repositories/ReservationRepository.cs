@@ -39,11 +39,11 @@ namespace CineQuebec.Windows.DAL.Repositories
             return reservations;
         }
 
-		public async Task<Reservation> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne, string pSiege)
+		public async Task<Reservation> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne)
 		{
             try
             {
-                Reservation new_reservation = new Reservation(pProjection, pAbonne, pSiege);
+                Reservation new_reservation = new Reservation(pProjection, pAbonne);
 
                 await _collection.InsertOneAsync(new_reservation);
 

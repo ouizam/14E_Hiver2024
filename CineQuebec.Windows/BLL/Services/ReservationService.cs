@@ -48,11 +48,11 @@ namespace CineQuebec.Windows.BLL.Services
             return reservations;
         }
 
-		public async Task<Reservation> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne, string pSiege)
+		public async Task<Reservation> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne)
 		{
             try
             {
-                return await _reservationRepository.ReserverPlaceProjection(pProjection, pAbonne, pSiege);
+                return await _reservationRepository.ReserverPlaceProjection(pProjection, pAbonne);
             }catch (Exception ex)
             {
                 Console.WriteLine("Impossible de faire la réservation " + ex.Message, "Erreur");

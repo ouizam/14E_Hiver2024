@@ -14,16 +14,14 @@ namespace CineQuebec.Windows.DAL.Data
         public Abonne Abonne { get; set; }
         public Projection Projection { get; set; }
         
-        public string Siege { get; set; }
 
         public Reservation() { }
 
-        public Reservation(Projection pProjection, Abonne pAbonne, string pSiege)
+        public Reservation(Projection pProjection, Abonne pAbonne)
         { 
             DateReservation = DateTime.Now;
             Projection = pProjection;
             Abonne = pAbonne;
-            Siege = pSiege;
         }
 
     }
