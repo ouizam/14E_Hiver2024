@@ -39,7 +39,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             return reservations;
         }
 
-		public async Task<Reservation> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne)
+		public async Task<Reservation?> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne)
 		{
             try
             {
@@ -52,8 +52,8 @@ namespace CineQuebec.Windows.DAL.Repositories
             }catch (Exception ex)
             {
 				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
-                throw;
 			}
+            return null;
 		}
 	}
 }
