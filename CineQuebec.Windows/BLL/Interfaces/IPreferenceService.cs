@@ -12,5 +12,7 @@ namespace CineQuebec.Windows.BLL.Interfaces
 	{
 		Preference ObtenirPreference(ObjectId pPreferenceID);
 		List<Preference> ObtenirPreferencesAbonne(ObjectId pAbonneID);
-	}
+		bool AjouterPreference(Preference preference);
+
+    }
 }

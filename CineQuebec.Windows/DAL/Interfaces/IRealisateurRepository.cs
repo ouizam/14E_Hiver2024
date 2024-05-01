@@ -12,5 +12,6 @@ namespace CineQuebec.Windows.DAL.Interfaces
     {
         List<Realisateur> ObtenirRealisateurs();
         Realisateur ObtenirUnRealisateur(ObjectId IdRealisateur);
+        bool CreateRealisateur(Realisateur realisateur);
     }
 }

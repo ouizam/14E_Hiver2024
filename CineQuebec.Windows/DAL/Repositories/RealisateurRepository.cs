@@ -56,5 +56,19 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return realisateur;
         }
+
+        public virtual bool CreateRealisateur(Realisateur realisateur)
+        {
+            try
+            {
+                 _collection.InsertOneAsync(realisateur);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la création du realisateur : {ex.Message}");
+                return false;
+            }
+        }
     }
 }

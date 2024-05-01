@@ -16,17 +16,21 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
 
 
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Liste des réalisateurs">
-            <ListBox x:Name="lstUsers" Margin="0,0,0,-357"   />
+            <ListBox x:Name="lstRealisateurs" Margin="0,0,0,-245" SelectionChanged="lstRealisateurs_SelectionChanged"   />
         </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Liste des films"> 
-            <ListBox x:Name="lstFilms" Margin="0,0,0,-357"   />
+        <Button Grid.Column="0" Grid.Row="3" Margin="16,261,5,-278"  FontWeight="Bold" Click="Button_Ajouter_Realisateur_Click">Ajouter préférences réalisateurs</Button>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Liste des films">
+            <ListBox x:Name="lstFilms" Margin="0,0,0,-245"   />
         </GroupBox>
+        <Button Grid.Column="1" Grid.Row="3" Margin="16,261,5,-278"  FontWeight="Bold">Ajouter préférences films</Button>
         <GroupBox Grid.Row="1" Grid.Column="2" Header="Liste des Catégories">
-            <ListBox x:Name="lstCategories" Margin="0,0,0,-357"   />
+            <ListBox x:Name="lstCategories" Margin="0,0,0,-245"   />
         </GroupBox>
+        <Button Grid.Column="2" Grid.Row="3" Margin="16,261,5,-278"  FontWeight="Bold">Ajouter préférences catégories</Button>
     </Grid>
 </Window>

@@ -4,6 +4,7 @@ using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Repositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,8 +31,9 @@ namespace CineQuebec.Windows.View
         private readonly ICategorieService _categorieService;
         private readonly IRealisateurService _realisateurService;
         private readonly IActeurService _acteurService;
+        private readonly IPreferenceService _preferenceService;
         public AdminHomeControl(IAbonneService abonneService, IFilmService filmService, IProjectionService projectionService, ICategorieService categorieService,
-            IRealisateurService realisateurService, IActeurService acteurService)
+            IRealisateurService realisateurService, IActeurService acteurService, IPreferenceService preferenceService)
         {
             _abonneService = abonneService;
             _filmService = filmService;
@@ -39,6 +41,7 @@ namespace CineQuebec.Windows.View
             _categorieService = categorieService;
             _realisateurService = realisateurService;
             _acteurService = acteurService;
+            _preferenceService = preferenceService;
             InitializeComponent();
         }
 
@@ -51,7 +54,7 @@ namespace CineQuebec.Windows.View
             }
             else
             {
-                var utilisateursPreference = new PreferencesAbonne(_abonneService);
+                var utilisateursPreference = new PreferencesAbonne( _filmService, _categorieService, _realisateurService, _preferenceService);
                 utilisateursPreference.Show();
             }
 			
