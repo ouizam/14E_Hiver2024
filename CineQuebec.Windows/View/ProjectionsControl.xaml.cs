@@ -75,7 +75,16 @@ namespace CineQuebec.Windows.View
 
 		private void Click_Projection(object sender, MouseButtonEventArgs e)
 		{
+			Projection projection = (Projection)sender;
 
+			ReservationProjectionControl control = new ReservationProjectionControl(_projectionService, _filmService, projection.Id);
+
+			bool? result = control.ShowDialog();
+
+			if (result == true)
+			{
+				MessageBox.Show("La réservation a été effectuée avec succès!", "Réservation", MessageBoxButton.OK, MessageBoxImage.Information);
+			}
 		}
 	}
 }

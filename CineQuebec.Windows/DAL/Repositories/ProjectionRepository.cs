@@ -55,5 +55,20 @@ namespace CineQuebec.Windows.DAL.Repositories
             return null;
         }
 
+		public async Task<Projection?> GetProjectionWithID(ObjectId pProjectionID)
+		{
+            try
+            {
+                FilterDefinition<Projection> filter = Builders<Projection>.Filter.Eq(f => f.Id, pProjectionID);
+				return await _collection.Find(filter).FirstOrDefaultAsync();
+
+
+			}
+			catch (Exception ex)
+            {
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+			}
+            return null;
+		}
 	}
 }

@@ -12,5 +12,6 @@ namespace CineQuebec.Windows.BLL.Interfaces
 	{
 		Projection ObtenirProjection(ObjectId pProjectionID);
 		Task<List<Projection>?> GetAllProjections();
+		Task<Projection?> GetProjectionWithID(ObjectId pProjectionID);
 	}
 }

@@ -15,5 +15,6 @@ namespace CineQuebec.Windows.BLL.Interfaces
 		Task<DeleteResult?> DeleteFilm(Film pFilm);
 		Task<List<Film>?> GetAllFilmsAffiche(List<Projection> projections);
 		Task<UpdateResult?> UpdateFilm(Film film);
+		Task<Film> GetFilmWithProjection(Projection projection);
 	}
 }
