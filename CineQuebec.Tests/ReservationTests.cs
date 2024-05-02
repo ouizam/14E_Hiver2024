@@ -25,23 +25,25 @@ namespace CineQuebec.Tests
         public void ObtenirReservationsAbonne_By_Id_Abonne()
         {
             Mock<IReservationRepository> mockRepo = new Mock<IReservationRepository>();
-            Mock<IProjectionService> mockProjection = new Mock<IProjectionService>();           
-            ObjectId idAbonne = ObjectId.GenerateNewId();
-            ObjectId idProjection = ObjectId.GenerateNewId();
-            Projection projection = new Projection { Id = idProjection };
-            List<Reservation> reservations = new List<Reservation> { new Reservation { IdAbonne = idAbonne, IdProjection = idProjection }, new Reservation { IdAbonne = idAbonne, IdProjection = idProjection } };
+            Mock<IProjectionService> mockProjection = new Mock<IProjectionService>();  
+            
 
-            mockRepo.Setup(x => x.ObtenirReservationsAbonne(idAbonne)).Returns(reservations);
-            mockProjection.Setup(y => y.ObtenirProjection(idProjection)).Returns(projection);
+            Abonne abonne = new Abonne { Id = ObjectId.GenerateNewId() };
+            Projection projection = new Projection { Id = ObjectId.GenerateNewId()};
+
+            List<Reservation> reservations = new List<Reservation> { new Reservation { IdAbonne = abonne.Id, IdProjection = projection.Id }, new Reservation { IdAbonne = abonne.Id, IdProjection = projection.Id } };
+
+            mockRepo.Setup(x => x.ObtenirReservationsAbonne(abonne.Id)).Returns(reservations);
+            mockProjection.Setup(y => y.ObtenirProjection(projection.Id)).Returns(projection);
             IReservationService reservationService = new ReservationService(mockRepo.Object, mockProjection.Object);
 
            
-            List<Reservation> resultat = reservationService.ObtenirReservationsAbonne(idAbonne);
+            List<Reservation> resultat = reservationService.ObtenirReservationsAbonne(abonne.Id);
 
 
             Assert.NotNull(resultat);
             Assert.Equal(reservations.Count, resultat.Count);
-            Assert.Equal(reservations[0].Projection, resultat[0].Projection);
+            Assert.Equal(reservations[0].IdProjection, resultat[0].IdProjection);
         }
     }
 }

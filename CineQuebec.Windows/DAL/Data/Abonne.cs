@@ -25,6 +25,7 @@ namespace CineQuebec.Windows.DAL.Data
         {
             throw new NotImplementedException();
         }
+
     }
 
   

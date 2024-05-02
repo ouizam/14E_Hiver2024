@@ -48,8 +48,9 @@ namespace CineQuebec.Windows
                 services.AddSingleton<IRealisateurRepository, RealisateurRepository>();
                 services.AddSingleton<IReservationRepository, ReservationRepository>();
 
+				services.AddSingleton<AbonneHomeControl>();
 
-            })
+			})
                 .Build();
            
         }

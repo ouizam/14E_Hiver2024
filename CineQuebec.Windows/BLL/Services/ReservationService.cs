@@ -17,11 +17,6 @@ namespace CineQuebec.Windows.BLL.Services
         private readonly IReservationRepository _reservationRepository;
         private readonly IProjectionService _projectionService;
 
-        //public ReservationService()
-        //{
-        //    _reservationRepository = new ReservationRepository();
-        //    _projectionService = new ProjectionService();
-        //}
 
         public ReservationService(IReservationRepository pReservationRep, IProjectionService pProjecService)
         {
@@ -52,5 +47,17 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return reservations;
         }
-    }
+
+		public async Task<Reservation?> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne)
+		{
+            try
+            {
+                return await _reservationRepository.ReserverPlaceProjection(pProjection, pAbonne);
+            }catch (Exception ex)
+            {
+                Console.WriteLine("Impossible de faire la réservation " + ex.Message, "Erreur");
+            }
+            return null;
+		}
+	}
 }

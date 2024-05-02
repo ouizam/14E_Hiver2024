@@ -107,5 +107,18 @@ namespace CineQuebec.Windows.BLL.Services
 			}
 			return null;
 		}
+
+		public async Task<Film> GetFilmWithProjection(Projection projection)
+		{
+			try
+			{
+				return await _filmRepo.GetFilmWithProjection(projection);
+			}
+			catch (Exception ex)
+			{
+				Console.Error.WriteLine(ex.Message);
+			}
+			return null;
+		}
 	}
 }

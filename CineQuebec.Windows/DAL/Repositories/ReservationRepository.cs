@@ -38,5 +38,22 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return reservations;
         }
-    }
+
+		public async Task<Reservation?> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne)
+		{
+            try
+            {
+                Reservation new_reservation = new Reservation(pProjection, pAbonne);
+
+                await _collection.InsertOneAsync(new_reservation);
+
+                return new_reservation;
+
+            }catch (Exception ex)
+            {
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+			}
+            return null;
+		}
+	}
 }
