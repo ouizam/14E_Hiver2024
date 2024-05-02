@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CineQuebec.Windows.BLL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,34 @@ namespace CineQuebec.Windows.View
 	/// <summary>
 	/// Logique d'interaction pour AbonneHomeControl.xaml
 	/// </summary>
-	public partial class AbonneHomeControl : Page
+	public partial class AbonneHomeControl : UserControl
 	{
-		public AbonneHomeControl()
+		private readonly IFilmService _filmService;
+		private readonly ICategorieService _categorieService;
+		private readonly IRealisateurService _realisateurService;
+		private readonly IPreferenceService _preferenceService;
+		private readonly IProjectionService _projectionService;
+
+		public AbonneHomeControl(IFilmService pFilmService, ICategorieService pCategorieService, IRealisateurService pRealisateurService, IPreferenceService pPreferenceService, IProjectionService projectionService)
 		{
 			InitializeComponent();
+
+			_filmService = pFilmService;
+			_categorieService = pCategorieService;
+			_realisateurService = pRealisateurService;
+			_preferenceService = pPreferenceService;
+			_projectionService = projectionService;
+		}
+
+		private void Button_Profile_Click(object sender, RoutedEventArgs e)
+		{
+			var utilisateursPreference = new PreferencesAbonne(_filmService, _categorieService, _realisateurService, _preferenceService);
+			utilisateursPreference.Show();
+		}
+
+		private void Button_Projections_Click(object sender, RoutedEventArgs e)
+		{
+			new ProjectionsControl(_projectionService, _filmService).Show();
 		}
 	}
 }
