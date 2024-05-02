@@ -10,5 +10,6 @@ namespace CineQuebec.Windows.BLL.Interfaces
 	public interface IAbonneService
 	{
 		List<Abonne> ObtenirAbonnes();
-	}
+       
+    }
 }

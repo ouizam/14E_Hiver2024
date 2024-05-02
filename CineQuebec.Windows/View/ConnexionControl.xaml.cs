@@ -27,9 +27,9 @@ namespace CineQuebec.Windows.View
 	public partial class ConnexionControl : UserControl
     {
 
-		private IAdminService _adminService;
+		private IUserService _adminService;
         private const int NB_MIN_USER = 2;
-		public ConnexionControl(IAdminService adminService)
+		public ConnexionControl(IUserService adminService)
         {
             InitializeComponent();
             _adminService = adminService;
@@ -45,9 +45,9 @@ namespace CineQuebec.Windows.View
 			{
                 try
                 {
-					Administrateur? admin = await _adminService.ConnexionUtilisateur(username, password);
-
-					if (admin != null)
+					Abonne? user = await _adminService.ConnexionUtilisateur(username, password);
+                    App.Current.Properties["UserConnect"] = user;
+					if (user != null)
 					{
 						((MainWindow)Application.Current.MainWindow).AdminHomeControl();
 					}

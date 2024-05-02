@@ -65,5 +65,18 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return realisateur;
         }
+
+        public  bool CreateRealisateur(Realisateur realisateur)
+        {
+            try
+            {
+                return _realisateurRepository.CreateRealisateur(realisateur);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+            }
+            return false;
+        }
     }
 }

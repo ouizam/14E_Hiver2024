@@ -55,7 +55,7 @@ namespace CineQuebec.Windows.BLL.Services
         {
             try
             {
-                return await _categorieRepository.GetAllCategories();
+                return await _categorieRepository.GetAllCategories().ConfigureAwait(false);
             }catch (Exception ex)
             {
 				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");

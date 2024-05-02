@@ -27,7 +27,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 		{
 			try
 			{
-				return await _collection.Aggregate().ToListAsync<Film>();
+				return await _collection.Aggregate().ToListAsync<Film>().ConfigureAwait(false);
 			}
 			catch (Exception ex)
 			{
