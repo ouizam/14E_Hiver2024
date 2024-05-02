@@ -1,7 +1,9 @@
 ﻿using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Exceptions;
 using CineQuebec.Windows.DAL.Interfaces;
+using CineQuebec.Windows.View;
 using Konscious.Security.Cryptography;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -14,13 +16,13 @@ using System.Xml.Linq;
 
 namespace CineQuebec.Windows.DAL.Repositories
 {
-    public class AdminRepository:BaseRepository, IAdminRepository
+    public class UserRepository:BaseRepository, IUserRepository
     {
-        private IMongoCollection<Administrateur> _collection;
+        private IMongoCollection<Abonne> _collection;
        
-        public AdminRepository()
+        public UserRepository()
         {
-            _collection = database.GetCollection<Administrateur>("Administrateurs");
+            _collection = database.GetCollection<Abonne>("Abonnes");
         }
 
         /// <summary>
@@ -30,13 +32,29 @@ namespace CineQuebec.Windows.DAL.Repositories
         /// <param name="pUsername"></param>
         /// <param name="pPassword"></param>
         /// <returns></returns>
-        public virtual async Task<Administrateur> ConnexionUtilisateur(string pUsername, string pPassword)
+        public virtual async Task<Abonne> ConnexionUtilisateur(string pUsername, string pPassword)
         {
-            Administrateur utilisateur = new Administrateur();
+            Abonne utilisateur = new Abonne();
             try
             {
-                var filter = Builders<Administrateur>.Filter.Eq("Name", pUsername);
+                //POUR CRÉER DES ABONNÉES
+                //var salt1 = CreerSalt();
+                //Abonne abonne = new Abonne
+                //{
+                //    Id = ObjectId.Parse("66058251d38403bc569a548e"),
+                //    Name = "ouiza",
+                //    Email = "ouiza@gmail.com",
+                //    Password = HacherMotDePasse("Admin@12", salt1),
+                //    Salt = salt1,
+                //    DateAdhesion = DateTime.Now,
+                //    EstAdmin = false
+                //};
+                //var collection = database.GetCollection<User>("Abonnes");
+                //collection.InsertOne(abonne);
+               
 
+                var filter = Builders<Abonne>.Filter.Eq("Name", pUsername);
+                var Utilisateurs = _collection.Aggregate().ToList();
                 utilisateur = await _collection.Find(filter).FirstOrDefaultAsync();
 
                 if (utilisateur is null)
@@ -82,7 +100,7 @@ namespace CineQuebec.Windows.DAL.Repositories
         /// Méthode qui crée le salt pour le mot de passe 
         /// </summary>
         /// <returns></returns>
-        public byte[] CreerSALT()
+        public byte[] CreerSalt()
         {
             var buffer = new byte[16];
             var rng = new RNGCryptoServiceProvider();

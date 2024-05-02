@@ -23,8 +23,8 @@ namespace CineQuebec.Tests
         {
             //Arrange
             Mock<IAbonneRepository> mockRepo = new Mock<IAbonneRepository>();
-            Mock<IReservationRepository> mockReservation = new Mock<IReservationRepository>();
-            Mock<IPreferenceRepository> mockPreference = new Mock<IPreferenceRepository>();
+            Mock<IReservationService> mockReservation = new Mock<IReservationService>();
+            Mock<IPreferenceService> mockPreference = new Mock<IPreferenceService>();
             List<Reservation> reservations = new List<Reservation> { new Reservation(), new Reservation() };
             List<Preference> preferences = new List<Preference>() { new Preference(), new Preference() };
             List<Abonne> abonnes = new List<Abonne> { new Abonne { Id = ObjectId.GenerateNewId(), Reservations = reservations, Preferences = preferences }, new Abonne { Id = ObjectId.GenerateNewId(), Reservations = reservations, Preferences = preferences } };

@@ -15,10 +15,7 @@ namespace CineQuebec.Windows.BLL.Services
 	{
 		private readonly IFilmRepository _filmRepo;
 
-		//public FilmService()
-		//{
-		//	_filmRepo = new FilmRepository();
-		//}
+		
 
 		public FilmService(IFilmRepository pFilmRepo)
 		{
@@ -34,7 +31,7 @@ namespace CineQuebec.Windows.BLL.Services
 			try
 			{
 
-				return await _filmRepo.GetAllFilms();
+				return await _filmRepo.GetAllFilms().ConfigureAwait(false);
 
 			}catch (Exception ex)
 			{

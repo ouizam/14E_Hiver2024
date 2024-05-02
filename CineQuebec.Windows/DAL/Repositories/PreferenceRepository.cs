@@ -58,5 +58,19 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return preferences;
         }
+
+        public virtual bool AjouterPreference(Preference preference)
+        {
+            try
+            {
+                _collection.InsertOneAsync(preference);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la création du preference : {ex.Message}");
+                return false;
+            }
+        }
     }
 }

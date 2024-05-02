@@ -84,5 +84,19 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return preferences;
         }
+
+        public bool AjouterPreference(Preference preference)
+        {
+            try
+            {
+                return  _preferenceRepository.AjouterPreference(preference);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
     }
 }

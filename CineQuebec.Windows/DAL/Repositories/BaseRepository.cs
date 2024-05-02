@@ -16,7 +16,7 @@ namespace CineQuebec.Windows.DAL.Repositories
     {
         private IMongoClient mongoDBClient;
         protected IMongoDatabase database;
-        private string connexionString = "mongodb+srv://dev:QWERTY123@cluster0.nfeagoi.mongodb.net/";
+        private string connexionString = "mongodb+srv://dev:QWERTY123@cluster0.usnpoav.mongodb.net/";
 
         public BaseRepository(IMongoClient client = null)
         {
@@ -51,7 +51,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             IMongoDatabase db = null;
             try
             {
-                db = mongoDBClient.GetDatabase("CineQuebec");
+                db = mongoDBClient.GetDatabase("TP3_conception");
             }
             catch (Exception ex)
             {

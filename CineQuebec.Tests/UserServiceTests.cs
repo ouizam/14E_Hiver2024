@@ -13,21 +13,21 @@ using CineQuebec.Windows.BLL.Interfaces;
 
 namespace CineQuebec.Tests
 {
-	public class AdminServiceTests
+	public class UserServiceTests
 	{
 		
         [Fact]
 		public async Task ConnexionUtilisateur_UtilisateurTrouve_RetourneUtilisateur()
 		{
 			// Arrange
-			Mock<IAdminRepository> mockAdminRepo = new Mock<IAdminRepository>();
-			IAdminService authService = new AdminService(mockAdminRepo.Object);
-			Administrateur expectedAdmin = new Administrateur { Name = "user", Password = new byte[16] };
+			Mock<IUserRepository> mockAdminRepo = new Mock<IUserRepository>();
+			IUserService authService = new UserService(mockAdminRepo.Object);
+			Abonne expectedAdmin = new Abonne { Name = "user", Password = new byte[16] };
 
 			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).ReturnsAsync(expectedAdmin);
 
-			// Act
-			Administrateur? result = await authService.ConnexionUtilisateur("user", "password");
+            // Act
+            User? result = await authService.ConnexionUtilisateur("user", "password");
 
 			// Assert
 			Assert.NotNull(result);
@@ -40,13 +40,13 @@ namespace CineQuebec.Tests
 		public async Task ConnexionUtilisateur_UtilisateurNonTrouve_RetourneNull()
 		{
 			// Arrange
-			Mock<IAdminRepository> mockAdminRepo = new Mock<IAdminRepository>();
-			IAdminService authService = new AdminService(mockAdminRepo.Object);
+			Mock<IUserRepository> mockAdminRepo = new Mock<IUserRepository>();
+			IUserService authService = new UserService(mockAdminRepo.Object);
 
 			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).Throws<UtilisateurNotFoundException>();
 
-			// Act
-			Administrateur? result = await authService.ConnexionUtilisateur("user", "password");
+            // Act
+            User? result = await authService.ConnexionUtilisateur("user", "password");
 
 			// Assert
 			Assert.Null(result);
@@ -56,13 +56,13 @@ namespace CineQuebec.Tests
 		public async Task ConnexionUtilisateur_Erreur_RetourneNull()
 		{
 			// Arrange
-			Mock<IAdminRepository> mockAdminRepo = new Mock<IAdminRepository>();
-			IAdminService authService = new AdminService(mockAdminRepo.Object);
+			Mock<IUserRepository> mockAdminRepo = new Mock<IUserRepository>();
+			IUserService authService = new UserService(mockAdminRepo.Object);
 
 			mockAdminRepo.Setup(repo => repo.ConnexionUtilisateur("user", It.IsAny<string>())).Throws<Exception>();
 
-			// Act
-			Administrateur? result = await authService.ConnexionUtilisateur("user", "password");
+            // Act
+            User? result = await authService.ConnexionUtilisateur("user", "password");
 
 			// Assert
 			Assert.Null(result);
@@ -72,14 +72,14 @@ namespace CineQuebec.Tests
 		public async Task ConnexionUtilisateur_Appelle_HacherMotDePasse()
 		{
 			// Arrange
-			Mock<IAdminRepository> mockRepo = new Mock<IAdminRepository>();
-			IAdminService adminService = new AdminService(mockRepo.Object);
+			Mock<IUserRepository> mockRepo = new Mock<IUserRepository>();
+			IUserService adminService = new UserService(mockRepo.Object);
 
 			string nom = "user";
 			string password = "password";
 
-			// Act
-			Administrateur? result = await adminService.ConnexionUtilisateur(nom, password);
+            // Act
+            User? result = await adminService.ConnexionUtilisateur(nom, password);
 
 			// Assert
 			mockRepo.Verify(repo => repo.ConnexionUtilisateur(nom, It.IsAny<string>()), Times.Once);
