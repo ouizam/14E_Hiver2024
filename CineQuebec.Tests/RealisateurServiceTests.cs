@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Tests
 {
-    public  class RealisateurTests
+    public  class RealisateurServiceTests
     {
       
 

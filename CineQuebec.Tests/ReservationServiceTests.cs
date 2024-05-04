@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Tests
 {
-    public class ReservationTests
+    public class ReservationServiceTests
     {
         //private readonly IReservationService _reservationService;
         //public ReservationTests(IReservationService reservationService)
