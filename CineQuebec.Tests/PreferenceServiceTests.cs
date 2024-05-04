@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Tests
 {
-    public class PreferenceTests
+    public class PreferenceServiceTests
     {
       
 
@@ -74,6 +74,20 @@ namespace CineQuebec.Tests
             Assert.Equal(preferences[0].Acteur, resultat[0].Acteur);
             Assert.Equal(preferences[0].Realisateur, resultat[0].Realisateur);
             Assert.Equal(preferences[0].Categorie, resultat[0].Categorie);
+        }
+        [Fact]
+        public void Ajouter_Preference_De_Chaque_abonne_A_La_Liste_preferences()
+        {
+           
+            Mock<IPreferenceRepository> preferenceRepo = new Mock<IPreferenceRepository>();
+            Preference preference = new Preference();
+            List<Preference> preferences = new List<Preference>();
+            preferenceRepo.Setup(x => x.AjouterPreference(preference)).Returns(true);
+            IPreferenceService prefService = new PreferenceService(preferenceRepo.Object);
+
+            bool result = prefService.AjouterPreference(preference);
+
+            Assert.Equal(result, true);
         }
     }
 }
