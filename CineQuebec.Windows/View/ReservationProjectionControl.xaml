@@ -27,20 +27,21 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="5">Nom:</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Projection.Film.Nom}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Film.Nom}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Margin="5">Date:</TextBlock>
             <DatePicker Grid.Row="2" Grid.Column="1" x:Name="dateSortieFilm"  HorizontalAlignment="Left" Margin="5" IsEnabled="False"
-                       SelectedDate="{Binding Projection.DateProjection}"/>
+                       SelectedDate="{Binding DateProjection}"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="5">Salle:</TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Projection.NoSalle}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding NoSalle}"/>
 
-            <Button Grid.Row="3" Grid.Column="2" Margin="10" FontWeight="Bold" Background="LightGreen">Réserver une place</Button>
+            <Button Grid.Row="4" Grid.Column="2" Margin="10" FontWeight="Bold" Background="LightGreen">Réserver une place</Button>
         </Grid>
     </Grid>
 </Window>
