@@ -52,11 +52,12 @@ namespace CineQuebec.Windows.View
 			try
 			{
 				await _reservationService.ReserverPlaceProjection(_viewModel.Projection!, (Abonne)App.Current.Properties["UserConnect"]!);
+				this.DialogResult = true;
 			}
 			catch
 			{
 				MessageBox.Show("La réservation a échouée. Veuillez réessayer plus tard.",
-						"Réservation non disponible", MessageBoxButton.OK, MessageBoxImage.Information);
+						"Réservation non disponible", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 	}
