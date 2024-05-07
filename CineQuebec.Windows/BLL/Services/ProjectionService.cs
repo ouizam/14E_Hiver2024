@@ -62,7 +62,7 @@ namespace CineQuebec.Windows.BLL.Services
             return null;
         }
 
-		public async Task<Projection?> GetProjectionWithID(ObjectId pProjectionID)
+		public async Task<Projection> GetProjectionWithID(ObjectId pProjectionID)
 		{
 			try
 			{

@@ -134,20 +134,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 			{
 				FilterDefinition<Film> filter = Builders<Film>.Filter.Eq(f => f.Id, projection.IdFilm);
 
-				await _collection.Find(filter).FirstOrDefaultAsync();
-			}catch (Exception ex)
-			{
-				Console.WriteLine($"Erreur lors de la modification du film : {ex.Message}");
-			}
-			return null;
-		}
-
-		public async Task<Film?> GetFilmForProjection(Projection pProjection)
-		{
-			try
-			{
-				FilterDefinition<Film> filter = Builders<Film>.Filter.Eq(f => f.Id, pProjection.IdFilm);
-				return await _collection.Find(filter).FirstOrDefaultAsync();	
+				return await _collection.Find(filter).FirstOrDefaultAsync();
 			}catch (Exception ex)
 			{
 				Console.WriteLine($"Erreur lors de la modification du film : {ex.Message}");

@@ -112,26 +112,10 @@ namespace CineQuebec.Windows.BLL.Services
 		{
 			try
 			{
-				return await _filmRepo.GetFilmWithProjection(projection);
-			}
-			catch (Exception ex)
-			{
-				Console.Error.WriteLine(ex.Message);
-			}
-			return null;
-		}
+				Film film = await _filmRepo.GetFilmWithProjection(projection);
 
-		public async Task<Film?> GetFilmForProjection(Projection pProjection)
-		{
-			try
-			{
-				Film film = await _filmRepo.GetFilmForProjection(pProjection);
-
-
-				if(pProjection.DateProjection > DateTime.Now)
+				if (projection.DateProjection > DateTime.Now)
 					return film;
-				else
-					return null;
 			}
 			catch (Exception ex)
 			{
@@ -139,5 +123,6 @@ namespace CineQuebec.Windows.BLL.Services
 			}
 			return null;
 		}
+		
 	}
 }

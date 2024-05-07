@@ -1,4 +1,5 @@
 ﻿using CineQuebec.Windows.BLL.Interfaces;
+using CineQuebec.Windows.DAL.Data;
 using CineQuebec.Windows.DAL.Exceptions;
 using CineQuebec.Windows.ViewModel;
 using MongoDB.Bson;
@@ -25,36 +26,37 @@ namespace CineQuebec.Windows.View
 	{
 
 		private ReservationProjectionControlViewModel _viewModel;
-		public ReservationProjectionControl(IProjectionService projectionService, IFilmService pFilmService, ObjectId pProjectionID)
+		private IReservationService _reservationService;
+		public ReservationProjectionControl(IProjectionService projectionService, IFilmService pFilmService, IReservationService pReservationService, ObjectId pProjectionID)
 		{
 			InitializeComponent();
 
-			_viewModel = new ReservationProjectionControlViewModel(projectionService, pFilmService);
+			_reservationService = pReservationService;
+
+			_viewModel = new ReservationProjectionControlViewModel(projectionService, pFilmService, pProjectionID);
 
 			DataContext = _viewModel;
 
 
-			Loaded += async (sender, e) =>
-			{
-				await LoadProjection(pProjectionID);
-			};
-
+			Loaded += _viewModel.Load;
 
 		}
 
-		private async Task LoadProjection(ObjectId pProjectionID)
+		private void Button_Reserver_Click(object sender, RoutedEventArgs e)
+		{
+			SaveReservation();
+		}
+
+		private async void SaveReservation()
 		{
 			try
 			{
-				await _viewModel.Load(pProjectionID);
+				await _reservationService.ReserverPlaceProjection(_viewModel.Projection!, (Abonne)App.Current.Properties["UserConnect"]!);
 			}
-			catch (ProjectionNotFoundException ex)
+			catch
 			{
-				Console.WriteLine("Projection non trouvée : " + ex.Message);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine("Erreur lors du chargement de la projection : " + ex.Message);
+				MessageBox.Show("La réservation a échouée. Veuillez réessayer plus tard.",
+						"Réservation non disponible", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 		}
 	}

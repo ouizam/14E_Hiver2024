@@ -24,13 +24,15 @@ namespace CineQuebec.Windows.View
 	{
 		private readonly IProjectionService _projectionService;
 		private readonly IFilmService _filmService;
+		private readonly IReservationService _reservationService;
 		private List<Projection>? _filmAffiche;
 
-		public ProjectionsControl(IProjectionService pProjectionService, IFilmService pFilmService)
+		public ProjectionsControl(IProjectionService pProjectionService, IFilmService pFilmService, IReservationService pReservationService)
 		{
 			InitializeComponent();
 			_projectionService = pProjectionService;
 			_filmService = pFilmService;
+			_reservationService = pReservationService;
 
 			ChargerFilms();
 		}
@@ -45,7 +47,7 @@ namespace CineQuebec.Windows.View
 				{
 					foreach(Projection proj in _filmAffiche)
 					{
-						proj.Film = await _filmService.GetFilmForProjection(proj);
+						proj.Film =  await _filmService.GetFilmWithProjection(proj);
 					}
 
 					AfficherListeFilmsAffiche();
@@ -81,7 +83,7 @@ namespace CineQuebec.Windows.View
 		{
 			Projection? projection = ((TextBlock)sender).DataContext as Projection;
 
-			ReservationProjectionControl control = new ReservationProjectionControl(_projectionService, _filmService, projection!.Id);
+			ReservationProjectionControl control = new ReservationProjectionControl(_projectionService, _filmService, _reservationService, projection!.Id);
 
 			bool? result = control.ShowDialog();
 

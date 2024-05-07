@@ -16,7 +16,5 @@ namespace CineQuebec.Windows.DAL.Interfaces
         Task<List<Film>?> GetAllFilmsAffiche(List<Projection> projections);
         Task<UpdateResult?> UpdateFilm(Film film);
 		Task<Film> GetFilmWithProjection(Projection projection);
-        Task<Film?> GetFilmForProjection(Projection pProjection);
-
 	}
 }

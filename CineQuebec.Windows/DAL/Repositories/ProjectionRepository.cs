@@ -55,7 +55,7 @@ namespace CineQuebec.Windows.DAL.Repositories
             return null;
         }
 
-		public async Task<Projection?> GetProjectionWithID(ObjectId pProjectionID)
+		public async Task<Projection> GetProjectionWithID(ObjectId pProjectionID)
 		{
             try
             {
