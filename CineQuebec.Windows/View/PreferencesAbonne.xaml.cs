@@ -31,6 +31,7 @@ namespace CineQuebec.Windows.View
         List<Film>? _listeDesFilms;
         List<Categorie> _listeCategories;
         List<Realisateur> _listeRealisateurs;
+        List<Preference> _preferences;
         public PreferencesAbonne(IFilmService filmService, ICategorieService categorieService, IRealisateurService realisateurService, IPreferenceService preferenceService)
         {
             InitializeComponent();
@@ -43,9 +44,12 @@ namespace CineQuebec.Windows.View
             _listeDesFilms = _filmService.GetAllFilms().Result;
             _listeCategories = _categorieService.GetAllCategories().Result;
             _listeRealisateurs = _realisateurService.ObtenirRealisateurs();
+            var user = App.Current.Properties["UserConnect"] as User;
+            _preferences = _preferenceService.ObtenirPreferencesAbonne(user.Id);
             AfficherListeRealisateur();
             AfficherListeFilms();
             AfficherListeCategories();
+            AfficherListePreferences();
         }
 
         private void AfficherListeRealisateur()
@@ -68,20 +72,29 @@ namespace CineQuebec.Windows.View
         private void AfficherListeCategories()
         {
             lstCategories.Items.Clear();
-            foreach (Categorie Categorie in _listeCategories)
+            foreach (Categorie categorie in _listeCategories)
             {
-                lstCategories.Items.Add(Categorie);
+                lstCategories.Items.Add(categorie);
+            }
+        }
+        private void AfficherListePreferences()
+        {
+            lstPrefUser.Items.Clear();
+            foreach (Preference preference in _preferences)
+            {
+                lstPrefUser.Items.Add(preference);
             }
         }
 
 
-
         private void Button_Ajouter_Realisateur_Click(object sender, RoutedEventArgs e)
         {
-            if (lstRealisateurs.SelectedItems != null)
+            if (lstRealisateurs.SelectedItem != null)
             {
                 Preference preference = new Preference { IdRealisateur = (lstRealisateurs.SelectedItem as Realisateur).Id };
                 _preferenceService.AjouterPreference(preference);
+                preference.Realisateur = lstRealisateurs.SelectedItem as Realisateur;
+                lstPrefUser.Items.Add(preference);
             }
             else
             {
@@ -92,6 +105,36 @@ namespace CineQuebec.Windows.View
         private void lstRealisateurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Bouton_Ajouter_Film(object sender, RoutedEventArgs e)
+        {
+            if (lstFilms.SelectedItem != null)
+            {
+                Preference preference = new Preference { IdFilm = (lstFilms.SelectedItem as Film).Id };
+                _preferenceService.AjouterPreference(preference);
+                preference.Film = lstFilms.SelectedItem as Film;
+                lstPrefUser.Items.Add(preference);
+            }
+            else
+            {
+                MessageBox.Show($"Vous devez selectionner un film");
+            }
+        }
+
+        private void Button_Ajouter_Categorie(object sender, RoutedEventArgs e)
+        {
+            if (lstCategories.SelectedItem != null)
+            {
+                Preference preference = new Preference { IdCategorie = (lstCategories.SelectedItem as Categorie).Id };
+                _preferenceService.AjouterPreference(preference);
+                preference.Categorie = lstCategories.SelectedItem as Categorie;
+                lstPrefUser.Items.Add(preference);
+            }
+            else
+            {
+                MessageBox.Show($"Vous devez selectionner une catégorie");
+            }
         }
     }
 }
