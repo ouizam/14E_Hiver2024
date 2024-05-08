@@ -63,5 +63,11 @@ namespace CineQuebec.Windows.View
                
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Recompenses recompenses = new Recompenses();
+            recompenses.Show();
+        }
     }
 }
