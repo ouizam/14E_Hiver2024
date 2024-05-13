@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.BLL.Services
 {
-	public class FilmService: IFilmService
+	public class FilmService : IFilmService
 	{
 		private readonly IFilmRepository _filmRepo;
 
@@ -112,7 +112,10 @@ namespace CineQuebec.Windows.BLL.Services
 		{
 			try
 			{
-				return await _filmRepo.GetFilmWithProjection(projection);
+				Film film = await _filmRepo.GetFilmWithProjection(projection);
+
+				if (projection.DateProjection > DateTime.Now)
+					return film;
 			}
 			catch (Exception ex)
 			{
@@ -120,5 +123,6 @@ namespace CineQuebec.Windows.BLL.Services
 			}
 			return null;
 		}
+		
 	}
 }
