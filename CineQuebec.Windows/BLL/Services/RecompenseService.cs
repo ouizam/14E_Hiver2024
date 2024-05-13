@@ -15,11 +15,17 @@ namespace CineQuebec.Windows.BLL.Services
     {
         private readonly IRecompenseRepository _recompenseRepository;
         private readonly ITypeRecompenseService _typeRecompenseService;
+        private IRecompenseRepository @object;
 
         public RecompenseService(IRecompenseRepository pRecompenseRepository, ITypeRecompenseService pTypeRecompenseService)
         {
             _recompenseRepository = pRecompenseRepository;
             _typeRecompenseService = pTypeRecompenseService;
+        }
+
+        public RecompenseService(IRecompenseRepository recompenseRepository)
+        {
+            _recompenseRepository = recompenseRepository;
         }
 
         public virtual List<Recompense> ObtenirRecompensesAbonne(ObjectId idAbonne)
