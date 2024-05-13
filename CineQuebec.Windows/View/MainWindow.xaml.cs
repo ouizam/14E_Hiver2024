@@ -27,18 +27,25 @@ namespace CineQuebec.Windows
         private IRealisateurService _realisateurService;
         private IActeurService _acteurService;
         private AdminHomeControl _adminHomeControl;
-        public MainWindow(IAbonneService abonneService, IUserService adminService, AdminHomeControl adminHomeControl)
+        private AbonneHomeControl _abonneHomeControl;
+        public MainWindow(IAbonneService abonneService, IUserService adminService, AdminHomeControl adminHomeControl, AbonneHomeControl abonneHomeControl)
         {
             _abonneService = abonneService;
             _adminService = adminService;
             InitializeComponent();
             mainContentControl.Content = new ConnexionControl(_adminService);
             _adminHomeControl = adminHomeControl;
+            _abonneHomeControl = abonneHomeControl;
         }
 
         public void AdminHomeControl()
         {
             mainContentControl.Content = _adminHomeControl;
         }
-    }
+
+		public void AbonneHomeControl()
+		{
+            mainContentControl.Content = _abonneHomeControl;
+		}
+	}
 }

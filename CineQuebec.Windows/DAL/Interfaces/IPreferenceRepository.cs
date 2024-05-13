@@ -12,5 +12,6 @@ namespace CineQuebec.Windows.DAL.Interfaces
     {
         Preference ObtenirPreference(ObjectId idPreference);
         List<Preference> ObtenirPreferencesAbonne(ObjectId idAbonne);
+        bool AjouterPreference(Preference preference);
     }
 }

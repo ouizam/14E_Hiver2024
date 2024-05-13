@@ -19,9 +19,11 @@
 
 
         </Grid.RowDefinitions>
-        
+
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Liste des utilisateurs">
             <ListBox x:Name="lstUsers" Margin="0,0,0,-357" SelectionChanged="lstUsers_SelectionChanged"  />
         </GroupBox>
+       
+
     </Grid>
 </Window>

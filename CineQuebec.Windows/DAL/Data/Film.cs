@@ -21,5 +21,10 @@ namespace CineQuebec.Windows.DAL.Data
         {
             Id = ObjectId.GenerateNewId();
         }
-	}
+
+        public override string ToString()
+        {
+            return Nom;
+        }
+    }
 }

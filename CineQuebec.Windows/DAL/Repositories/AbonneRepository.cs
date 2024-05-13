@@ -11,11 +11,12 @@ namespace CineQuebec.Windows.DAL.Repositories
 {
     public class AbonneRepository:BaseRepository, IAbonneRepository
     {
-      
+
+        IMongoCollection<Abonne> _collection;
 
         public AbonneRepository()
         {
-          
+            _collection = database.GetCollection<Abonne>("Abonnes");
         }
 
       
@@ -29,8 +30,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 
             try
             {
-                IMongoCollection<Abonne> collection = database.GetCollection<Abonne>("Abonnes");
-                abonnes = collection.Aggregate().ToList();
+                abonnes = _collection.Aggregate().ToList();
             }
             catch (Exception ex)
             {
@@ -38,5 +38,23 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return abonnes;
         }
+
+		public async Task<UpdateResult> AddReservation(Abonne pAbonne, Reservation pReservation)
+        {
+            try
+            {
+                FilterDefinition<Abonne> filter = Builders<Abonne>.Filter.Eq(a => a.Id, pAbonne.Id);
+                UpdateDefinition<Abonne> update = Builders<Abonne>.Update
+                    .AddToSet(a => a.Reservations, pReservation);
+
+                return await _collection.UpdateOneAsync(filter, update);
+
+            }catch (Exception ex)
+            {
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+			}
+
+            return UpdateResult.Unacknowledged.Instance;
+		}
     }
 }

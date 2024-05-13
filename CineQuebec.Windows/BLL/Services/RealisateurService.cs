@@ -65,5 +65,7 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return realisateur;
         }
+
+       
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CineQuebec.Windows.BLL.Interfaces;
 using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Exceptions;
 using CineQuebec.Windows.DAL.Interfaces;
 using CineQuebec.Windows.DAL.Repositories;
 using MongoDB.Bson;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CineQuebec.Windows.BLL.Services
 {
@@ -17,11 +19,6 @@ namespace CineQuebec.Windows.BLL.Services
         private readonly IReservationRepository _reservationRepository;
         private readonly IProjectionService _projectionService;
 
-        //public ReservationService()
-        //{
-        //    _reservationRepository = new ReservationRepository();
-        //    _projectionService = new ProjectionService();
-        //}
 
         public ReservationService(IReservationRepository pReservationRep, IProjectionService pProjecService)
         {
@@ -52,5 +49,23 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return reservations;
         }
-    }
+
+		public async Task<Reservation?> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne)
+		{
+            try
+            {
+                return await _reservationRepository.ReserverPlaceProjection(pProjection, pAbonne);
+            }catch(ReservationAlreadyExistsException ex)
+            {
+				Console.WriteLine("Impossible de faire la réservation " + ex.Message, "Erreur");
+				MessageBox.Show("Vous avez déjà réservé pour cette projection.",
+						"Réservation non disponible", MessageBoxButton.OK, MessageBoxImage.Warning);
+			}
+            catch (Exception ex)
+            {
+                Console.WriteLine("Impossible de faire la réservation " + ex.Message, "Erreur");
+            }
+            return null;
+		}
+	}
 }

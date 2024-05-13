@@ -49,7 +49,10 @@ namespace CineQuebec.Windows.View
                     App.Current.Properties["UserConnect"] = user;
 					if (user != null)
 					{
-						((MainWindow)Application.Current.MainWindow).AdminHomeControl();
+                        if (user.EstAdmin)
+                            ((MainWindow)Application.Current.MainWindow).AdminHomeControl();
+                        else
+                            ((MainWindow)Application.Current.MainWindow).AbonneHomeControl();
 					}
 				}
 				catch (Exception ex)

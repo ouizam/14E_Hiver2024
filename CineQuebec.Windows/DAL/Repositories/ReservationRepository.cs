@@ -1,4 +1,5 @@
 ﻿using CineQuebec.Windows.DAL.Data;
+using CineQuebec.Windows.DAL.Exceptions;
 using CineQuebec.Windows.DAL.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -38,5 +39,35 @@ namespace CineQuebec.Windows.DAL.Repositories
             }
             return reservations;
         }
-    }
+
+		public async Task<Reservation?> ReserverPlaceProjection(Projection pProjection, Abonne pAbonne)
+		{
+            try
+            {
+                List<Reservation> reservations = ObtenirReservationsAbonne(pAbonne.Id);
+
+				foreach(Reservation reserv in reservations)
+                {
+                    if (reserv.IdProjection.Equals(pProjection.Id))
+                        throw new ReservationAlreadyExistsException();
+                }
+
+                Reservation new_reservation = new Reservation(pProjection, pAbonne);
+
+                await _collection.InsertOneAsync(new_reservation);
+
+                return new_reservation;
+
+            }catch(ReservationAlreadyExistsException)
+            {
+				Console.WriteLine("Une réservation existe déjà avec cette projection.", "Erreur");
+                throw;
+			}
+            catch (Exception ex)
+            {
+				Console.WriteLine("Impossible d'obtenir la collection " + ex.Message, "Erreur");
+			}
+            return null;
+		}
+	}
 }

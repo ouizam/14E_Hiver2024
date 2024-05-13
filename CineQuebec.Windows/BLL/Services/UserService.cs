@@ -24,7 +24,6 @@ namespace CineQuebec.Windows.BLL.Services
         private List<User> _user = new List<User>();
 
     
-
         public UserService(IUserRepository pUserRepo)
         {
             _userRepository = pUserRepo;

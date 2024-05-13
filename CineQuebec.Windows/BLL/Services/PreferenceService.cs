@@ -18,13 +18,7 @@ namespace CineQuebec.Windows.BLL.Services
         private readonly IRealisateurService _realisateurService;
         private readonly ICategorieService _categorieService;
 
-   //     public PreferenceService()
-   //     {
-			//_preferenceRepository = new PreferenceRepository();
-   //         _acteurService = new ActeurService();
-   //         _realisateurService = new RealisateurService();
-   //         _categorieService = new CategorieService();
-   //     }
+ 
         public PreferenceService(IPreferenceRepository preferenceRepository)
         {
             _preferenceRepository = preferenceRepository;        
@@ -84,5 +78,19 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return preferences;
         }
+
+        public bool AjouterPreference(Preference preference)
+        {
+            try
+            {
+                return  _preferenceRepository.AjouterPreference(preference);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
     }
 }

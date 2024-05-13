@@ -27,7 +27,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 		{
 			try
 			{
-				return await _collection.Aggregate().ToListAsync<Film>();
+				return await _collection.Aggregate().ToListAsync<Film>().ConfigureAwait(false);
 			}
 			catch (Exception ex)
 			{
@@ -91,6 +91,7 @@ namespace CineQuebec.Windows.DAL.Repositories
 				Builders<Film>.Filter.In(f => f.Id, filmIds)
 				);
 
+				
 				return await _collection.Find(filter).ToListAsync();
 			}
 			catch (Exception ex)
@@ -127,6 +128,18 @@ namespace CineQuebec.Windows.DAL.Repositories
 			return null;
 		}
 
+		public async Task<Film> GetFilmWithProjection(Projection projection)
+		{
+			try
+			{
+				FilterDefinition<Film> filter = Builders<Film>.Filter.Eq(f => f.Id, projection.IdFilm);
 
+				return await _collection.Find(filter).FirstOrDefaultAsync();
+			}catch (Exception ex)
+			{
+				Console.WriteLine($"Erreur lors de la modification du film : {ex.Message}");
+			}
+			return null;
+		}
 	}
 }

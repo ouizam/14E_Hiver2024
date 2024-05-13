@@ -61,5 +61,18 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return null;
         }
-    }
+
+		public async Task<Projection> GetProjectionWithID(ObjectId pProjectionID)
+		{
+			try
+			{
+				return  await _projectionRepository.GetProjectionWithID(pProjectionID);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Impossible de recuperer les Projections: ", ex.Message, "Erreur");
+			}
+			return null;
+		}
+	}
 }

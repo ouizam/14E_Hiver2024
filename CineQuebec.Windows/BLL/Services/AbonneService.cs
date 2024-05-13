@@ -19,22 +19,24 @@ namespace CineQuebec.Windows.BLL.Services
         private readonly IAbonneRepository _abonneRepository;
         private readonly IReservationService _reservationService;
         private readonly IPreferenceService _preferenceService;
+        private readonly IRecompenseService _recompenseService;
          
 
-		public AbonneService (IAbonneRepository pAbonneRepo, IReservationService pReservationService, IPreferenceService pPrefService )
+		public AbonneService (IAbonneRepository pAbonneRepo, IReservationService pReservationService, IPreferenceService pPrefService, IRecompenseService pRecompenseService )
         {
             _abonneRepository = pAbonneRepo;
             _reservationService = pReservationService;
             _preferenceService = pPrefService;
+            _recompenseService = pRecompenseService;
         }
-     
-        /// <summary>
-        /// Méthode qui obtient une liste de tous les sbonnés, elle fais appel a la méthode ObtenirReservation pour obtenir toutes les 
-        /// réservation qu'un abonné fait, et auusi elle appelle la méthode obtenir préférence pour obtenir toutes les préférence de 
-        /// cette abonné selon la catégorie du film, les acteurs et les réalistaeurs.
-        /// </summary>
-        /// <returns></returns>
-        public List<Abonne> ObtenirAbonnes()
+
+		/// <summary>
+		/// Méthode qui obtient une liste de tous les sbonnés, elle fais appel a la méthode ObtenirReservation pour obtenir toutes les 
+		/// réservation qu'un abonné fait, et auusi elle appelle la méthode obtenir préférence pour obtenir toutes les préférence de 
+		/// cette abonné selon la catégorie du film, les acteurs et les réalistaeurs.
+		/// </summary>
+		/// <returns></returns>
+		public List<Abonne> ObtenirAbonnes()
         {
             var abonnes = new List<Abonne>();
 
@@ -45,6 +47,7 @@ namespace CineQuebec.Windows.BLL.Services
                 {
                     abonne.Reservations = _reservationService.ObtenirReservationsAbonne(abonne.Id);
                     abonne.Preferences = _preferenceService.ObtenirPreferencesAbonne(abonne.Id);
+                    abonne.Recompenses = _recompenseService.ObtenirRecompensesAbonne(abonne.Id);
                 }
                
             }
@@ -54,5 +57,18 @@ namespace CineQuebec.Windows.BLL.Services
             }
             return abonnes;
         }
-    }
+
+		public async Task<UpdateResult> AddReservation(Abonne pAbonne, Reservation pReservation)
+		{
+            try
+            {
+                return await _abonneRepository.AddReservation(pAbonne, pReservation);
+
+            }catch(Exception  ex)
+            {
+                Console.WriteLine("Impossible de créer la réservation" + ex.Message, "Erreur");
+            }
+			return UpdateResult.Unacknowledged.Instance;
+		}
+	}
 }
