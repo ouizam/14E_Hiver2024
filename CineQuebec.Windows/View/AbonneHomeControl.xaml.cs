@@ -26,8 +26,9 @@ namespace CineQuebec.Windows.View
 		private readonly IRealisateurService _realisateurService;
 		private readonly IPreferenceService _preferenceService;
 		private readonly IProjectionService _projectionService;
+		private readonly IReservationService _reservationService;
 
-		public AbonneHomeControl(IFilmService pFilmService, ICategorieService pCategorieService, IRealisateurService pRealisateurService, IPreferenceService pPreferenceService, IProjectionService projectionService)
+		public AbonneHomeControl(IFilmService pFilmService, ICategorieService pCategorieService, IRealisateurService pRealisateurService, IPreferenceService pPreferenceService, IProjectionService projectionService, IReservationService reservationService)
 		{
 			InitializeComponent();
 
@@ -36,6 +37,7 @@ namespace CineQuebec.Windows.View
 			_realisateurService = pRealisateurService;
 			_preferenceService = pPreferenceService;
 			_projectionService = projectionService;
+			_reservationService = reservationService;
 		}
 
 		private void Button_Profile_Click(object sender, RoutedEventArgs e)
@@ -46,7 +48,7 @@ namespace CineQuebec.Windows.View
 
 		private void Button_Projections_Click(object sender, RoutedEventArgs e)
 		{
-			new ProjectionsControl(_projectionService, _filmService).Show();
+			new ProjectionsControl(_projectionService, _filmService, _reservationService).Show();
 		}
 	}
 }

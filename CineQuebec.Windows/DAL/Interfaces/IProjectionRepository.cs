@@ -13,7 +13,7 @@ namespace CineQuebec.Windows.DAL.Interfaces
         Projection ObtenirProjection(ObjectId idProjection);
         Task<List<Projection>?> GetAllProjections();
 
-        Task<Projection?> GetProjectionWithID(ObjectId pProjectionID);
+        Task<Projection> GetProjectionWithID(ObjectId pProjectionID);
 
 	}
 }

@@ -29,7 +29,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="{Binding Nom}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" MouseDown="Click_Projection" />
+                            <TextBlock Text="{Binding Film.Nom}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" MouseDown="Click_Projection" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

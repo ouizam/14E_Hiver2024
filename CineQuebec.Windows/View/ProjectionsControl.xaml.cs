@@ -24,13 +24,15 @@ namespace CineQuebec.Windows.View
 	{
 		private readonly IProjectionService _projectionService;
 		private readonly IFilmService _filmService;
-		private List<Film>? _filmAffiche;
+		private readonly IReservationService _reservationService;
+		private List<Projection>? _filmAffiche;
 
-		public ProjectionsControl(IProjectionService pProjectionService, IFilmService pFilmService)
+		public ProjectionsControl(IProjectionService pProjectionService, IFilmService pFilmService, IReservationService pReservationService)
 		{
 			InitializeComponent();
 			_projectionService = pProjectionService;
 			_filmService = pFilmService;
+			_reservationService = pReservationService;
 
 			ChargerFilms();
 		}
@@ -39,11 +41,14 @@ namespace CineQuebec.Windows.View
 		{
 			try
 			{
-				List<Projection>? projections = await _projectionService.GetAllProjections();
+				_filmAffiche = await _projectionService.GetAllProjections();
 
-				if (projections != null)
+				if (_filmAffiche != null)
 				{
-					_filmAffiche = await _filmService.GetAllFilmsAffiche(projections!);
+					foreach(Projection proj in _filmAffiche)
+					{
+						proj.Film =  await _filmService.GetFilmWithProjection(proj);
+					}
 
 					AfficherListeFilmsAffiche();
 				}
@@ -66,18 +71,19 @@ namespace CineQuebec.Windows.View
 
 			if(_filmAffiche is not null)
 			{
-				foreach (Film film in _filmAffiche)
+				foreach (Projection film in _filmAffiche)
 				{
-					lstFilmsAffiche.Items.Add(film);
+					if(film.Film is not null)
+						lstFilmsAffiche.Items.Add(film);
 				}
 			}
 		}
 
 		private void Click_Projection(object sender, MouseButtonEventArgs e)
 		{
-			Projection projection = (Projection)sender;
+			Projection? projection = ((TextBlock)sender).DataContext as Projection;
 
-			ReservationProjectionControl control = new ReservationProjectionControl(_projectionService, _filmService, projection.Id);
+			ReservationProjectionControl control = new ReservationProjectionControl(_projectionService, _filmService, _reservationService, projection!.Id);
 
 			bool? result = control.ShowDialog();
 

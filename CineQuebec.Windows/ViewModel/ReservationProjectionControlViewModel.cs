@@ -15,30 +15,49 @@ namespace CineQuebec.Windows.ViewModel
 {
 	public class ReservationProjectionControlViewModel: ViewModelBase
 	{
-
-		public Projection? Projection { get; set; }
+		private Projection _projection;
+		public Projection? Projection
+		{
+			get
+			{
+				return _projection;
+			}
+			set { 
+				if(value != _projection)
+				{
+					_projection = value;
+					OnPropertyChanged();
+				}
+			
+			}
+		}
 		
 
 		private IProjectionService _projectionService;
 		private IFilmService _filmService;
+		private ObjectId _projectionID;
 
-		public ReservationProjectionControlViewModel(IProjectionService projectionService, IFilmService pFilmService)
+		public ReservationProjectionControlViewModel(IProjectionService projectionService, IFilmService pFilmService, ObjectId pPropjectionId)
 		{
 			_projectionService = projectionService;
 			_filmService = pFilmService;
+			_projectionID = pPropjectionId;
 		}
 
-		public async Task Load(ObjectId pProjectionID)
+		public async void Load(object sender, RoutedEventArgs e)
 		{
-			Projection = await _projectionService.GetProjectionWithID(pProjectionID);
+			Projection projection =  await _projectionService.GetProjectionWithID(_projectionID);
 
-			if (Projection == null)
+			if (projection == null)
 			{
 				throw new ProjectionNotFoundException("Cet ID ne correspond à aucune projection!");
 			}
 
-			Projection.Film = await _filmService.GetFilmWithProjection(Projection);
+			projection.Film =  await _filmService.GetFilmWithProjection(projection);
+
+			Projection = projection;
 
 		}
+
 	}
 }
