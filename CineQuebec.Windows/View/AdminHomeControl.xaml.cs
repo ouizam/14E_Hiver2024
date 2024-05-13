@@ -31,8 +31,11 @@ namespace CineQuebec.Windows.View
         private readonly ICategorieService _categorieService;
         private readonly IRealisateurService _realisateurService;
         private readonly IActeurService _acteurService;
+        private readonly ITypeRecompenseService _typeRecompenseService;
+        private readonly IRecompenseService _recompenseService;
         public AdminHomeControl(IAbonneService abonneService, IFilmService filmService, IProjectionService projectionService, ICategorieService categorieService,
-            IRealisateurService realisateurService, IActeurService acteurService)
+            IRealisateurService realisateurService, IActeurService acteurService,
+             ITypeRecompenseService typeRecompenseService, IRecompenseService recompenseService)
         {
             _abonneService = abonneService;
             _filmService = filmService;
@@ -40,12 +43,14 @@ namespace CineQuebec.Windows.View
             _categorieService = categorieService;
             _realisateurService = realisateurService;
             _acteurService = acteurService;
+            _typeRecompenseService = typeRecompenseService;
+            _recompenseService = recompenseService;
             InitializeComponent();
         }
 
         private void Button_Utilisateurs_Click(object sender, RoutedEventArgs e)
         {
-            var utilisateursControl = new UtilisateursControl(_abonneService);
+            var utilisateursControl = new UtilisateursControl(_abonneService, _typeRecompenseService, _recompenseService);
             utilisateursControl.Show();
 		}
 

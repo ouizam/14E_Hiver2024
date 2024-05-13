@@ -26,14 +26,18 @@ namespace CineQuebec.Windows.View
     public partial class UtilisateursControl : Window
     {
         private readonly IAbonneService _abonneService;
+        private readonly ITypeRecompenseService _typeRecompenseService;
+        private readonly IRecompenseService _recompenseService;
 
         List<Abonne> _listeDesUsers;
         
-        public UtilisateursControl(IAbonneService abonneService)
+        public UtilisateursControl(IAbonneService abonneService, ITypeRecompenseService typeRecompenseService, IRecompenseService recompenseService)
         {
             InitializeComponent();
 
-			_abonneService = abonneService;
+            _typeRecompenseService = typeRecompenseService;
+            _recompenseService = recompenseService;
+            _abonneService = abonneService;
 			_listeDesUsers = _abonneService.ObtenirAbonnes().OrderByDescending(x=>x.Reservations.Count).ToList();
 
             AfficherListeUtilisateurs();
@@ -44,7 +48,7 @@ namespace CineQuebec.Windows.View
             if (lstUsers.SelectedItems !=null)
             {
                 Abonne abonne = lstUsers.SelectedItem as Abonne;             
-                InformationsAbonne informationAbonne = new InformationsAbonne(abonne);
+                InformationsAbonne informationAbonne = new InformationsAbonne(abonne, _typeRecompenseService, _recompenseService);
                 informationAbonne.Show();
 
             }
